@@ -30,4 +30,4 @@
 
 ## License boundary
 
-仓库内 Trellis 生成文件存在，但尚未找到与所安装版本对应的许可/版权通知，状态为 `license-notice-needed`。根目录 `license` 是项目原有文件，不能替代 Trellis 上游的 AGPL 通知；在核对上游准确来源与通知前，不把受保护文件纳入 Trellis Plus 提交。新写的 mainline 和本层、product 层是独立项目文档；`trellis update` 后仅重检这些项目文件，不向上游模板恢复自定义内容。
+仓库内 Trellis 生成文件来自本机安装的 `@mindfoldhq/trellis` 0.6.14；该版本的 AGPL-3.0-only 许可证副本在 `third_party/trellis/LICENSE`，来源记录在根目录 `readme.md`，通知状态为 `present`。根目录 `license` 是项目原有文件，不能替代 Trellis 上游的 AGPL 通知。新写的 mainline 和本层、product 层是独立项目文档；`trellis update` 后仅重检这些项目文件，不向上游模板恢复自定义内容。受保护的上游文件仍不作为 Trellis Plus 自定义目标。

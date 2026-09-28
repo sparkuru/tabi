@@ -27,5 +27,5 @@
 ## Evidence and Decisions
 
 - completed evidence: 2026-09-28 根目录 `prd.md` 的需求与架构决策已转存于 `.trellis/spec/product/`；本仓库尚无应用实现或运行验证。
-- current blocker / dirty-state warning: 初始化中的 `.trellis/` 含 Trellis 上游文件；分发前需核对其 AGPL 许可及准确通知。已有 `00-bootstrap-guidelines` 初始化任务与本轮产品工作分开。
+- current blocker / dirty-state warning: 初始化中的 `.trellis/` 含 Trellis 上游文件；其 0.6.14 版本的 AGPL 许可证和来源记录见根目录 `readme.md`。已有 `00-bootstrap-guidelines` 初始化任务与本轮产品工作分开。
 - next user decision: 开始实现前确定首个任务范围；账号验证/找回、地图与地点来源、管理员治理和数据保留策略在对应功能开发前确定。
