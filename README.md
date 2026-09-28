@@ -1,0 +1,1 @@
+这是一个以清单组织目标、以多次打卡记录经历的响应式 Web 应用：用户可浏览公开清单和条目、记录照片与心得、回看个人历史，并选择公开分享单次经历；计划采用 React、TypeScript、TanStack Router、TanStack Query、Tailwind CSS 和 shadcn/ui 构建前端，以 HeyAPI 从 OpenAPI 生成 API 客户端，由 FastAPI、PostgreSQL 和受保护的图片存储提供服务，经 HTTPS 反向代理向手机和电脑浏览器开放。目前仓库处于规格阶段，尚无应用实现。
