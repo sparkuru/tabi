@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --color-paper: #faf8f3;
+  --color-ink: #24352f;
+  --color-accent: #dd6b4d;
+}
+
+:root {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: var(--color-paper);
+  font-synthesis: none;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  background: #b8ded1;
+  color: #173d32;
+}
+
+.field {
+  width: 100%;
+  border: 1px solid #d6d3cd;
+  border-radius: 0.85rem;
+  background: white;
+  padding: 0.7rem 0.85rem;
+  outline-color: #0f766e;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.prose-note {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}

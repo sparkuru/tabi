@@ -1,0 +1,5 @@
+{"file":".trellis/spec/product/requirements.md","reason":"MVP behavior and acceptance scenarios"}
+{"file":".trellis/spec/product/architecture.md","reason":"Planned stack, data model, security and media constraints"}
+{"file":".trellis/spec/backend/index.md","reason":"Backend guidelines index; currently bootstrap placeholders"}
+{"file":".trellis/spec/frontend/index.md","reason":"Frontend guidelines index; currently bootstrap placeholders"}
+{"file":".trellis/spec/guides/cross-layer-thinking-guide.md","reason":"Trace API, persistence and UI contracts"}

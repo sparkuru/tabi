@@ -1,0 +1,15 @@
+.git/
+.trellis/
+.agents/
+.codex/
+**/.venv/
+**/node_modules/
+**/dist/
+**/__pycache__/
+**/.pytest_cache/
+**/.ruff_cache/
+**/*.tsbuildinfo
+infra/.env
+backend/media/
+backups/
+archive/

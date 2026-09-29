@@ -1,0 +1,2620 @@
+{
+  "schema_version": 2,
+  "source_file": "archive/ocr.md",
+  "source_sha256": "0a8a5aec7e891358ecd309e76fa322d1a458f9bf02ff42b2018abd5aa3e3522b",
+  "review_status": "transcribed_markdown_only",
+  "lists": [
+    {
+      "key": "beijing_food",
+      "title": "北京美食",
+      "summary": "本清单整理自 archive/ocr.md 的 OCR 原始资料，仅供参考；店铺、地址及推荐内容可能已变化，出行前请核实。",
+      "legacy_generated_summaries": [
+        "来自 OCR 汇总的北京餐饮候选条目，逐条核实后发布。"
+      ],
+      "category": "美食",
+      "section": "北京《Delicious》刊",
+      "source_note_prefix": "OCR 原始备注（未核实）：",
+      "suggested_action": "到店体验并记录感受",
+      "rows": [
+        {
+          "number": 1,
+          "source_line": 9,
+          "name": "雅佳神话·麻辣烤鱼",
+          "original_address": "海淀区志新路11号（三里庄店）",
+          "original_remark": "烤鱼活鱼现杀，经营超20年老店",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 2,
+          "source_line": 10,
+          "name": "四季民福烤鸭店",
+          "original_address": "东城区前门大街30号",
+          "original_remark": "本地人常去的烤鸭店，外皮酥脆",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 3,
+          "source_line": 11,
+          "name": "南城小刘涮肉",
+          "original_address": "西城区阡儿胡同18号",
+          "original_remark": "传统清汤铜锅涮肉，手切鲜羊肉",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 4,
+          "source_line": 12,
+          "name": "方砖厂69号炸酱面",
+          "original_address": "东城区方砖厂胡同1号",
+          "original_remark": "连续六年米其林必比登推介",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 5,
+          "source_line": 13,
+          "name": "鼎香润",
+          "original_address": "西城区德胜门内大街34号",
+          "original_remark": "大懒龙比手臂还粗，肘子软烂脱骨",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 6,
+          "source_line": 14,
+          "name": "白记肉饼",
+          "original_address": "东城区西打磨厂街50号",
+          "original_remark": "肉饼现擀现烙，皮薄馅足",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 7,
+          "source_line": 15,
+          "name": "悦宾饭馆",
+          "original_address": "东城区翠花胡同43号",
+          "original_remark": "国内第一批个体户餐馆，蒜泥肘子经典",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 8,
+          "source_line": 16,
+          "name": "七寻八找胡同菜",
+          "original_address": "东城区戏楼胡同二巷1号院",
+          "original_remark": "鸡里蹦酸甜酥脆，胡同氛围浓厚",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 9,
+          "source_line": 17,
+          "name": "杏园餐厅",
+          "original_address": "西城区西北四大街24号",
+          "original_remark": "老北京人食堂，小炖肉面汤浓肉多",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 10,
+          "source_line": 18,
+          "name": "洪福亮酒家",
+          "original_address": "西城区南草厂街91号",
+          "original_remark": "大众点评西城区家常菜榜第一名",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 11,
+          "source_line": 19,
+          "name": "福满园",
+          "original_address": "朝阳区新源南路",
+          "original_remark": "街头巷尾的苍蝇馆子，本地人常去",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address"
+          ]
+        },
+        {
+          "number": 12,
+          "source_line": 20,
+          "name": "悦仙美食",
+          "original_address": "东城区",
+          "original_remark": "干烧桂鱼、蒜泥肘子、锅塌豆腐等家常菜",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address"
+          ]
+        },
+        {
+          "number": 13,
+          "source_line": 21,
+          "name": "小荣酒家",
+          "original_address": "西城区",
+          "original_remark": "鱼头泡饼、京酱肉丝、干锅土豆片",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address"
+          ]
+        },
+        {
+          "number": 14,
+          "source_line": 22,
+          "name": "煲煲好",
+          "original_address": "朝阳区",
+          "original_remark": "腊味煲仔饭招牌，人均约110元",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "current_price"
+          ]
+        },
+        {
+          "number": 15,
+          "source_line": 23,
+          "name": "南街北巷家里饭",
+          "original_address": "朝阳区保利东郡小区内",
+          "original_remark": "私房茄子软糯入味，红烧肉扁豆角经典",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address"
+          ]
+        },
+        {
+          "number": 16,
+          "source_line": 24,
+          "name": "老门框爆肚",
+          "original_address": "东城区金宝街东段59号",
+          "original_remark": "创始于1910年，爆肚十三吃",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 17,
+          "source_line": 25,
+          "name": "金生隆",
+          "original_address": "西城区安德路六铺炕1巷",
+          "original_remark": "百年爆肚老字号，爆肚冯传承",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 18,
+          "source_line": 26,
+          "name": "爆肚冯",
+          "original_address": "西城区菜市口十字路口西南",
+          "original_remark": "清光绪年间开创，曾为清宫御膳房特供",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address"
+          ]
+        },
+        {
+          "number": 19,
+          "source_line": 27,
+          "name": "爆肚王",
+          "original_address": "朝阳区垡头东鹏市场北门",
+          "original_remark": "经营近20年老牌门店",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address"
+          ]
+        },
+        {
+          "number": 20,
+          "source_line": 28,
+          "name": "门框胡同百年卤煮",
+          "original_address": "西城区门框胡同26号",
+          "original_remark": "无分店，烟火气拉满",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 21,
+          "source_line": 29,
+          "name": "小肠陈",
+          "original_address": "西城区南横街老店",
+          "original_remark": "百年老字号卤煮",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address"
+          ]
+        },
+        {
+          "number": 22,
+          "source_line": 30,
+          "name": "北新桥卤煮老店",
+          "original_address": "东城区北新桥",
+          "original_remark": "深夜食堂，本地人扎堆",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address"
+          ]
+        },
+        {
+          "number": 23,
+          "source_line": 31,
+          "name": "凯琳虎坊桥卤煮",
+          "original_address": "西城区虎坊路7号",
+          "original_remark": "菜底卤煮、小碗炒肝",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 24,
+          "source_line": 32,
+          "name": "汇兴居老北京炒肝包子卤煮火烧",
+          "original_address": "东城区体育馆西路7号",
+          "original_remark": "人均约29元，提供早餐",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_price"
+          ]
+        },
+        {
+          "number": 25,
+          "source_line": 33,
+          "name": "姚记炒肝",
+          "original_address": "东城区鼓楼东大街311号",
+          "original_remark": "想吃炒肝儿，鼓楼一拐弯儿",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 26,
+          "source_line": 34,
+          "name": "天兴居炒肝",
+          "original_address": "东城区前门鲜鱼口街",
+          "original_remark": "老北京早餐标配，炒肝配包子",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address"
+          ]
+        },
+        {
+          "number": 27,
+          "source_line": 35,
+          "name": "炒肝赵",
+          "original_address": "朝阳区南磨房中街",
+          "original_remark": "炒肝大碗15元，性价比高",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "current_price"
+          ]
+        },
+        {
+          "number": 28,
+          "source_line": 36,
+          "name": "老磁器口豆汁店",
+          "original_address": "东城区天坛路71-7号",
+          "original_remark": "毗邻天坛北门，传统豆汁店",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 29,
+          "source_line": 37,
+          "name": "尹三豆汁",
+          "original_address": "东城区光明楼中街",
+          "original_remark": "老北京早点铺风格，客群以本地居民为主",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address"
+          ]
+        },
+        {
+          "number": 30,
+          "source_line": 38,
+          "name": "耀峰成小吃店",
+          "original_address": "海淀区马甸东路马甸南村7号",
+          "original_remark": "马甸清真寺旁，糖油饼出名",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 31,
+          "source_line": 39,
+          "name": "护国寺小吃",
+          "original_address": "西城区护国寺大街",
+          "original_remark": "多样北京小吃，人均约35元",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "current_price"
+          ]
+        },
+        {
+          "number": 32,
+          "source_line": 40,
+          "name": "白魁老号",
+          "original_address": "东城区隆福寺",
+          "original_remark": "烧羊肉面、烧羊肉夹烧饼",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address"
+          ]
+        },
+        {
+          "number": 33,
+          "source_line": 41,
+          "name": "明华烧麦馆",
+          "original_address": "东城区隆福寺",
+          "original_remark": "曾与都一处烧麦并称京城烧麦名店",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address"
+          ]
+        },
+        {
+          "number": 34,
+          "source_line": 42,
+          "name": "隆福寺小吃",
+          "original_address": "东城区隆福寺",
+          "original_remark": "艾窝窝、驴打滚、焖炉烤羊肉串",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address"
+          ]
+        },
+        {
+          "number": 35,
+          "source_line": 43,
+          "name": "宝瑞门钉肉饼",
+          "original_address": "东城区隆福寺",
+          "original_remark": "一口爆汁锁住老北京烟火",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address"
+          ]
+        },
+        {
+          "number": 36,
+          "source_line": 44,
+          "name": "东来顺饭庄",
+          "original_address": "东城区前门大街32号",
+          "original_remark": "老北京铜锅涮肉代名词，始于1903年",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 37,
+          "source_line": 45,
+          "name": "南门涮肉",
+          "original_address": "东城区永定门东街",
+          "original_remark": "因总店位于天坛公园南门得名",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address"
+          ]
+        },
+        {
+          "number": 38,
+          "source_line": 46,
+          "name": "北门涮肉",
+          "original_address": "西城区地安门帽儿胡同乙43号",
+          "original_remark": "邻近地安门百货，人均约100元",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_price"
+          ]
+        },
+        {
+          "number": 39,
+          "source_line": 47,
+          "name": "老北京老铜锅四季涮肉",
+          "original_address": "西城区腊竹胡同23号",
+          "original_remark": "创建于1903年，清汤炭火铜锅",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 40,
+          "source_line": 48,
+          "name": "鸦儿李记",
+          "original_address": "东城区和平里西街67号",
+          "original_remark": "清真老字号，手切羊上脑、爆肚",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 41,
+          "source_line": 49,
+          "name": "烤肉宛饭庄",
+          "original_address": "东城区北新桥",
+          "original_remark": "南宛北季的南宛，清真老字号",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address"
+          ]
+        },
+        {
+          "number": 42,
+          "source_line": 50,
+          "name": "静香斋",
+          "original_address": "大兴区兴华北路2段",
+          "original_remark": "本地人常去餐厅排行榜上榜",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 43,
+          "source_line": 51,
+          "name": "清源饭馆",
+          "original_address": "西城区建功北里五区",
+          "original_remark": "烤羊肉串、大盘鸡盖饭、干煸炒面",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address"
+          ]
+        },
+        {
+          "number": 44,
+          "source_line": 52,
+          "name": "北京清真房记小吃店",
+          "original_address": "西城区",
+          "original_remark": "早点种类丰富，豆腐脑、包子、油饼正宗",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address"
+          ]
+        },
+        {
+          "number": 45,
+          "source_line": 53,
+          "name": "四季民福烤鸭店",
+          "original_address": "西城区大栅栏街1号",
+          "original_remark": "人均约160元，搭配贝勒烤肉",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_price"
+          ]
+        },
+        {
+          "number": 46,
+          "source_line": 54,
+          "name": "便宜坊烤鸭",
+          "original_address": "东城区崇外大街16号",
+          "original_remark": "焖炉烤鸭始于1416年，比全聚德历史悠久",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 47,
+          "source_line": 55,
+          "name": "利群烤鸭店",
+          "original_address": "东城区前门东大街北翔凤胡同11号",
+          "original_remark": "四合院改建，墙面装饰名人合影",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 48,
+          "source_line": 56,
+          "name": "红莲烤鸭店",
+          "original_address": "西城区红莲北里",
+          "original_remark": "人均57元，社区高频用餐场所",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "current_price"
+          ]
+        },
+        {
+          "number": 49,
+          "source_line": 57,
+          "name": "砂锅居",
+          "original_address": "西城区西四南大街60号",
+          "original_remark": "北京八大居之一，砂锅白肉招牌",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 50,
+          "source_line": 58,
+          "name": "鸿宾楼",
+          "original_address": "朝阳区朝外南街20号",
+          "original_remark": "百年清真老字号，京城清真餐饮第一楼",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 51,
+          "source_line": 59,
+          "name": "丰泽园饭庄",
+          "original_address": "西城区珠市口西大街83号",
+          "original_remark": "鲁菜天花板，葱烧海参、九转大肠",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 52,
+          "source_line": 60,
+          "name": "仿膳饭庄",
+          "original_address": "西城区地安门西大街北海公园内",
+          "original_remark": "宫廷菜，豌豆黄、芸豆卷必点",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address"
+          ]
+        },
+        {
+          "number": 53,
+          "source_line": 61,
+          "name": "北京宜宾招待所",
+          "original_address": "西城区西中胡同28号",
+          "original_remark": "四川宜宾驻京办，李庄白肉、燃面",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 54,
+          "source_line": 62,
+          "name": "巴州金丝特餐厅",
+          "original_address": "海淀区皂君庙2号",
+          "original_remark": "新疆巴州驻京办，大盘鸡、手抓饭",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 55,
+          "source_line": 63,
+          "name": "隆中宾馆餐厅",
+          "original_address": "朝阳区朝阳门外大街吉祥里205号",
+          "original_remark": "湖北襄阳驻京办，洪湖莲藕排骨汤",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 56,
+          "source_line": 64,
+          "name": "汗腾格里·风味餐厅",
+          "original_address": "海淀区三里河路7号新疆大厦嘉宾楼",
+          "original_remark": "新疆驻京办，2024年必吃榜",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 57,
+          "source_line": 65,
+          "name": "豫香苑餐厅",
+          "original_address": "朝阳区华威里28号河南大厦2楼",
+          "original_remark": "河南驻京办，胡辣汤、羊肉烩面",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 58,
+          "source_line": 66,
+          "name": "齐鲁苑",
+          "original_address": "海淀区马甸桥南路2号七省大院",
+          "original_remark": "山东驻京办，齐鲁烩酥肉、九转大肠",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 59,
+          "source_line": 67,
+          "name": "老川办餐厅",
+          "original_address": "东城区东总布胡同贡院头条5号",
+          "original_remark": "四川驻京办，蒜泥白肉、口水鸡",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 60,
+          "source_line": 68,
+          "name": "甲秀楼缘餐厅",
+          "original_address": "西城区西直门南小街国英园5号楼2层",
+          "original_remark": "贵阳驻京办，酸汤鱼、红油米豆腐",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 61,
+          "source_line": 69,
+          "name": "赣人之家",
+          "original_address": "海淀区马甸桥南路2号七省大院",
+          "original_remark": "江西驻京办，南昌炒粉、排骨莲藕汤",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 62,
+          "source_line": 70,
+          "name": "内蒙古宾馆中餐厅",
+          "original_address": "东城区美术馆后街71号",
+          "original_remark": "内蒙古驻京办，烤羊排、羊肉沙葱烧麦",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 63,
+          "source_line": 71,
+          "name": "敦煌食府",
+          "original_address": "西城区阜外大街27号1号楼",
+          "original_remark": "甘肃驻京办，兰州酿皮、红烧羊蹄",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 64,
+          "source_line": 72,
+          "name": "浙江食府",
+          "original_address": "朝阳区北三环安贞西里三区26号",
+          "original_remark": "浙江驻京办，西湖醋鱼、东坡肉",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 65,
+          "source_line": 73,
+          "name": "京滨饭店·餐厅",
+          "original_address": "西城区阜成门外大街24号",
+          "original_remark": "哈尔滨驻京办，金牌锅包肉、得莫利炖鱼",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 66,
+          "source_line": 74,
+          "name": "黄河面道·山西菜",
+          "original_address": "东城区夕照寺中街黄河京都大酒店2层",
+          "original_remark": "老运城驻京办，泡泡油糕、过油肉",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 67,
+          "source_line": 75,
+          "name": "长安白云大酒店",
+          "original_address": "西城区白云观街7号",
+          "original_remark": "陕西驻京办，小炒泡馍、肉夹馍",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 68,
+          "source_line": 76,
+          "name": "宁夏大厦全日制餐厅",
+          "original_address": "东城区分司厅胡同13号",
+          "original_remark": "宁夏驻京办，精品羊肋条、手抓羊肉",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 69,
+          "source_line": 77,
+          "name": "海南食府",
+          "original_address": "东城区安定门外大街188号",
+          "original_remark": "海南驻京办，鸳鸯文昌鸡、糟粕醋火锅",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 70,
+          "source_line": 78,
+          "name": "法源寺街胡同菜",
+          "original_address": "西城区法源寺后街25号",
+          "original_remark": "老字号小馆，醋溜木须、炖黄鱼",
+          "missing_fields": [
+            "verified_at",
+            "coordinates"
+          ]
+        },
+        {
+          "number": 71,
+          "source_line": 171,
+          "source_section": "北京有什么好吃的了？/东城区",
+          "name": "胡大饭馆（簋街总店）",
+          "original_district": "东城区",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "remarks"
+          ]
+        },
+        {
+          "number": 72,
+          "source_line": 172,
+          "source_section": "北京有什么好吃的了？/东城区",
+          "name": "龙门跳私家炙子烤肉（交道口店）",
+          "original_district": "东城区",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "remarks"
+          ]
+        },
+        {
+          "number": 73,
+          "source_line": 173,
+          "source_section": "北京有什么好吃的了？/东城区",
+          "name": "南门涮肉（天坛南门店）",
+          "original_district": "东城区",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "remarks"
+          ]
+        },
+        {
+          "number": 74,
+          "source_line": 174,
+          "source_section": "北京有什么好吃的了？/东城区",
+          "name": "胖妹面庄（香饵胡同店）",
+          "original_district": "东城区",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "remarks"
+          ]
+        },
+        {
+          "number": 75,
+          "source_line": 175,
+          "source_section": "北京有什么好吃的了？/东城区",
+          "name": "刘阿妹重庆鸡公煲（北新桥店）",
+          "original_district": "东城区",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "remarks"
+          ]
+        },
+        {
+          "number": 76,
+          "source_line": 176,
+          "source_section": "北京有什么好吃的了？/东城区",
+          "name": "花家怡园（四合院总店）",
+          "original_district": "东城区",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "remarks"
+          ]
+        },
+        {
+          "number": 77,
+          "source_line": 180,
+          "source_section": "北京有什么好吃的了？/西城区",
+          "name": "聚宝源（牛街创始店）",
+          "original_district": "西城区",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "remarks"
+          ]
+        },
+        {
+          "number": 78,
+          "source_line": 181,
+          "source_section": "北京有什么好吃的了？/西城区",
+          "name": "牛街清真满恒记（平安里店）",
+          "original_district": "西城区",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "remarks"
+          ]
+        },
+        {
+          "number": 79,
+          "source_line": 182,
+          "source_section": "北京有什么好吃的了？/西城区",
+          "name": "牛街大绿包烤羊腿（牛街总店）",
+          "original_district": "西城区",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "remarks"
+          ]
+        },
+        {
+          "number": 80,
+          "source_line": 183,
+          "source_section": "北京有什么好吃的了？/西城区",
+          "name": "刘记炙子烤肉（虎坊桥店）",
+          "original_district": "西城区",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "remarks"
+          ]
+        },
+        {
+          "number": 81,
+          "source_line": 184,
+          "source_section": "北京有什么好吃的了？/西城区",
+          "name": "门框胡同百年卤煮（新街口店）",
+          "original_district": "西城区",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "remarks"
+          ]
+        },
+        {
+          "number": 82,
+          "source_line": 185,
+          "source_section": "北京有什么好吃的了？/西城区",
+          "name": "老吉堂上海本帮菜（后海店）",
+          "original_district": "西城区",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "remarks"
+          ]
+        },
+        {
+          "number": 83,
+          "source_line": 189,
+          "source_section": "北京有什么好吃的了？/朝阳区",
+          "name": "粉灯牛腩牛杂煲（双井店）",
+          "original_district": "朝阳区",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "remarks"
+          ]
+        },
+        {
+          "number": 84,
+          "source_line": 190,
+          "source_section": "北京有什么好吃的了？/朝阳区",
+          "name": "烤匠烤鱼（合生汇店）",
+          "original_district": "朝阳区",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "remarks"
+          ]
+        },
+        {
+          "number": 85,
+          "source_line": 191,
+          "source_section": "北京有什么好吃的了？/朝阳区",
+          "name": "旺顺阁 1999（财富购物中心店）",
+          "original_district": "朝阳区",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "remarks"
+          ]
+        },
+        {
+          "number": 86,
+          "source_line": 192,
+          "source_section": "北京有什么好吃的了？/朝阳区",
+          "name": "日坛涮肉（日坛公园店）",
+          "original_district": "朝阳区",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "remarks"
+          ]
+        },
+        {
+          "number": 87,
+          "source_line": 193,
+          "source_section": "北京有什么好吃的了？/朝阳区",
+          "name": "满福楼·清真涮肉（侨福店）",
+          "original_district": "朝阳区",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "remarks"
+          ]
+        },
+        {
+          "number": 88,
+          "source_line": 194,
+          "source_section": "北京有什么好吃的了？/朝阳区",
+          "name": "九本居酒屋（大望路店）",
+          "original_district": "朝阳区",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "remarks"
+          ]
+        },
+        {
+          "number": 89,
+          "source_line": 198,
+          "source_section": "北京有什么好吃的了？/海淀区",
+          "name": "龙人居·水煮鱼（五道口店）",
+          "original_district": "海淀区",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "remarks"
+          ]
+        },
+        {
+          "number": 90,
+          "source_line": 199,
+          "source_section": "北京有什么好吃的了？/海淀区",
+          "name": "柴氏风味斋（甘家口店）",
+          "original_district": "海淀区",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "remarks"
+          ]
+        },
+        {
+          "number": 91,
+          "source_line": 200,
+          "source_section": "北京有什么好吃的了？/海淀区",
+          "name": "川军本色（双安店）",
+          "original_district": "海淀区",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "remarks"
+          ]
+        },
+        {
+          "number": 92,
+          "source_line": 201,
+          "source_section": "北京有什么好吃的了？/海淀区",
+          "name": "北平楼·烤鸭（牡丹园店）",
+          "original_district": "海淀区",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "remarks"
+          ]
+        },
+        {
+          "number": 93,
+          "source_line": 202,
+          "source_section": "北京有什么好吃的了？/海淀区",
+          "name": "新疆巴州金丝特餐厅（大钟寺店）",
+          "original_district": "海淀区",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "remarks"
+          ]
+        },
+        {
+          "number": 94,
+          "source_line": 203,
+          "source_section": "北京有什么好吃的了？/海淀区",
+          "name": "羲和雅苑·北京烤鸭（中关村店）",
+          "original_district": "海淀区",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "remarks"
+          ]
+        },
+        {
+          "number": 95,
+          "source_line": 204,
+          "source_section": "北京有什么好吃的了？/海淀区",
+          "name": "钱塘花园·宁波菜（双榆树店）",
+          "original_district": "海淀区",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "remarks"
+          ]
+        },
+        {
+          "number": 96,
+          "source_line": 205,
+          "source_section": "北京有什么好吃的了？/海淀区",
+          "name": "kōng 胶东小馆（华熙店）",
+          "original_district": "海淀区",
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "street_address",
+            "remarks"
+          ]
+        }
+      ],
+      "publication_warning": "本清单整理自 archive/ocr.md 的 OCR 原始资料，仅供参考；店铺、地址及推荐内容可能已变化，出行前请核实。"
+    },
+    {
+      "key": "weekend_travel",
+      "title": "周末游玩",
+      "summary": "本清单整理自 archive/ocr.md 的 OCR 原始资料，仅供参考；目的地及景点信息可能已变化，出行前请核实。",
+      "legacy_generated_summaries": [
+        "来自 OCR 汇总的周末目的地候选条目，逐条核实后发布。"
+      ],
+      "category": "游玩",
+      "section": "周末逃离北京计划",
+      "source_note_prefix": "OCR 景点建议（未核实）：",
+      "specialty_note_prefix": "OCR 所列特色（未核实）：",
+      "suggested_action": "游览目的地并记录体验",
+      "rows": [
+        {
+          "number": 1,
+          "source_line": 88,
+          "name": "天津",
+          "original_duration": "30分钟",
+          "original_fare": "55",
+          "original_specialties": "狗不理包子、十八街麻花、耳朵眼炸糕",
+          "original_attractions": [
+            "天津之眼",
+            "古文化街",
+            "五大道"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 2,
+          "source_line": 89,
+          "name": "廊坊",
+          "original_duration": "21分钟",
+          "original_fare": "30",
+          "original_specialties": "香河肉饼、三河豆片、大城驴肉",
+          "original_attractions": [
+            "天下第一城",
+            "廊坊自然公园",
+            "丝绸之路国际文化交流中心"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 3,
+          "source_line": 90,
+          "name": "保定",
+          "original_duration": "41分钟",
+          "original_fare": "63",
+          "original_specialties": "驴肉火烧、牛肉罩饼、冰糖葫芦",
+          "original_attractions": [
+            "白洋淀",
+            "野三坡",
+            "古莲花池"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 4,
+          "source_line": 91,
+          "name": "石家庄",
+          "original_duration": "1小时7分",
+          "original_fare": "129",
+          "original_specialties": "安徽牛肉板面、熏肉大饼",
+          "original_attractions": [
+            "正定古城",
+            "赵州桥",
+            "西柏坡"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 5,
+          "source_line": 92,
+          "name": "唐山",
+          "original_duration": "1小时10分",
+          "original_fare": "103",
+          "original_specialties": "蜂蜜麻糖、唐山酥糖、烧鸡",
+          "original_attractions": [
+            "清东陵",
+            "南湖公园",
+            "滦州古城"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 6,
+          "source_line": 93,
+          "name": "秦皇岛",
+          "original_duration": "1小时50分",
+          "original_fare": "178",
+          "original_specialties": "海鲜、烤大虾、山海关浑锅",
+          "original_attractions": [
+            "北戴河",
+            "山海关",
+            "阿那亚"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 7,
+          "source_line": 94,
+          "name": "承德",
+          "original_duration": "52分钟",
+          "original_fare": "95",
+          "original_specialties": "御土荷叶鸡、驴打滚、拔御面",
+          "original_attractions": [
+            "避暑山庄",
+            "外八庙",
+            "塞罕坝"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 8,
+          "source_line": 95,
+          "name": "张家口",
+          "original_duration": "47分钟",
+          "original_fare": "72",
+          "original_specialties": "莜面、羊肉蘑菇汤、手把肉",
+          "original_attractions": [
+            "大境门",
+            "崇礼冬奥场馆",
+            "八达岭长城"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 9,
+          "source_line": 96,
+          "name": "沧州",
+          "original_duration": "51分钟",
+          "original_fare": "94",
+          "original_specialties": "沧州火锅鸡、驴肉火烧、羊肠子",
+          "original_attractions": [
+            "吴桥杂技大世界",
+            "沧州铁狮子",
+            "南大港湿地"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 10,
+          "source_line": 97,
+          "name": "衡水",
+          "original_duration": "1小时15分",
+          "original_fare": "100",
+          "original_specialties": "衡水老白干、熏肉、扣碗",
+          "original_attractions": [
+            "衡水湖",
+            "衡水老白干景区",
+            "武强年画博物馆"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 11,
+          "source_line": 98,
+          "name": "邢台",
+          "original_duration": "1小时30分",
+          "original_fare": "120",
+          "original_specialties": "道口烧鸡、南宫熏菜、大锅菜",
+          "original_attractions": [
+            "邢台大峡谷",
+            "崆山白云洞",
+            "开元寺"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 12,
+          "source_line": 99,
+          "name": "邯郸",
+          "original_duration": "1小时40分",
+          "original_fare": "135",
+          "original_specialties": "邯郸炖菜、驴肉卷饼、马头酥鱼",
+          "original_attractions": [
+            "娲皇宫",
+            "广府古城",
+            "丛台公园"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 13,
+          "source_line": 100,
+          "name": "济南",
+          "original_duration": "1小时22分",
+          "original_fare": "165",
+          "original_specialties": "把子肉、甜沫、九转大肠",
+          "original_attractions": [
+            "趵突泉",
+            "大明湖",
+            "千佛山"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 14,
+          "source_line": 101,
+          "name": "青岛",
+          "original_duration": "2小时50分",
+          "original_fare": "268",
+          "original_specialties": "海鲜烧烤、酸鱼饺子、青岛啤酒",
+          "original_attractions": [],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address",
+            "attractions"
+          ]
+        },
+        {
+          "number": 15,
+          "source_line": 102,
+          "name": "淄博",
+          "original_duration": "2小时10分",
+          "original_fare": "198",
+          "original_specialties": "淄博烧烤、周村烧饼、豆腐箱",
+          "original_attractions": [
+            "海岱楼钟书阁",
+            "聊斋园",
+            "周村古商城"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 16,
+          "source_line": 103,
+          "name": "枣庄",
+          "original_duration": "2小时20分",
+          "original_fare": "210",
+          "original_specialties": "辣子鸡、羊肉汤、黄花牛肉面",
+          "original_attractions": [
+            "台儿庄古城",
+            "微山湖湿地",
+            "抱犊崮"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 17,
+          "source_line": 104,
+          "name": "东营",
+          "original_duration": "2小时50分",
+          "original_fare": "240",
+          "original_specialties": "黄河口大闸蟹、利津水煎包",
+          "original_attractions": [
+            "黄河口生态旅游区",
+            "孙武祠",
+            "黄河三角洲动物园"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 18,
+          "source_line": 105,
+          "name": "烟台",
+          "original_duration": "3小时10分",
+          "original_fare": "285",
+          "original_specialties": "海鲜焖子、福山大面、烤鲅鱼",
+          "original_attractions": [],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address",
+            "attractions"
+          ]
+        },
+        {
+          "number": 19,
+          "source_line": 106,
+          "name": "潍坊",
+          "original_duration": "2小时30分",
+          "original_fare": "220",
+          "original_specialties": "潍坊肉火烧、朝天锅、鸡鸭和乐",
+          "original_attractions": [
+            "潍坊风筝博物馆",
+            "十笏园",
+            "沂山"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 20,
+          "source_line": 107,
+          "name": "济宁",
+          "original_duration": "2小时15分",
+          "original_fare": "200",
+          "original_specialties": "甏肉干饭、孔府菜、微山湖鱼",
+          "original_attractions": [
+            "孔庙",
+            "孔府",
+            "微山湖"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 21,
+          "source_line": 108,
+          "name": "泰安",
+          "original_duration": "1小时35分",
+          "original_fare": "155",
+          "original_specialties": "泰安煎饼、豆腐宴、野菜丸子",
+          "original_attractions": [
+            "泰山",
+            "岱庙",
+            "方特欢乐世界"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 22,
+          "source_line": 109,
+          "name": "威海",
+          "original_duration": "3小时30分",
+          "original_fare": "310",
+          "original_specialties": "威海烤海肠、鱼锅饼子、海鲜手擀面",
+          "original_attractions": [],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address",
+            "attractions"
+          ]
+        },
+        {
+          "number": 23,
+          "source_line": 110,
+          "name": "日照",
+          "original_duration": "3小时",
+          "original_fare": "275",
+          "original_specialties": "海鲜小豆腐、日照刀鱼、海沙子面",
+          "original_attractions": [],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address",
+            "attractions"
+          ]
+        },
+        {
+          "number": 24,
+          "source_line": 111,
+          "name": "临沂",
+          "original_duration": "2小时40分",
+          "original_fare": "235",
+          "original_specialties": "临沂炒鸡、八宝豆豉、糁汤",
+          "original_attractions": [],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address",
+            "attractions"
+          ]
+        },
+        {
+          "number": 55,
+          "source_line": 112,
+          "name": "抚顺",
+          "original_duration": "3小时",
+          "original_fare": "290",
+          "original_specialties": "抚顺麻辣拌、波浪叶饼、豆面卷子",
+          "original_attractions": [],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address",
+            "attractions"
+          ]
+        },
+        {
+          "number": 56,
+          "source_line": 113,
+          "name": "本溪",
+          "original_duration": "3小时20分",
+          "original_fare": "310",
+          "original_specialties": "本溪羊汤、小市一锅、长宽猪蹄",
+          "original_attractions": [],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address",
+            "attractions"
+          ]
+        },
+        {
+          "number": 57,
+          "source_line": 114,
+          "name": "丹东",
+          "original_duration": "4小时",
+          "original_fare": "380",
+          "original_specialties": "丹东草莓、朝鲜冷面、黄蚬子",
+          "original_attractions": [],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address",
+            "attractions"
+          ]
+        },
+        {
+          "number": 58,
+          "source_line": 115,
+          "name": "锦州",
+          "original_duration": "2小时50分",
+          "original_fare": "260",
+          "original_specialties": "锦州烧烤、沟帮子熏鸡、干豆腐",
+          "original_attractions": [],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address",
+            "attractions"
+          ]
+        },
+        {
+          "number": 59,
+          "source_line": 116,
+          "name": "营口",
+          "original_duration": "3小时",
+          "original_fare": "280",
+          "original_specialties": "营口海鲜、盖州西瓜、鲅鱼圈海蜇",
+          "original_attractions": [],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address",
+            "attractions"
+          ]
+        },
+        {
+          "number": 60,
+          "source_line": 117,
+          "name": "阜新",
+          "original_duration": "3小时",
+          "original_fare": "270",
+          "original_specialties": "阜新蒙古馅饼、荞面、清沟鱼",
+          "original_attractions": [],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address",
+            "attractions"
+          ]
+        },
+        {
+          "number": 61,
+          "source_line": 118,
+          "name": "辽阳",
+          "original_duration": "3小时",
+          "original_fare": "280",
+          "original_specialties": "塔糖、小屯羊汤、香水梨",
+          "original_attractions": [],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address",
+            "attractions"
+          ]
+        },
+        {
+          "number": 62,
+          "source_line": 119,
+          "name": "盘锦",
+          "original_duration": "2小时50分",
+          "original_fare": "250",
+          "original_specialties": "盘锦河蟹、大米、田庄台小吃",
+          "original_attractions": [],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address",
+            "attractions"
+          ]
+        },
+        {
+          "number": 63,
+          "source_line": 120,
+          "name": "铁岭",
+          "original_duration": "2小时40分",
+          "original_fare": "240",
+          "original_specialties": "铁岭火勺、牛肉火烧、大甸子羊汤",
+          "original_attractions": [],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address",
+            "attractions"
+          ]
+        },
+        {
+          "number": 64,
+          "source_line": 121,
+          "name": "长春",
+          "original_duration": "3小时50分",
+          "original_fare": "414",
+          "original_specialties": "长春酱肉、锅包肉、朝鲜族冷面",
+          "original_attractions": [],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address",
+            "attractions"
+          ]
+        },
+        {
+          "number": 65,
+          "source_line": 122,
+          "name": "吉林",
+          "original_duration": "4小时10分",
+          "original_fare": "440",
+          "original_specialties": "吉林煎粉、新兴园蒸饺、人参鸡",
+          "original_attractions": [],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address",
+            "attractions"
+          ]
+        },
+        {
+          "number": 66,
+          "source_line": 123,
+          "name": "四平",
+          "original_duration": "3小时30分",
+          "original_fare": "350",
+          "original_specialties": "四平李连贵熏肉大饼、伊通烧鸽子、玉米",
+          "original_attractions": [],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address",
+            "attractions"
+          ]
+        },
+        {
+          "number": 67,
+          "source_line": 124,
+          "name": "哈尔滨",
+          "original_duration": "4小时52分",
+          "original_fare": "546",
+          "original_specialties": "哈尔滨红肠、锅包肉、马迭尔冰棍",
+          "original_attractions": [],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address",
+            "attractions"
+          ]
+        },
+        {
+          "number": 68,
+          "source_line": 125,
+          "name": "大庆",
+          "original_duration": "5小时",
+          "original_fare": "580",
+          "original_specialties": "大庆坑烤、扒鸡、连环湖鱼",
+          "original_attractions": [],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address",
+            "attractions"
+          ]
+        },
+        {
+          "number": 69,
+          "source_line": 126,
+          "name": "牡丹江",
+          "original_duration": "7小时",
+          "original_fare": "650",
+          "original_specialties": "牡丹江镜泊湖鱼、东北炖菜、粘豆包",
+          "original_attractions": [],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address",
+            "attractions"
+          ]
+        },
+        {
+          "number": 70,
+          "source_line": 127,
+          "name": "呼和浩特",
+          "original_duration": "2小时13分",
+          "original_fare": "150",
+          "original_specialties": "手扒羊肉、烤羊排、焙子",
+          "original_attractions": [],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address",
+            "attractions"
+          ]
+        },
+        {
+          "number": 71,
+          "source_line": 128,
+          "name": "包头",
+          "original_duration": "2小时50分",
+          "original_fare": "200",
+          "original_specialties": "包头茶汤、莜面、黄河鲤鱼",
+          "original_attractions": [],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address",
+            "attractions"
+          ]
+        },
+        {
+          "number": 72,
+          "source_line": 129,
+          "name": "鄂尔多斯",
+          "original_duration": "3小时30分",
+          "original_fare": "250",
+          "original_specialties": "鄂尔多斯炖羊肉、酸粥、炒米",
+          "original_attractions": [],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address",
+            "attractions"
+          ]
+        },
+        {
+          "number": 73,
+          "source_line": 130,
+          "name": "乌兰察布",
+          "original_duration": "1小时50分",
+          "original_fare": "100",
+          "original_specialties": "乌兰察布羊肉、土豆、莜面窝窝",
+          "original_attractions": [],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address",
+            "attractions"
+          ]
+        },
+        {
+          "number": 74,
+          "source_line": 131,
+          "name": "赤峰",
+          "original_duration": "2小时30分",
+          "original_fare": "200",
+          "original_specialties": "赤峰对夹、锅包肉、哈达火烧",
+          "original_attractions": [],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address",
+            "attractions"
+          ]
+        },
+        {
+          "number": 75,
+          "source_line": 132,
+          "name": "通辽",
+          "original_duration": "3小时50分",
+          "original_fare": "300",
+          "original_specialties": "通辽牛肉干、蒙古馅饼、手把肉",
+          "original_attractions": [],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address",
+            "attractions"
+          ]
+        },
+        {
+          "number": 76,
+          "source_line": 133,
+          "name": "涿州",
+          "original_duration": "25分钟",
+          "original_fare": "23.5",
+          "original_specialties": null,
+          "original_attractions": [
+            "涿州影视城",
+            "张飞庙",
+            "永济桥"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 77,
+          "source_line": 134,
+          "name": "高碑店",
+          "original_duration": "30分钟",
+          "original_fare": "37.5",
+          "original_specialties": null,
+          "original_attractions": [
+            "高碑店植物园",
+            "中国门窗博物馆",
+            "燕赵公园"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 78,
+          "source_line": 135,
+          "name": "德州",
+          "original_duration": "55分钟",
+          "original_fare": "114",
+          "original_specialties": null,
+          "original_attractions": [
+            "德州太阳谷",
+            "苏禄王墓",
+            "董子园"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 79,
+          "source_line": 136,
+          "name": "定州",
+          "original_duration": "55分钟",
+          "original_fare": "85",
+          "original_specialties": null,
+          "original_attractions": [
+            "定州古城",
+            "开元寺塔",
+            "中山汉墓"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 80,
+          "source_line": 137,
+          "name": "正定",
+          "original_duration": "1小时15分",
+          "original_fare": "122",
+          "original_specialties": null,
+          "original_attractions": [
+            "正定古城",
+            "隆兴寺",
+            "荣国府"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 81,
+          "source_line": 138,
+          "name": "阳泉",
+          "original_duration": "1小时10分",
+          "original_fare": "140",
+          "original_specialties": null,
+          "original_attractions": [
+            "娘子关",
+            "固关长城",
+            "阳泉古城"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 82,
+          "source_line": 139,
+          "name": "青州",
+          "original_duration": "1小时30分",
+          "original_fare": "230",
+          "original_specialties": null,
+          "original_attractions": [
+            "青州古城",
+            "云门山",
+            "驼山"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 83,
+          "source_line": 140,
+          "name": "大同",
+          "original_duration": "1小时40分",
+          "original_fare": "130",
+          "original_specialties": null,
+          "original_attractions": [
+            "云冈石窟",
+            "悬空寺",
+            "大同古城"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 84,
+          "source_line": 141,
+          "name": "曲阜",
+          "original_duration": "1小时40分",
+          "original_fare": "244",
+          "original_specialties": null,
+          "original_attractions": [
+            "孔府",
+            "孔庙",
+            "孔林",
+            "尼山圣境"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 85,
+          "source_line": 142,
+          "name": "滨州",
+          "original_duration": "1小时40分",
+          "original_fare": "204",
+          "original_specialties": null,
+          "original_attractions": [
+            "魏集古村落",
+            "杜受田故居",
+            "黄河三角洲文化产业园"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 86,
+          "source_line": 143,
+          "name": "寿光",
+          "original_duration": "1小时40分",
+          "original_fare": "240",
+          "original_specialties": null,
+          "original_attractions": [
+            "寿光蔬菜高科技示范园",
+            "寿光林海生态博览园",
+            "弥河风景区"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 87,
+          "source_line": 144,
+          "name": "鹤壁",
+          "original_duration": "1小时50分",
+          "original_fare": "172",
+          "original_specialties": null,
+          "original_attractions": [
+            "云梦山",
+            "浚县古城",
+            "大伾山"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 88,
+          "source_line": 145,
+          "name": "朔州",
+          "original_duration": "1小时50分",
+          "original_fare": "150",
+          "original_specialties": null,
+          "original_attractions": [
+            "应县木塔",
+            "崇福寺",
+            "朔州古城"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 89,
+          "source_line": 146,
+          "name": "榆次",
+          "original_duration": "1小时50分",
+          "original_fare": "190",
+          "original_specialties": null,
+          "original_attractions": [
+            "榆次老城",
+            "常家庄园",
+            "乔家大院"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 90,
+          "source_line": 147,
+          "name": "辛集",
+          "original_duration": "1小时10分",
+          "original_fare": "115",
+          "original_specialties": null,
+          "original_attractions": [
+            "辛集国际皮革城",
+            "辛集湿地",
+            "吴禄贞墓"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 91,
+          "source_line": 148,
+          "name": "晋州",
+          "original_duration": "1小时15分",
+          "original_fare": "118",
+          "original_specialties": null,
+          "original_attractions": [
+            "晋州古城",
+            "魏征公园",
+            "晋州烈士陵园"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 92,
+          "source_line": 149,
+          "name": "藁城",
+          "original_duration": "1小时20分",
+          "original_fare": "125",
+          "original_specialties": null,
+          "original_attractions": [
+            "藁城宫灯博物馆",
+            "台西商代遗址",
+            "藁城湿地公园"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 93,
+          "source_line": 150,
+          "name": "高密",
+          "original_duration": "1小时45分",
+          "original_fare": "235",
+          "original_specialties": null,
+          "original_attractions": [
+            "高密东北乡",
+            "莫言旧居",
+            "红高粱影视基地"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 94,
+          "source_line": 151,
+          "name": "诸城",
+          "original_duration": "1小时50分",
+          "original_fare": "260",
+          "original_specialties": null,
+          "original_attractions": [
+            "诸城恐龙博物馆",
+            "潍河公园",
+            "大舜苑"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 95,
+          "source_line": 152,
+          "name": "昌邑",
+          "original_duration": "1小时50分",
+          "original_fare": "245",
+          "original_specialties": null,
+          "original_attractions": [
+            "昌邑绿博园",
+            "潍水风情湿地公园",
+            "昌邑博物馆"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 96,
+          "source_line": 153,
+          "name": "安阳",
+          "original_duration": "1小时55分",
+          "original_fare": "189",
+          "original_specialties": null,
+          "original_attractions": [
+            "殷墟",
+            "中国文字博物馆",
+            "红旗渠"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 97,
+          "source_line": 154,
+          "name": "忻州",
+          "original_duration": "1小时55分",
+          "original_fare": "180",
+          "original_specialties": null,
+          "original_attractions": [
+            "五台山",
+            "雁门关",
+            "忻州古城"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 98,
+          "source_line": 155,
+          "name": "五莲",
+          "original_duration": "1小时55分",
+          "original_fare": "270",
+          "original_specialties": null,
+          "original_attractions": [
+            "五莲山",
+            "九仙山",
+            "大青山"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 99,
+          "source_line": 156,
+          "name": "安丘",
+          "original_duration": "1小时55分",
+          "original_fare": "255",
+          "original_specialties": null,
+          "original_attractions": [
+            "青云山民俗游乐园",
+            "景芝酒之城",
+            "安丘齐鲁酒地"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 100,
+          "source_line": 157,
+          "name": "新乡",
+          "original_duration": "1小时58分",
+          "original_fare": "185",
+          "original_specialties": null,
+          "original_attractions": [
+            "八里沟",
+            "万仙山",
+            "新乡博物馆"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 101,
+          "source_line": 158,
+          "name": "太原",
+          "original_duration": "1小时58分",
+          "original_fare": "197",
+          "original_specialties": null,
+          "original_attractions": [
+            "晋祠",
+            "双塔寺",
+            "平遥古城"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 102,
+          "source_line": 159,
+          "name": "平遥",
+          "original_duration": "1小时58分",
+          "original_fare": "201",
+          "original_specialties": null,
+          "original_attractions": [
+            "平遥古城",
+            "双林寺",
+            "镇国寺"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 103,
+          "source_line": 160,
+          "name": "莱阳",
+          "original_duration": "1小时58分",
+          "original_fare": "265",
+          "original_specialties": null,
+          "original_attractions": [
+            "莱阳恐龙地质公园",
+            "蚬河公园",
+            "莱阳博物馆"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 104,
+          "source_line": 161,
+          "name": "海阳",
+          "original_duration": "1小时59分",
+          "original_fare": "275",
+          "original_specialties": null,
+          "original_attractions": [
+            "海阳万米金沙滩",
+            "海阳地雷战纪念馆",
+            "招虎山国家森林公园"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 105,
+          "source_line": 162,
+          "name": "介休",
+          "original_duration": "2小时",
+          "original_fare": "210",
+          "original_specialties": null,
+          "original_attractions": [
+            "绵山",
+            "张壁古堡",
+            "介休古城"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        },
+        {
+          "number": 106,
+          "source_line": 163,
+          "name": "北戴河",
+          "original_duration": "1小时55分",
+          "original_fare": "178",
+          "original_specialties": null,
+          "original_attractions": [
+            "北戴河鸽子窝公园",
+            "老虎石海上公园",
+            "联峰山公园"
+          ],
+          "missing_fields": [
+            "verified_at",
+            "coordinates",
+            "current_duration",
+            "current_fare",
+            "street_address"
+          ]
+        }
+      ],
+      "publication_warning": "本清单整理自 archive/ocr.md 的 OCR 原始资料，仅供参考；目的地及景点信息可能已变化，出行前请核实。"
+    }
+  ]
+}

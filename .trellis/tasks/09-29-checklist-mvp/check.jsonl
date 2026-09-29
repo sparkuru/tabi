@@ -1,0 +1,4 @@
+{"file":".trellis/spec/product/requirements.md","reason":"Acceptance requirements"}
+{"file":".trellis/spec/product/architecture.md","reason":"Security, persistence and media constraints"}
+{"file":".trellis/spec/backend/index.md","reason":"Backend quality guidance"}
+{"file":".trellis/spec/frontend/index.md","reason":"Frontend quality guidance"}
