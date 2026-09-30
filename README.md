@@ -9,13 +9,13 @@
 ```sh
 cp infra/.env.example infra/.env
 # 修改 infra/.env 中的 POSTGRES_PASSWORD
-docker compose --env-file infra/.env -f infra/docker-compose.yml up --build -d
+./preview.sh
 docker compose --env-file infra/.env -f infra/docker-compose.yml exec api python -m app.bootstrap_admin --email you@example.com
 ```
 
-打开 <http://127.0.0.1:8080>。API 文档在 <http://127.0.0.1:8080/api/docs>。首次启动会自动执行数据库迁移。管理员账号创建命令会交互式读取密码，至少 12 个字符。
+`preview.sh` 等待整套服务就绪，并显示网站、管理页和 API 文档入口；之后可再次运行以重建并启动。首次启动会自动执行数据库迁移。管理员账号创建命令会交互式读取密码，至少 12 个字符。
 
-默认只监听本机回环地址。对外部署时，先配置 HTTPS 域名和反向代理入口，并将 `TABI_COOKIE_SECURE=true`；浏览器定位需要 HTTPS。配置项见 `infra/.env.example`。
+示例配置将 HTTP 和 HTTPS 分别绑定到 `0.0.0.0:8080`、`0.0.0.0:8443`，同一局域网的设备可通过运行机器的 IP 和映射端口访问。修改 `infra/.env` 中的 `TABI_HTTP_BIND`、`TABI_HTTPS_BIND` 即可调整宿主机监听地址；这两项必须设置。本地预览时保持 `TABI_SITE_ADDRESS=:80`，它是 Caddy 在容器内监听的端口。对外部署时，先配置 HTTPS 域名和反向代理入口，并将 `TABI_COOKIE_SECURE=true`；浏览器定位需要 HTTPS。配置项见 `infra/.env.example`。
 
 ## 首批资料
 

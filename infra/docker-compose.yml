@@ -39,8 +39,8 @@ services:
     environment:
       TABI_SITE_ADDRESS: ${TABI_SITE_ADDRESS:-:80}
     ports:
-      - "${TABI_HTTP_BIND:-127.0.0.1:8080}:80"
-      - "${TABI_HTTPS_BIND:-127.0.0.1:8443}:443"
+      - "${TABI_HTTP_BIND:?Set TABI_HTTP_BIND in infra/.env}:80"
+      - "${TABI_HTTPS_BIND:?Set TABI_HTTPS_BIND in infra/.env}:443"
     depends_on:
       api:
         condition: service_healthy
