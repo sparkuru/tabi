@@ -4,30 +4,42 @@
 - source: project-authored
 - tracking: commit this file and its referenced project-owned detail files
 
-本层记录项目级 Trellis Plus 决策。Trellis 上游 workflow、scripts、agents、config、更新元数据和平台生成文件保持原样；本层不是新的任务系统或自动运行时。每次应用 Trellis Plus 时先读取本文件及 [验证资料](validation.md)。未来有产品任务时，通过现有 Trellis context 机制让 implement/check 读取本层；本次不新建或激活任务。
+本层是共享开发规则的唯一来源，规则由项目编写，不复制工具源码。2026-10-01 按新版 Trellis Plus 核对；本次不创建、启动或归档任务，不更改产品实现。
 
-## Mainline continuity
+## Loading conditions
 
-项目方向见 [mainline](../../mainline.md)。对相关的无任务请求，先只读检查 mainline、task/archive、git 和验证证据，报告当前进度、阻碍及唯一明确的建议。默认 `guided`：未经用户选择，不创建下一个产品任务或实现代码。只有 mainline 明确记录了有边界、有顺序的 `serial` 授权，且候选工作已准备好，才可按正常 Trellis 生命周期继续；`paused` 只报告状态。遇到脏工作区、歧义、风险、范围变化或依赖未满足时停止推进并取得决定。
+| 时机 | 必读资料 |
+| --- | --- |
+| 会话开始、长时间中断后、提交/归档前、选择后续工作 | 本文件、[mainline](../../mainline.md)、当前任务验收标准、[连续性](continuity.md) |
+| 开发与修复 | [开发原则](development-principles.md)、[Docker/环境资料](development.md) |
+| UI 规划、实施、检查 | [前端设计流程](frontend.md)、[验证资料](validation.md) |
+| 检查完成与提交前 | [验证和人工反馈门禁](validation.md) |
+| 工作提交、归档、journal | [提交与归档署名](commit-policy.md) |
+| 新增第三方材料或工具更新 | [通知清单](../../../third_party/index.md)、下列写入边界 |
 
-## Before development
+## License and write boundary
 
-当前仓库只有产品规格，没有前后端清单、可运行命令或端口证据，因此现在不生成 `hako`/`dev.sh`。首个需要安装、lint、测试、构建或开发服务的任务开始前，核对项目真实工具链，按 `dev-it-in-docker` skill 建立 Docker 开发命令包装器；使用 `.devhome/` 时将其忽略。只配置当前平台可用的、针对 `./hako` 的窄权限或审批方式，不放宽原始 `docker`、shell、包管理器权限。项目级规则留在本层，本机适配留在个人配置且不提交。
+- 共享写入范围：本目录、正常 task 文档/context、`.trellis/mainline.md`、`third_party/`；普通源码、测试、包装器仅在相应工作获授权后修改。
+- Trellis `workflow.md`、`scripts/**`、`agents/**`、`config.yaml`、`.gitignore`、版本/hash/backup 元数据、AGENTS 的管理块及生成的平台文件只读；不补回旧定制、不配置 `update.skip`。要求维护上游 fork 时先说明具体来源与许可边界，等待单独决定。
+- `.codex/`、`.agents/` 等平台目录和本地环境文件属于个人/本机配置；沿用忽略规则，不暂存、不强制添加。README 仅在用户明确要求时修改。
+- 提交前逐路径分类，运行 `git diff --check`，检查 staged 列表；只添加明确授权的项目文件，不使用全仓库或强制暂存，不混入原有工作。
+- Trellis 0.6.14 的许可证状态 `present`，已收集文本与安装包一致；UUPM 本地材料精确版本/许可状态 `unknown`，见通知清单。遇到未知来源记 `license-notice-needed`，继续独立工作，不伪造通知或修改根许可证。
+- `trellis update` 后重检本层、mainline 和 task context。当前没有 `.backup-*`，本次未恢复备份，所有修改目标均不属于模板覆盖目标。2026-10-01 `trellis update --dry-run` 确认项目/CLI 同为 0.6.14、87 个模板无变化，spec/tasks/workspace 保留；npm 最新版本无法获取，不据此声称已核实远端最新。若以后更新状态不明，先运行 dry-run 并只读核对最新备份。
 
-## UI/UX Pro Max
+## Actual policy loading
 
-本项目是手机优先的 Web UI；Codex 项目级 UUPM 已于 2026-09-28 初始化在 `.codex/skills/ui-ux-pro-max/`，属于本机生成文件，不作为共享提交内容。对未来改变页面、交互或视觉的任务：计划阶段先读取安装的 UUPM skill，用其真实脚本生成任务级设计研究，再把经确认的视觉、响应式、状态和可访问性决策写入 task `design.md` 与 implement/check context；实施与检查均对照这些决策，验证后仅将稳定通用规则写回本层。原始生成材料的保存与共享须先核对其来源和许可。当前仅整理产品规格，尚无具体页面设计，不生成伪造的 UUPM 设计系统。
+`get_context.py --mode packages` 能发现 `trellis-plus` 层，但只列路径，不加载正文。根 AGENTS 管理块与已安装启动流程没有直接加载本层/mainline 的入口；未来主会话必须手动读取上表。没有修改受保护的启动文件，也没有宣称全阶段自动集成。
 
-## Browser validation and human review
+当前 `.trellis/tasks/09-30-universal-checklist-format/` 的 implement/check 清单显式注册本层各适用详情及 mainline；原有条目保留。Codex `.codex/hooks.json` 的 `SubagentStart` 经 `.codex/hooks/inject-subagent-context.py` 读取 JSONL 引用，不递归读取 Markdown 链接。原生注入需要正确的父会话标识；缺失时，现有子代理定义要求从派发的 `Active task: <path>` 读取清单及正文，不能猜另一个会话的任务。
 
-未来浏览器可访问的 UI 改动先判断 Playwright 是否能验证验收路径；可验证时建立最小可复现测试并运行，记录具体页面、状态、视口、数据边界和结果。已存在等效浏览器测试工具时沿用。不能运行时记下实际失败的前置条件，不计作通过。项目当前没有应用、Playwright 依赖、配置或测试命令；可运行资料见 [验证资料](validation.md)，待首个 UI 实现任务用仓库证据补齐。
+以后在正常任务规划阶段逐项注册所需详情，不能只注册 index：
 
-在任务实现与可运行检查结束、提交前，按差异、验收场景和验证证据选择 `human-required`、`human-optional` 或 `human-not-needed`。权限、删除、数据迁移、部署或无法自动验证的关键行为需要针对剩余风险征求反馈；纯文档且已检查的变更无需人工验收。需要反馈时明确说明已改内容、已运行检查、用户需测试的步骤及希望返回的通过/失败、截图或日志，避免泛泛要求“看一下”。
+```sh
+python3 .trellis/scripts/task.py add-context <task-dir> implement .trellis/spec/trellis-plus/validation.md 'UI validation and review gate'
+python3 .trellis/scripts/task.py add-context <task-dir> check .trellis/spec/trellis-plus/validation.md 'UI validation and review gate'
+python3 .trellis/scripts/task.py validate <task-dir>
+```
 
-## Commit and attribution
+其他详情按上表同样注册，去重且保留原条目。子代理只执行已批准的有边界任务；主会话负责阶段、规格、提交、归档和主线。本次只验证上下文解析与流程推演，不执行产品任务生命周期。
 
-每个工作提交前检查完整候选路径、`git diff --check` 和 staged 列表；只逐一暂存明确属于项目的文件。个人平台配置不提交，Trellis 上游受保护材料不由 Trellis Plus 修改或暂存。实质性 AI 作者贡献的工作提交写简洁完成摘要，并在正文后加 `Co-authored-by: OpenAI Codex <codex@openai.com>`；纯机械修改、用户原有文件、任务归档和 journal 提交通常不加。提交前给出正文与归属判断，遵守用户本次明确指定的提交范围及标题。
-
-## License boundary
-
-仓库内 Trellis 生成文件来自本机安装的 `@mindfoldhq/trellis` 0.6.14；该版本的 AGPL-3.0-only 许可证副本在 `third_party/trellis/LICENSE`，来源记录在根目录 `readme.md`，通知状态为 `present`。根目录 `license` 是项目原有文件，不能替代 Trellis 上游的 AGPL 通知。新写的 mainline 和本层、product 层是独立项目文档；`trellis update` 后仅重检这些项目文件，不向上游模板恢复自定义内容。受保护的上游文件仍不作为 Trellis Plus 自定义目标。
+2026-10-01 验证：implement/check 各 14 条真实、唯一、存在的引用；直接调用已安装 hook 的两种 context 解析入口，确认本层所有详情及 mainline 的正文已物化，低于默认 131072 字节总预算。这里只证明解析与内容可加载，未派发子代理，不能代替真实父会话 `SubagentStart` 的运行证据。

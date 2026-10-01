@@ -1,0 +1,26 @@
+# Mainline continuity
+
+`.trellis/mainline.md` 记录项目方向、来源/批准边界和已验证进度；详细需求留在产品 specs 与正常 task，不另建调度器、任务 schema 或优先级系统。
+
+## Import and lifecycle
+
+开始、长时间中断后、提交/归档前和选择后续工作时读 mainline、源需求、当前 PRD/design 与验收。来源以项目内当前文档为准，区分批准、草案、已替代和归档证据；文件名和时间本身不证明批准。已有明确决定直接继承，冲突的权威来源才请求选择。没主线时只从实际来源导入，不编造产品目标；尚未 Trellis init 时只读盘点，不制造局部安装。
+
+需求获批准后同步目标、范围、约束、验收、来源和受影响工作。create/start 只链接批准的正常任务，父子树不代表依赖。检查后区分已实现、已验证和未验证。归档后更新路径、工作/归档提交、完成范围与下一项决定；沿用归档署名规则。重跑合并证据，不重复工作行、不回退到较旧草案、不因实现偏差降低验收。
+
+## Read-only Project Pulse
+
+相关的无任务请求（继续、状态、下一步）或归档后做只读 Pulse：读 mainline、task/archive、Git 与验证记录，报告当前目标、已完成证据、具体阻碍、唯一明确建议及允许的下一步。不为无关问答执行 Pulse，不依赖归档后无法再解析的 completed 状态。
+
+- `guided`（默认）：可建议，等待用户选择后才创建或推进产品工作。
+- `paused`：只报告，不创建或实现。
+- `serial`：只有记录了明确目标、允许任务/顺序及停止条件的授权，且恰有一个列出的 ready 任务，才串行继续。不能从拟议功能、技术依赖或旧会话推导 serial 授权。
+- 缺主线/目标时请求一个优先级决定；脏工作区、检查未解决、归档证据不足、依赖/范围/风险/歧义有问题时先说明并取得所需决定，不能自动清理。
+
+serial 只省去重复的列内 create/start 同意，不省略规划/验收、人工反馈、提交决定或归档证据。本次“不建 task”有效，`universal-checklist-format` 保持 planning；配置安装不等于批准产品实施。
+
+## Coordination and walkthrough
+
+主会话负责阶段选择、AC 映射、派发、核实证据、规格、Git、归档及 mainline。工作代理收到明确 task/边界，只执行研究、实施或检查并报告文件/验证/未决事项，不能自行选择下项、归档、全仓清理或递归派发实施/检查代理。
+
+当前任务流程推演：主会话读 mainline/政策与 AC1–AC8 → 最终规划仍待批准 → 批准后使用现有 task start → implement/check 显式 context 加载 → 检查按 validation.md；Playwright 缺失先建立可运行套件，PostgreSQL 并发必须隔离验证 → 判断剩余人工风险 → 获授权后工作提交 → `archive --no-commit` + 唯一署名归档提交 → 独立 journal → guided Pulse。归档 route/help 与 context 解析可只读验证；本次没有实际执行 start/check/archive，不计产品验收通过。
