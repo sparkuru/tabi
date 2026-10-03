@@ -25,3 +25,47 @@ Implemented checklist/check-in MVP, seeded all 172 OCR records as labeled refere
 ### Status
 
 [OK] **Completed**
+
+
+## Session 2: Universal checklist delivery and actual preview acceptance
+
+**Date**: 2026-10-04
+**Task**: Universal checklist delivery and actual preview acceptance
+**Branch**: `ikimashō`
+
+### Summary
+
+用户认可实际 preview 并授权提交全部 86 个文件；通用清单任务已归档，OCR 第一块 70 条已导入发布，验收与提交引用已记录。
+
+### Main Changes
+
+- Work `7f6eb74b2f32b59b6e5fb7bf4a59ea7b69fdaa5a` 提交全部 86 个未提交文件，包含通用 JSON 导入/发布、私人直接完成、文案/API/Schema/示例、隔离开发与浏览器套件，以及完整 preview 配置与生命周期调整。
+- 用户认可实际 preview 效果，并明确授权“提交吧；包括所有脏文件”；旧的部分暂存与预览排除方案不再适用。
+- 通过原 bootstrap 创建实际 preview 的首个管理员，随机凭据仅在 owner-only /tmp 文件；持久验收使用用户相同的 HTTP 入口和数据库。
+- 依用户独立授权、不创建新任务，将 OCR 第一块 70 条整理、导入并发布为“北京美食·《Delicious》刊”。原字段和顺序逐项核对；4 条 area、66 条 physical，verified_at 为 null。公开清单 22909b37-a11e-406c-8bd4-f01180f53f58 已验收。
+- Archive `9171c39b363345b1f77e1f682b7b3b26cf25184b` 将本任务 12 个文件完整搬至 `.trellis/tasks/archive/2026-10/09-30-universal-checklist-format/`；状态 completed，工作提交 hash 已写 task.json，JSONL/spec/mainline 引用更新，归档提交恰好一次 Codex trailer。
+- 开发规范初始化任务保持原状态；忽略的 dotenv、凭据、缓存、依赖和截图不进入 Git。
+
+### Testing
+
+- 2026-10-01：45 单元、4 PostgreSQL、14 双视口隔离浏览器及迁移/构建/类型/格式/Schema/生命周期通过，详见归档 verification。
+- 2026-10-03：预览脚本语法/ShellCheck/shfmt、Compose 配置与独立预览生命周期通过；HEAD Compose 与完整 hako 隔离兼容性检查通过。
+- 2026-10-04：实际 preview 持久桌面/手机 2/2，通过类型/格式与 8 项错误配置拒绝/有效配置列表；38 个部署后端文件与工作区一致，前端资源与验收构建一致，迁移 a748bd701acf。
+- 发布数据逐项核对、匿名 API 70 条、公开桌面/手机页面通过；真实退出 204。证据 `/tmp/tabi-ocr-first/publication-result.json`。
+- 本次收尾核对全部 staged 路径、git diff --check、归档上下文各 15 项有效引用和独立 bootstrap 文件摘要；未将历史完整测试记作新一轮执行。
+
+### Next Steps
+
+- 本次交付、工作提交与归档完成，没有新增任务或 serial 授权。
+- 手机为 Chromium 触控模拟；历史 OCR 未核实，旧代码回滚需要兼容新的空记录。
+
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `7f6eb74` | (see git log) |
+
+### Status
+
+[OK] **Completed**

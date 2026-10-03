@@ -29,12 +29,12 @@
 | --- | --- | --- | --- |
 | 1 | `.trellis/tasks/archive/2026-09/09-29-checklist-mvp/` | complete | Work `b22105a`、archive `d92afbb`；verification 记录应用/数据库/恢复及 172 条参考内容验收和现状未核实限制。 |
 | 2 | 本地预览入口 | complete | `2595100` 增加 `preview.sh`、地址配置和已有 Compose 生命周期，无独立 task；不新建任务补历史。 |
-| 3 | `.trellis/tasks/archive/2026-10/09-30-universal-checklist-format/` | complete | 实现与全范围检查通过：45 单元、4 PostgreSQL、14 桌面/手机浏览器，迁移/构建/格式及生命周期通过；实际 preview 与用户验收通过；Work `7f6eb74`，已归档，归档提交引用随后记录。 |
+| 3 | `.trellis/tasks/archive/2026-10/09-30-universal-checklist-format/` | complete | 实现与全范围检查通过：45 单元、4 PostgreSQL、14 桌面/手机浏览器，迁移/构建/格式及生命周期通过；实际 preview 与用户验收通过；Work `7f6eb74`、archive `9171c39`；任务 completed，收尾 journal 独立记录。 |
 
 ## Evidence and Decisions
 
 - completed evidence: 上表及已归档 verification；2026-10-01 的 Trellis Plus 更新已独立提交。当前产品实施的新证据记录在任务 `verification.md`，不沿用历史检查结果声称通过。
-- current blocker / dirty-state warning: 无待决提交授权；2026-10-04 用户明确要求“提交吧；包括所有脏文件”。Work `7f6eb74` 已完整提交 86 个文件，包含通用清单与预览 bootstrap。通用清单已归档，随后独立记录 journal；独立 `00-bootstrap-guidelines` 保持原状态，忽略的 dotenv/凭据/缓存/测试产物不纳入。
+- current blocker / dirty-state warning: 无待决提交授权；2026-10-04 用户明确要求“提交吧；包括所有脏文件”。Work `7f6eb74` 已完整提交 86 个文件，包含通用清单与预览 bootstrap。通用清单以 `9171c39` 归档，独立 journal 与本主线记录同步提交；独立 `00-bootstrap-guidelines` 保持原状态，忽略的 dotenv/凭据/缓存/测试产物不纳入。
 - next user decision: 当前交付与提交已获批准，没有额外任务或 serial 授权。手机检查为 Chromium 触控模拟，真实设备/辅助技术未证明；旧版本回滚须兼容新空记录。
 - actual preview review: 用户确认验收入口为 `http://192.168.9.4:7081`（infra 项目），授权创建首个管理员并要求后续同步测试通过 preview HTTP 入口。38 个运行后端源码文件与工作区一致、前端资源与验收构建一致、迁移为 `a748bd701acf`。实际 HTTP 桌面/手机登录、管理页和 JSON 预览通过，持久 `test:preview` 2/2、类型/格式及 8 个配置拒绝路径通过，真实退出204/me401。随机凭据仅在 owner-only `/tmp` 文件；规则见 validation，实际证据见任务 verification。用户已在该入口认可效果。
 - OCR publication: 用户另行授权不创建任务，第一块“北京《Delicious》刊”已整理为“北京美食·《Delicious》刊”，70 条经实际 preview 导入并发布；原始字段/顺序逐项核对，4 条区域、66 条实体地点，均保留历史 OCR 未核实状态。匿名 API 及桌面/手机页面通过；公开地址 `http://192.168.9.4:7081/lists/22909b37-a11e-406c-8bd4-f01180f53f58`。临时导入包与结果保存在 `/tmp/tabi-ocr-first/`，数据不属于 Git 文件。
