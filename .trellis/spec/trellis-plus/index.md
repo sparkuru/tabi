@@ -32,7 +32,7 @@
 
 `get_context.py --mode packages` 能发现 `trellis-plus` 层，但只列路径，不加载正文。根 AGENTS 管理块与已安装启动流程没有直接加载本层/mainline 的入口；未来主会话必须手动读取上表。没有修改受保护的启动文件，也没有宣称全阶段自动集成。
 
-当前 `.trellis/tasks/09-30-universal-checklist-format/` 的 implement/check 各 15 个条目，显式注册本层各适用详情、mainline 和已实施通用清单契约；原有条目保留。Codex `.codex/hooks.json` 的 `SubagentStart` 经 `.codex/hooks/inject-subagent-context.py` 读取 JSONL 引用，不递归读取 Markdown 链接。原生注入需要正确的父会话标识；缺失时，现有子代理定义要求从派发的 `Active task: <path>` 读取清单及正文，不能猜另一个会话的任务。
+已归档 `.trellis/tasks/archive/2026-10/09-30-universal-checklist-format/` 的 implement/check 各 15 个条目，显式注册本层各适用详情、mainline 和已实施通用清单契约；原有条目保留。Codex `.codex/hooks.json` 的 `SubagentStart` 经 `.codex/hooks/inject-subagent-context.py` 读取 JSONL 引用，不递归读取 Markdown 链接。原生注入需要正确的父会话标识；缺失时，现有子代理定义要求从派发的 `Active task: <path>` 读取清单及正文，不能猜另一个会话的任务。
 
 以后在正常任务规划阶段逐项注册所需详情，不能只注册 index：
 

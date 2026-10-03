@@ -4,7 +4,7 @@
 {"file":".trellis/spec/frontend/index.md","reason":"Frontend guideline discovery; preserve generated-client conventions."}
 {"file":".trellis/spec/guides/cross-layer-thinking-guide.md","reason":"Trace versioned package, preview, persistence, publishing, completion and UI responses."}
 {"file":".trellis/spec/trellis-plus/index.md","reason":"Project development, responsive validation and finish-work policies."}
-{"file":".trellis/tasks/09-30-universal-checklist-format/research/format-and-import.md","reason":"Code evidence and task-specific import, content-first UI and completion research."}
+{"file":".trellis/tasks/archive/2026-10/09-30-universal-checklist-format/research/format-and-import.md","reason":"Code evidence and task-specific import, content-first UI and completion research."}
 {"file": ".trellis/mainline.md", "reason": "Current initiative, approved requirements and planning boundary"}
 {"file": ".trellis/spec/trellis-plus/development-principles.md", "reason": "Project development defaults, scope, data protection and evidence"}
 {"file": ".trellis/spec/trellis-plus/development.md", "reason": "Existing Compose lifecycle, environment and before-dev checkpoint"}

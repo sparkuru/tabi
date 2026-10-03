@@ -11,7 +11,7 @@
 
 - 原根 PRD 已转存 `.trellis/spec/product/requirements.md`（定位、领域不变量、首版验收）与 `architecture.md`（技术栈、隐私、数据/媒体边界）。不重建已转存原文；根 `readme.md` 的目录树只作历史示例，实际命令以清单、源码和运行文件为准。
 - 已交付首版：账号、公开清单/条目、重复记录/去重进度、私人媒体、受控分享、管理员及 OCR 参考数据。证据见 MVP archive 的 PRD/design/verification；历史验证不证明后续变更通过。
-- 当前需求：`.trellis/tasks/09-30-universal-checklist-format/prd.md` 的 R1–R7、AC1–AC8；用户已确认管理员导入发布、无内容直接完成、同 key/同内容复用而内容变化冲突。2026-10-01 最终规划评审后用户明确回复“开始实施”；任务已启动。批准范围以 `prd.md`、`design.md`、`implement.md` 为准。
+- 当前需求：`.trellis/tasks/archive/2026-10/09-30-universal-checklist-format/prd.md` 的 R1–R7、AC1–AC8；用户已确认管理员导入发布、无内容直接完成、同 key/同内容复用而内容变化冲突。2026-10-01 最终规划评审后用户明确回复“开始实施”；任务已启动。批准范围以 `prd.md`、`design.md`、`implement.md` 为准。
 - 本任务已实现并验证通用导入和无内容完成，产品/后端执行契约及开发/验证 profile 已同步。隐私、所有权、历史保留、OCR ID/来源/真实核实状态保持原契约。
 - 非目标：普通用户自建/协作、文件同步覆盖、CSV/Excel、导出、任意字段编辑器、周期待办、自动抓取/实时核查。邮箱验证/找回/注销、地图费用/来源、治理和保留期限仍是后续决定，不能自动进入现有范围。
 
@@ -29,12 +29,12 @@
 | --- | --- | --- | --- |
 | 1 | `.trellis/tasks/archive/2026-09/09-29-checklist-mvp/` | complete | Work `b22105a`、archive `d92afbb`；verification 记录应用/数据库/恢复及 172 条参考内容验收和现状未核实限制。 |
 | 2 | 本地预览入口 | complete | `2595100` 增加 `preview.sh`、地址配置和已有 Compose 生命周期，无独立 task；不新建任务补历史。 |
-| 3 | `.trellis/tasks/09-30-universal-checklist-format/` | in_progress | 实现与全范围检查通过：45 单元、4 PostgreSQL、14 桌面/手机浏览器，迁移/构建/格式及生命周期通过；实际 preview 验收通过，用户认可效果并授权完整提交；工作提交与归档执行中。 |
+| 3 | `.trellis/tasks/archive/2026-10/09-30-universal-checklist-format/` | complete | 实现与全范围检查通过：45 单元、4 PostgreSQL、14 桌面/手机浏览器，迁移/构建/格式及生命周期通过；实际 preview 与用户验收通过；Work `7f6eb74`，已归档，归档提交引用随后记录。 |
 
 ## Evidence and Decisions
 
 - completed evidence: 上表及已归档 verification；2026-10-01 的 Trellis Plus 更新已独立提交。当前产品实施的新证据记录在任务 `verification.md`，不沿用历史检查结果声称通过。
-- current blocker / dirty-state warning: 无待决提交授权；2026-10-04 用户明确要求“提交吧；包括所有脏文件”。完整提交当前 86 个文件，包含通用清单与预览 bootstrap，不再使用旧的部分暂存/排除方案。工作提交后归档通用清单并记录 journal；独立 `00-bootstrap-guidelines` 保持原状态，忽略的 dotenv/凭据/缓存/测试产物不纳入。
+- current blocker / dirty-state warning: 无待决提交授权；2026-10-04 用户明确要求“提交吧；包括所有脏文件”。Work `7f6eb74` 已完整提交 86 个文件，包含通用清单与预览 bootstrap。通用清单已归档，随后独立记录 journal；独立 `00-bootstrap-guidelines` 保持原状态，忽略的 dotenv/凭据/缓存/测试产物不纳入。
 - next user decision: 当前交付与提交已获批准，没有额外任务或 serial 授权。手机检查为 Chromium 触控模拟，真实设备/辅助技术未证明；旧版本回滚须兼容新空记录。
 - actual preview review: 用户确认验收入口为 `http://192.168.9.4:7081`（infra 项目），授权创建首个管理员并要求后续同步测试通过 preview HTTP 入口。38 个运行后端源码文件与工作区一致、前端资源与验收构建一致、迁移为 `a748bd701acf`。实际 HTTP 桌面/手机登录、管理页和 JSON 预览通过，持久 `test:preview` 2/2、类型/格式及 8 个配置拒绝路径通过，真实退出204/me401。随机凭据仅在 owner-only `/tmp` 文件；规则见 validation，实际证据见任务 verification。用户已在该入口认可效果。
 - OCR publication: 用户另行授权不创建任务，第一块“北京《Delicious》刊”已整理为“北京美食·《Delicious》刊”，70 条经实际 preview 导入并发布；原始字段/顺序逐项核对，4 条区域、66 条实体地点，均保留历史 OCR 未核实状态。匿名 API 及桌面/手机页面通过；公开地址 `http://192.168.9.4:7081/lists/22909b37-a11e-406c-8bd4-f01180f53f58`。临时导入包与结果保存在 `/tmp/tabi-ocr-first/`，数据不属于 Git 文件。
