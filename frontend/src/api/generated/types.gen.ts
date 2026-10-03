@@ -5,6 +5,70 @@ export type ClientOptions = {
 };
 
 /**
+ * AdminChecklistOut
+ *
+ * Management counts without changing public catalog totals.
+ */
+export type AdminChecklistOut = {
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Title
+     */
+    title: string;
+    /**
+     * Summary
+     */
+    summary: string;
+    /**
+     * Category
+     */
+    category: string | null;
+    /**
+     * Sort Order
+     */
+    sort_order: number;
+    /**
+     * Cover Url
+     */
+    cover_url: string | null;
+    /**
+     * Status
+     */
+    status: string;
+    /**
+     * Item Count
+     */
+    item_count: number;
+    /**
+     * Completed Count
+     */
+    completed_count: number;
+    /**
+     * Record Count
+     */
+    record_count: number;
+    /**
+     * Total Item Count
+     */
+    total_item_count: number;
+    /**
+     * Draft Item Count
+     */
+    draft_item_count: number;
+    /**
+     * Published Item Count
+     */
+    published_item_count: number;
+    /**
+     * Unpublished Item Count
+     */
+    unpublished_item_count: number;
+};
+
+/**
  * AdminUserOut
  *
  * Account fields visible only to a system administrator.
@@ -141,6 +205,205 @@ export type CheckinEdit = {
 };
 
 /**
+ * ChecklistContent
+ *
+ * Importable list content without IDs or publication state.
+ */
+export type ChecklistContent = {
+    /**
+     * Title
+     */
+    title: string;
+    /**
+     * Summary
+     */
+    summary?: string;
+    /**
+     * Category
+     */
+    category?: string | null;
+    /**
+     * Sort Order
+     */
+    sort_order?: number;
+};
+
+/**
+ * ChecklistDocument
+ *
+ * One UTF-8 JSON file, limited to 200 items and 2 MiB in transport.
+ */
+export type ChecklistDocument = {
+    /**
+     * Format
+     */
+    format: 'tabi.checklist';
+    /**
+     * Version
+     */
+    version: 1;
+    /**
+     * Key
+     */
+    key: string;
+    list: ChecklistContent;
+    /**
+     * Items
+     */
+    items: Array<ChecklistItem>;
+    /**
+     * Source
+     */
+    source?: string | null;
+};
+
+/**
+ * ChecklistImportOut
+ *
+ * Stable IDs from the original import, including a reuse indicator.
+ */
+export type ChecklistImportOut = {
+    /**
+     * List Id
+     */
+    list_id: string;
+    /**
+     * Item Ids By Key
+     */
+    item_ids_by_key: {
+        [key: string]: string;
+    };
+    /**
+     * Reused
+     */
+    reused: boolean;
+};
+
+/**
+ * ChecklistItem
+ *
+ * Item data and references local to one import document.
+ */
+export type ChecklistItem = {
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Summary
+     */
+    summary?: string;
+    /**
+     * Description
+     */
+    description?: string;
+    /**
+     * Category
+     */
+    category?: string | null;
+    /**
+     * Tags
+     */
+    tags?: Array<string>;
+    /**
+     * Suggested Action
+     */
+    suggested_action?: string | null;
+    /**
+     * Recommendation
+     */
+    recommendation?: string | null;
+    /**
+     * Reference Note
+     */
+    reference_note?: string | null;
+    /**
+     * Reference As Of
+     */
+    reference_as_of?: string | null;
+    /**
+     * Missing Fields
+     */
+    missing_fields?: Array<string>;
+    /**
+     * Sort Order
+     */
+    sort_order?: number;
+    /**
+     * Place Kind
+     */
+    place_kind?: 'none' | 'physical' | 'area' | 'online';
+    /**
+     * Place Name
+     */
+    place_name?: string | null;
+    /**
+     * Address
+     */
+    address?: string | null;
+    /**
+     * Area
+     */
+    area?: string | null;
+    /**
+     * Online Url
+     */
+    online_url?: string | null;
+    /**
+     * Latitude
+     */
+    latitude?: number | null;
+    /**
+     * Longitude
+     */
+    longitude?: number | null;
+    /**
+     * Coordinate System
+     */
+    coordinate_system?: 'WGS84' | 'GCJ02' | 'BD09' | null;
+    /**
+     * Source
+     */
+    source?: string | null;
+    /**
+     * Verified At
+     */
+    verified_at?: string | null;
+    /**
+     * Links
+     */
+    links?: Array<ChecklistLink>;
+    /**
+     * Key
+     */
+    key: string;
+    /**
+     * Related Keys
+     */
+    related_keys?: Array<string>;
+};
+
+/**
+ * ChecklistLink
+ *
+ * Strict nested link contract using existing URL validation.
+ */
+export type ChecklistLink = {
+    /**
+     * Title
+     */
+    title: string;
+    /**
+     * Url
+     */
+    url: string;
+    /**
+     * Kind
+     */
+    kind?: string;
+};
+
+/**
  * ChecklistOut
  *
  * Checklist card with viewer-specific progress.
@@ -186,6 +449,38 @@ export type ChecklistOut = {
      * Record Count
      */
     record_count: number;
+};
+
+/**
+ * ChecklistPreviewOut
+ *
+ * Validated import preview; it is not a write authorization token.
+ */
+export type ChecklistPreviewOut = {
+    /**
+     * Key
+     */
+    key: string;
+    /**
+     * Title
+     */
+    title: string;
+    /**
+     * Item Count
+     */
+    item_count: number;
+    /**
+     * Items
+     */
+    items: Array<ChecklistItem>;
+    /**
+     * State
+     */
+    state: 'ready' | 'existing' | 'conflict';
+    /**
+     * Existing List Id
+     */
+    existing_list_id: string | null;
 };
 
 /**
@@ -672,6 +967,28 @@ export type OwnCheckinOut = {
 };
 
 /**
+ * Page[AdminChecklistOut]
+ */
+export type PageAdminChecklistOut = {
+    /**
+     * Items
+     */
+    items: Array<AdminChecklistOut>;
+    /**
+     * Total
+     */
+    total: number;
+    /**
+     * Limit
+     */
+    limit: number;
+    /**
+     * Offset
+     */
+    offset: number;
+};
+
+/**
  * Page[AdminUserOut]
  */
 export type PageAdminUserOut = {
@@ -928,6 +1245,27 @@ export type PublicCheckinOut = {
 };
 
 /**
+ * PublishAllOut
+ *
+ * Actual batch publication outcomes.
+ */
+export type PublishAllOut = {
+    list: AdminChecklistOut;
+    /**
+     * Published Count
+     */
+    published_count: number;
+    /**
+     * Already Published Count
+     */
+    already_published_count: number;
+    /**
+     * Skipped Unpublished Count
+     */
+    skipped_unpublished_count: number;
+};
+
+/**
  * RegisterIn
  *
  * Account registration input.
@@ -1075,6 +1413,72 @@ export type ValidationError = {
         [key: string]: unknown;
     };
 };
+
+export type PreviewChecklistApiAdminChecklistImportsPreviewPostData = {
+    body: ChecklistDocument;
+    headers?: {
+        /**
+         * X-Csrf-Token
+         */
+        'x-csrf-token'?: string | null;
+    };
+    path?: never;
+    query?: never;
+    url: '/api/admin/checklist-imports/preview';
+};
+
+export type PreviewChecklistApiAdminChecklistImportsPreviewPostErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type PreviewChecklistApiAdminChecklistImportsPreviewPostError = PreviewChecklistApiAdminChecklistImportsPreviewPostErrors[keyof PreviewChecklistApiAdminChecklistImportsPreviewPostErrors];
+
+export type PreviewChecklistApiAdminChecklistImportsPreviewPostResponses = {
+    /**
+     * Successful Response
+     */
+    200: ChecklistPreviewOut;
+};
+
+export type PreviewChecklistApiAdminChecklistImportsPreviewPostResponse = PreviewChecklistApiAdminChecklistImportsPreviewPostResponses[keyof PreviewChecklistApiAdminChecklistImportsPreviewPostResponses];
+
+export type CreateChecklistImportApiAdminChecklistImportsPostData = {
+    body: ChecklistDocument;
+    headers?: {
+        /**
+         * X-Csrf-Token
+         */
+        'x-csrf-token'?: string | null;
+    };
+    path?: never;
+    query?: never;
+    url: '/api/admin/checklist-imports';
+};
+
+export type CreateChecklistImportApiAdminChecklistImportsPostErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type CreateChecklistImportApiAdminChecklistImportsPostError = CreateChecklistImportApiAdminChecklistImportsPostErrors[keyof CreateChecklistImportApiAdminChecklistImportsPostErrors];
+
+export type CreateChecklistImportApiAdminChecklistImportsPostResponses = {
+    /**
+     * OK
+     */
+    200: ChecklistImportOut;
+    /**
+     * Successful Response
+     */
+    201: ChecklistImportOut;
+};
+
+export type CreateChecklistImportApiAdminChecklistImportsPostResponse = CreateChecklistImportApiAdminChecklistImportsPostResponses[keyof CreateChecklistImportApiAdminChecklistImportsPostResponses];
 
 export type RegisterApiAuthRegisterPostData = {
     body: RegisterIn;
@@ -1389,6 +1793,46 @@ export type CreateCheckinApiItemsItemIdCheckinsPostResponses = {
 
 export type CreateCheckinApiItemsItemIdCheckinsPostResponse = CreateCheckinApiItemsItemIdCheckinsPostResponses[keyof CreateCheckinApiItemsItemIdCheckinsPostResponses];
 
+export type CompleteItemApiItemsItemIdCompletePostData = {
+    body?: never;
+    headers: {
+        /**
+         * Idempotency-Key
+         */
+        'idempotency-key': string;
+        /**
+         * X-Csrf-Token
+         */
+        'x-csrf-token'?: string | null;
+    };
+    path: {
+        /**
+         * Item Id
+         */
+        item_id: string;
+    };
+    query?: never;
+    url: '/api/items/{item_id}/complete';
+};
+
+export type CompleteItemApiItemsItemIdCompletePostErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type CompleteItemApiItemsItemIdCompletePostError = CompleteItemApiItemsItemIdCompletePostErrors[keyof CompleteItemApiItemsItemIdCompletePostErrors];
+
+export type CompleteItemApiItemsItemIdCompletePostResponses = {
+    /**
+     * Successful Response
+     */
+    200: OwnCheckinOut;
+};
+
+export type CompleteItemApiItemsItemIdCompletePostResponse = CompleteItemApiItemsItemIdCompletePostResponses[keyof CompleteItemApiItemsItemIdCompletePostResponses];
+
 export type HistoryApiMeCheckinsGetData = {
     body?: never;
     path?: never;
@@ -1701,7 +2145,7 @@ export type AdminListsApiAdminListsGetResponses = {
     /**
      * Successful Response
      */
-    200: PageChecklistOut;
+    200: PageAdminChecklistOut;
 };
 
 export type AdminListsApiAdminListsGetResponse = AdminListsApiAdminListsGetResponses[keyof AdminListsApiAdminListsGetResponses];
@@ -1732,10 +2176,40 @@ export type CreateListApiAdminListsPostResponses = {
     /**
      * Successful Response
      */
-    201: ChecklistOut;
+    201: AdminChecklistOut;
 };
 
 export type CreateListApiAdminListsPostResponse = CreateListApiAdminListsPostResponses[keyof CreateListApiAdminListsPostResponses];
+
+export type AdminListDetailApiAdminListsListIdGetData = {
+    body?: never;
+    path: {
+        /**
+         * List Id
+         */
+        list_id: string;
+    };
+    query?: never;
+    url: '/api/admin/lists/{list_id}';
+};
+
+export type AdminListDetailApiAdminListsListIdGetErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type AdminListDetailApiAdminListsListIdGetError = AdminListDetailApiAdminListsListIdGetErrors[keyof AdminListDetailApiAdminListsListIdGetErrors];
+
+export type AdminListDetailApiAdminListsListIdGetResponses = {
+    /**
+     * Successful Response
+     */
+    200: AdminChecklistOut;
+};
+
+export type AdminListDetailApiAdminListsListIdGetResponse = AdminListDetailApiAdminListsListIdGetResponses[keyof AdminListDetailApiAdminListsListIdGetResponses];
 
 export type EditListApiAdminListsListIdPutData = {
     body: ChecklistWrite;
@@ -1768,7 +2242,7 @@ export type EditListApiAdminListsListIdPutResponses = {
     /**
      * Successful Response
      */
-    200: ChecklistOut;
+    200: AdminChecklistOut;
 };
 
 export type EditListApiAdminListsListIdPutResponse = EditListApiAdminListsListIdPutResponses[keyof EditListApiAdminListsListIdPutResponses];
@@ -1804,7 +2278,7 @@ export type PublishListApiAdminListsListIdPublishPostResponses = {
     /**
      * Successful Response
      */
-    200: ChecklistOut;
+    200: AdminChecklistOut;
 };
 
 export type PublishListApiAdminListsListIdPublishPostResponse = PublishListApiAdminListsListIdPublishPostResponses[keyof PublishListApiAdminListsListIdPublishPostResponses];
@@ -1840,10 +2314,46 @@ export type UnpublishListApiAdminListsListIdUnpublishPostResponses = {
     /**
      * Successful Response
      */
-    200: ChecklistOut;
+    200: AdminChecklistOut;
 };
 
 export type UnpublishListApiAdminListsListIdUnpublishPostResponse = UnpublishListApiAdminListsListIdUnpublishPostResponses[keyof UnpublishListApiAdminListsListIdUnpublishPostResponses];
+
+export type PublishAllApiAdminListsListIdPublishAllPostData = {
+    body?: never;
+    headers?: {
+        /**
+         * X-Csrf-Token
+         */
+        'x-csrf-token'?: string | null;
+    };
+    path: {
+        /**
+         * List Id
+         */
+        list_id: string;
+    };
+    query?: never;
+    url: '/api/admin/lists/{list_id}/publish-all';
+};
+
+export type PublishAllApiAdminListsListIdPublishAllPostErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type PublishAllApiAdminListsListIdPublishAllPostError = PublishAllApiAdminListsListIdPublishAllPostErrors[keyof PublishAllApiAdminListsListIdPublishAllPostErrors];
+
+export type PublishAllApiAdminListsListIdPublishAllPostResponses = {
+    /**
+     * Successful Response
+     */
+    200: PublishAllOut;
+};
+
+export type PublishAllApiAdminListsListIdPublishAllPostResponse = PublishAllApiAdminListsListIdPublishAllPostResponses[keyof PublishAllApiAdminListsListIdPublishAllPostResponses];
 
 export type AdminItemsApiAdminListsListIdItemsGetData = {
     body?: never;

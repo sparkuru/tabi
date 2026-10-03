@@ -12,15 +12,16 @@ from app.api.deps import AuthContext, require_admin, require_admin_view
 from app.db.session import get_db
 from app.models.tables import AuditLog, Checklist, ImportBatch, Item, ItemLink, ItemRelation
 from app.schemas.catalog import (
-    ChecklistOut,
+    AdminChecklistOut,
     ChecklistWrite,
     ItemDetailOut,
     ItemWrite,
     Page,
+    PublishAllOut,
     RelationIn,
 )
 from app.schemas.imports import ReviewedImportIn, ReviewedImportOut
-from app.services.catalog import checklist_out, item_detail
+from app.services.catalog import admin_checklist_out, item_detail
 from app.services.imports import item_dedupe_key
 
 router = APIRouter(prefix="/admin", tags=["admin"])
@@ -80,13 +81,13 @@ def _preserve_ocr_warning(previous: str, updated: str) -> str:
     return combined
 
 
-@router.get("/lists", response_model=Page[ChecklistOut])
+@router.get("/lists", response_model=Page[AdminChecklistOut])
 def admin_lists(
     auth: Annotated[AuthContext, Depends(require_admin_view)],
     db: Annotated[Session, Depends(get_db)],
     limit: Annotated[int, Query(ge=1, le=100)] = 30,
     offset: Annotated[int, Query(ge=0)] = 0,
-) -> Page[ChecklistOut]:
+) -> Page[AdminChecklistOut]:
     """Page through published and draft checklists."""
     total = db.scalar(select(func.count()).select_from(Checklist)) or 0
     rows = db.scalars(
@@ -96,35 +97,35 @@ def admin_lists(
         .offset(offset)
     )
     return Page(
-        items=[checklist_out(db, row, auth.user.id) for row in rows],
+        items=[admin_checklist_out(db, row, auth.user.id) for row in rows],
         total=total,
         limit=limit,
         offset=offset,
     )
 
 
-@router.post("/lists", response_model=ChecklistOut, status_code=status.HTTP_201_CREATED)
+@router.post("/lists", response_model=AdminChecklistOut, status_code=status.HTTP_201_CREATED)
 def create_list(
     payload: ChecklistWrite,
     auth: Annotated[AuthContext, Depends(require_admin)],
     db: Annotated[Session, Depends(get_db)],
-) -> ChecklistOut:
+) -> AdminChecklistOut:
     """Create a draft checklist."""
     checklist = Checklist(**payload.model_dump(), created_by=auth.user.id)
     db.add(checklist)
     db.flush()
     _audit(db, auth, "list.create", "list", checklist.id)
     db.commit()
-    return checklist_out(db, checklist, auth.user.id)
+    return admin_checklist_out(db, checklist, auth.user.id)
 
 
-@router.put("/lists/{list_id}", response_model=ChecklistOut)
+@router.put("/lists/{list_id}", response_model=AdminChecklistOut)
 def edit_list(
     list_id: str,
     payload: ChecklistWrite,
     auth: Annotated[AuthContext, Depends(require_admin)],
     db: Annotated[Session, Depends(get_db)],
-) -> ChecklistOut:
+) -> AdminChecklistOut:
     """Replace editable checklist content."""
     checklist = _require_list(db, list_id)
     values = payload.model_dump()
@@ -133,15 +134,15 @@ def edit_list(
         setattr(checklist, key, value)
     _audit(db, auth, "list.edit", "list", list_id)
     db.commit()
-    return checklist_out(db, checklist, auth.user.id)
+    return admin_checklist_out(db, checklist, auth.user.id)
 
 
-@router.post("/lists/{list_id}/publish", response_model=ChecklistOut)
+@router.post("/lists/{list_id}/publish", response_model=AdminChecklistOut)
 def publish_list(
     list_id: str,
     auth: Annotated[AuthContext, Depends(require_admin)],
     db: Annotated[Session, Depends(get_db)],
-) -> ChecklistOut:
+) -> AdminChecklistOut:
     """Publish a checklist and preserve its identity."""
     checklist = _require_list(db, list_id)
     checklist.status = "published"
@@ -149,22 +150,66 @@ def publish_list(
     checklist.removed_at = None
     _audit(db, auth, "list.publish", "list", list_id)
     db.commit()
-    return checklist_out(db, checklist, auth.user.id)
+    return admin_checklist_out(db, checklist, auth.user.id)
 
 
-@router.post("/lists/{list_id}/unpublish", response_model=ChecklistOut)
+@router.post("/lists/{list_id}/unpublish", response_model=AdminChecklistOut)
 def unpublish_list(
     list_id: str,
     auth: Annotated[AuthContext, Depends(require_admin)],
     db: Annotated[Session, Depends(get_db)],
-) -> ChecklistOut:
+) -> AdminChecklistOut:
     """Unpublish without deleting personal history."""
     checklist = _require_list(db, list_id)
     checklist.status = "unpublished"
     checklist.removed_at = datetime.now(UTC)
     _audit(db, auth, "list.unpublish", "list", list_id)
     db.commit()
-    return checklist_out(db, checklist, auth.user.id)
+    return admin_checklist_out(db, checklist, auth.user.id)
+
+
+@router.get("/lists/{list_id}", response_model=AdminChecklistOut)
+def admin_list_detail(
+    list_id: str,
+    auth: Annotated[AuthContext, Depends(require_admin_view)],
+    db: Annotated[Session, Depends(get_db)],
+) -> AdminChecklistOut:
+    """Read one list and all publication status counts as an administrator."""
+    return admin_checklist_out(db, _require_list(db, list_id), auth.user.id)
+
+
+@router.post("/lists/{list_id}/publish-all", response_model=PublishAllOut)
+def publish_all(
+    list_id: str,
+    auth: Annotated[AuthContext, Depends(require_admin)],
+    db: Annotated[Session, Depends(get_db)],
+) -> PublishAllOut:
+    """Publish the list and draft items, preserving intentionally unpublished items."""
+    checklist = db.scalar(select(Checklist).where(Checklist.id == list_id).with_for_update())
+    if checklist is None:
+        raise HTTPException(404, "Checklist not found")
+    items = list(db.scalars(select(Item).where(Item.list_id == list_id).with_for_update()))
+    drafts = [item for item in items if item.status == "draft"]
+    published = sum(item.status == "published" for item in items)
+    skipped = sum(item.status == "unpublished" for item in items)
+    if not drafts and not published:
+        raise HTTPException(422, "Checklist needs at least one draft or published item")
+    for item in drafts:
+        item.status = "published"
+        item.removed_at = None
+    checklist.status = "published"
+    checklist.published_at = checklist.published_at or datetime.now(UTC)
+    checklist.removed_at = None
+    _audit(
+        db, auth, "list.publish-all", "list", list_id, f"published={len(drafts)}; skipped={skipped}"
+    )
+    db.commit()
+    return PublishAllOut(
+        list=admin_checklist_out(db, checklist, auth.user.id),
+        published_count=len(drafts),
+        already_published_count=published,
+        skipped_unpublished_count=skipped,
+    )
 
 
 @router.get("/lists/{list_id}/items", response_model=Page[ItemDetailOut])

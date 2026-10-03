@@ -33,6 +33,24 @@ class ChecklistOut(BaseModel):
     record_count: int
 
 
+class AdminChecklistOut(ChecklistOut):
+    """Management counts without changing public catalog totals."""
+
+    total_item_count: int
+    draft_item_count: int
+    published_item_count: int
+    unpublished_item_count: int
+
+
+class PublishAllOut(BaseModel):
+    """Actual batch publication outcomes."""
+
+    list: AdminChecklistOut
+    published_count: int
+    already_published_count: int
+    skipped_unpublished_count: int
+
+
 class ItemLinkIn(BaseModel):
     """Titled safe external link."""
 

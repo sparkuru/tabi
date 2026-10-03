@@ -1,0 +1,139 @@
+#!/usr/bin/env bash
+# Run disposable development commands with host UID ownership.
+# Python 3.12 / Node 22 / Playwright 1.62.1; HOME stays in ignored .devhome.
+# ./hako python python -m venv /app/.devhome/python
+# ./hako python pip install -e '.[dev]'
+# ./hako python pytest -q
+# ./hako node npm ci
+# ./hako browser npm run test:e2e
+# ./hako compose ps
+# Compose uses the existing runtime with separate volumes and loopback ports.
+set -Eeuo pipefail
+
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+readonly REPO_ROOT
+readonly HAKO_BIND_HOST="${HAKO_BIND_HOST:-127.0.0.1}"
+readonly WEB_HOST_PORT="${WEB_HOST_PORT:-18080}"
+readonly WEB_CONTAINER_PORT=80
+readonly HTTPS_HOST_PORT="${HTTPS_HOST_PORT:-18443}"
+readonly HTTPS_CONTAINER_PORT=443
+readonly TABI_DEV_PROJECT="${TABI_DEV_PROJECT:-tabi-checklist-dev}"
+readonly PYTHON_IMAGE="${HAKO_PYTHON_IMAGE:-python:3.12-slim}"
+readonly NODE_IMAGE="${HAKO_NODE_IMAGE:-node:22-bookworm}"
+readonly BROWSER_IMAGE="${HAKO_BROWSER_IMAGE:-mcr.microsoft.com/playwright:v1.62.1-noble}"
+step_index=0
+
+usage() {
+	printf 'Usage: ./hako python|node|browser|compose COMMAND [ARGS...]\n' >&2
+	printf 'Compose: isolated %s; HTTP http://%s:%s; volumes retained.\n' \
+		"$TABI_DEV_PROJECT" "$HAKO_BIND_HOST" "$WEB_HOST_PORT" >&2
+	printf 'Override WEB_HOST_PORT / HTTPS_HOST_PORT for parallel runs.\n' >&2
+	printf 'Container ports remain HTTP %s / HTTPS %s in existing Compose.\n' "$WEB_CONTAINER_PORT" "$HTTPS_CONTAINER_PORT" >&2
+}
+
+die() {
+	printf 'Error: %s\n' "$*" >&2
+	exit 1
+}
+
+require_command() {
+	command -v "$1" >/dev/null 2>&1 || die "required command not found: $1"
+}
+
+log_step() {
+	step_index=$((step_index + 1))
+	printf '#%s [hako] ' "$step_index" >&2
+	printf '%q ' "$@" >&2
+	printf '\n' >&2
+}
+
+run_step() {
+	log_step "$@"
+	"$@"
+}
+
+compose_command() {
+	[[ "$TABI_DEV_PROJECT" == tabi-checklist-* ]] || die 'TABI_DEV_PROJECT must start with tabi-checklist-'
+	[[ "$HAKO_BIND_HOST" == 127.0.0.1 ]] || die 'isolated Compose must bind to 127.0.0.1'
+	[[ "$WEB_HOST_PORT" =~ ^[0-9]+$ && "$HTTPS_HOST_PORT" =~ ^[0-9]+$ ]] || die 'ports must be numeric'
+	export POSTGRES_PASSWORD=local-isolated-checklist
+	export POSTGRES_DB=tabi POSTGRES_USER=tabi
+	export TABI_POSTGRES_IMAGE=postgres:17-alpine TABI_MEDIA_ROOT=/data/media
+	export TABI_DB_HOST=0.0.0.0 TABI_DB_PORT=5432
+	export TABI_API_HOST=0.0.0.0 TABI_API_PORT=8000
+	export TABI_WEB_HOST=0.0.0.0 TABI_WEB_HTTP_PORT=80 TABI_WEB_HTTPS_PORT=443
+	# Keep application image names scoped to this test project, not the preview.
+	unset TABI_API_IMAGE TABI_WEB_IMAGE
+	export TABI_SITE_ADDRESS=:80 TABI_COOKIE_SECURE=false
+	export TABI_HTTP_BIND="$HAKO_BIND_HOST:$WEB_HOST_PORT"
+	export TABI_HTTPS_BIND="$HAKO_BIND_HOST:$HTTPS_HOST_PORT"
+	local -a command=(docker compose --env-file /dev/null -p "$TABI_DEV_PROJECT"
+		-f "$REPO_ROOT/infra/docker-compose.yml" "$@")
+	log_step "${command[@]}"
+	exec "${command[@]}"
+}
+
+main() {
+	case "${1:-}" in
+	--help | -h)
+		usage
+		return 0
+		;;
+	python | node | browser | compose) ;;
+	*)
+		usage
+		return 2
+		;;
+	esac
+	local mode=$1
+	shift
+	[[ $# -gt 0 ]] || {
+		usage
+		return 2
+	}
+	if [[ "$mode" == compose || "$mode" == browser ]]; then
+		[[ "$TABI_DEV_PROJECT" == tabi-checklist-* ]] || die 'TABI_DEV_PROJECT must start with tabi-checklist-'
+	fi
+	require_command docker
+	if [[ "$mode" == compose ]]; then
+		compose_command "$@"
+	fi
+	require_command mkdir
+	require_command id
+	run_step mkdir -p -- "$REPO_ROOT/.devhome"
+	local image workdir
+	local -a extra_flags=() tty_flags=()
+	case "$mode" in
+	python)
+		image=$PYTHON_IMAGE
+		workdir=/app/backend
+		extra_flags=(-e PATH=/app/.devhome/python/bin:/usr/local/bin:/usr/bin:/bin
+			-e PYTHONDONTWRITEBYTECODE=1 -e PYTHONUNBUFFERED=1)
+		[[ -z "${TABI_DATABASE_URL:-}" ]] || extra_flags+=(-e TABI_DATABASE_URL)
+		[[ -z "${TABI_TEST_DATABASE_URL:-}" ]] || extra_flags+=(-e TABI_TEST_DATABASE_URL)
+		[[ -z "${TABI_MEDIA_ROOT:-}" ]] || extra_flags+=(-e TABI_MEDIA_ROOT)
+		[[ -z "${HAKO_NETWORK:-}" ]] || extra_flags+=(--network "$HAKO_NETWORK")
+		;;
+	node)
+		image=$NODE_IMAGE
+		workdir=/app/frontend
+		;;
+	browser)
+		image=$BROWSER_IMAGE
+		workdir=/app/frontend
+		extra_flags=(--network "${TABI_DEV_PROJECT}_default" --ipc=private --shm-size=1g
+			-e TABI_E2E_BASE_URL=http://web -e TABI_E2E_ISOLATED=1)
+		;;
+	esac
+	[[ ! -t 0 ]] || tty_flags+=(-i)
+	[[ ! -t 0 || ! -t 1 ]] || tty_flags+=(-t)
+	local -a command=(docker run --rm "${tty_flags[@]}"
+		--user "$(id -u):$(id -g)" -e HOME=/app/.devhome
+		-v "$REPO_ROOT:/app" -w "$workdir"
+		--label "hako.repo=$REPO_ROOT" --label "hako.scope=${HAKO_SCOPE:-manual}"
+		--label "hako.service=$mode" "${extra_flags[@]}" "$image" "$@")
+	log_step "${command[@]}"
+	exec "${command[@]}"
+}
+
+main "$@"

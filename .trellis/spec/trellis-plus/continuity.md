@@ -17,10 +17,10 @@
 - `serial`：只有记录了明确目标、允许任务/顺序及停止条件的授权，且恰有一个列出的 ready 任务，才串行继续。不能从拟议功能、技术依赖或旧会话推导 serial 授权。
 - 缺主线/目标时请求一个优先级决定；脏工作区、检查未解决、归档证据不足、依赖/范围/风险/歧义有问题时先说明并取得所需决定，不能自动清理。
 
-serial 只省去重复的列内 create/start 同意，不省略规划/验收、人工反馈、提交决定或归档证据。本次“不建 task”有效，`universal-checklist-format` 保持 planning；配置安装不等于批准产品实施。
+serial 只省去重复的列内 create/start 同意，不省略规划/验收、人工反馈、提交决定或归档证据。配置安装不等于批准产品实施；当前 task 的批准与验证状态以 mainline 和任务证据为准，不从历史规范安装推演继承。
 
 ## Coordination and walkthrough
 
 主会话负责阶段选择、AC 映射、派发、核实证据、规格、Git、归档及 mainline。工作代理收到明确 task/边界，只执行研究、实施或检查并报告文件/验证/未决事项，不能自行选择下项、归档、全仓清理或递归派发实施/检查代理。
 
-当前任务流程推演：主会话读 mainline/政策与 AC1–AC8 → 最终规划仍待批准 → 批准后使用现有 task start → implement/check 显式 context 加载 → 检查按 validation.md；Playwright 缺失先建立可运行套件，PostgreSQL 并发必须隔离验证 → 判断剩余人工风险 → 获授权后工作提交 → `archive --no-commit` + 唯一署名归档提交 → 独立 journal → guided Pulse。归档 route/help 与 context 解析可只读验证；本次没有实际执行 start/check/archive，不计产品验收通过。
+执行路径：主会话读 mainline/政策与 task AC → 完整规划评审与明确批准 → task start → implement/check 显式 context 加载 → 按 validation.md 验证（持久浏览器套件和隔离 PostgreSQL）→ 同步规格并判断剩余人工风险 → 获授权后工作提交 → `archive --no-commit` + 唯一署名归档提交 → 独立 journal → guided Pulse。实际执行证据留在正常 task，不用本流程描述替代运行结果。

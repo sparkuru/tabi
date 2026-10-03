@@ -19,16 +19,48 @@ client.interceptors.request.use((request) => {
 
 type ApiResult<T> = { data?: T; error?: unknown; response?: Response };
 
+function describeIssue(entry: unknown): string {
+  if (!entry || typeof entry !== "object") return "输入不完整";
+  const message =
+    "msg" in entry && typeof entry.msg === "string" ? entry.msg : "输入不完整";
+  const location =
+    "loc" in entry && Array.isArray(entry.loc)
+      ? entry.loc.filter((part) => part !== "body")
+      : [];
+  const path = location.reduce<string>(
+    (value, part) =>
+      typeof part === "number"
+        ? `${value}[${part}]`
+        : `${value}${value ? "." : ""}${String(part)}`,
+    "",
+  );
+  return path ? `${path}：${message}` : message;
+}
+
 function describeError(error: unknown, response?: Response): string {
   if (error && typeof error === "object" && "detail" in error) {
     const detail = error.detail;
     if (typeof detail === "string") return detail;
-    if (Array.isArray(detail))
-      return detail.map((entry) => entry.msg ?? "输入不完整").join("；");
+    if (Array.isArray(detail)) return detail.map(describeIssue).join("\n");
   }
   return response
     ? `请求失败（${response.status}）`
     : "网络连接失败，请稍后重试。";
+}
+
+// Preserve the original UTF-8 source for server syntax diagnostics and byte limits.
+export async function postJsonText<T>(
+  path: string,
+  source: string,
+): Promise<T> {
+  return apiData(
+    client.post<{ 200: T }>({
+      url: path,
+      body: source,
+      bodySerializer: () => source,
+      headers: { "Content-Type": "application/json" },
+    }),
+  );
 }
 
 export async function apiData<T>(promise: Promise<ApiResult<T>>): Promise<T> {

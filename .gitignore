@@ -1,2 +1,7 @@
 
 /archive
+/.env
+.devhome/
+backend/tabi_api.egg-info/
+frontend/playwright-report/
+frontend/test-results/

@@ -137,3 +137,44 @@ def test_cover_replacement_keeps_only_current_thumbnail(client: TestClient) -> N
         assert response.status_code == 204, response.text
         assert list((media_root / "originals").glob("*.jpg")) == []
         assert len(list((media_root / "thumbs").glob("*.jpg"))) == 1
+
+
+def test_empty_completion_accepts_photo_then_last_photo_removal(client: TestClient) -> None:
+    """Photos can be added later, remain authorized, and leave a valid empty record."""
+    _admin(client)
+    list_id = create_list(client, "Learning")
+    item_id = create_item(client, list_id, "Exercise")
+    record = client.post(
+        f"/api/items/{item_id}/complete",
+        headers={**csrf(client), "idempotency-key": uuid4().hex},
+    ).json()
+    attached = client.post(
+        f"/api/media/checkins/{record['id']}",
+        headers=csrf(client),
+        files={"file": ("exercise.jpg", _jpeg_with_exif(), "image/jpeg")},
+    )
+    assert attached.status_code == 201, attached.text
+    photo = client.get(f"/api/checkins/{record['id']}").json()["media"][0]
+    assert client.get(photo["original_url"]).status_code == 200
+    client.patch(
+        f"/api/checkins/{record['id']}", headers=csrf(client), json={"visibility": "public"}
+    )
+    client.post("/api/auth/logout", headers=csrf(client))
+    assert client.get(photo["thumbnail_url"]).status_code == 200
+    assert client.get(photo["original_url"]).status_code == 404
+    register(client, "media-other@example.com")
+    assert client.delete(f"/api/media/{photo['id']}", headers=csrf(client)).status_code == 404
+    client.post("/api/auth/logout", headers=csrf(client))
+    client.post(
+        "/api/auth/login",
+        json={"email": "media-admin@example.com", "password": "correct horse battery"},
+    )
+    assert client.delete(f"/api/media/{photo['id']}", headers=csrf(client)).status_code == 204
+    empty = client.get(f"/api/checkins/{record['id']}").json()
+    assert empty["note"] is None and empty["media"] == []
+    assert client.get(f"/api/lists/{list_id}").json()["completed_count"] == 1
+    assert client.get(f"/api/shares/{record['share_id']}").json()["media"] == []
+    client.post(
+        f"/api/admin/checkins/{record['id']}/hide", headers=csrf(client), json={"reason": "Review"}
+    )
+    assert client.get(f"/api/shares/{record['share_id']}").status_code == 404

@@ -2,7 +2,7 @@
 
 import { type Client, formDataBodySerializer, type Options as Options2, type TDataShape } from './client';
 import { client } from './client.gen';
-import type { AddPhotoApiMediaCheckinsCheckinIdPostData, AddPhotoApiMediaCheckinsCheckinIdPostErrors, AddPhotoApiMediaCheckinsCheckinIdPostResponses, AddRelationApiAdminItemsItemIdRelationsPostData, AddRelationApiAdminItemsItemIdRelationsPostErrors, AddRelationApiAdminItemsItemIdRelationsPostResponses, AdminItemsApiAdminListsListIdItemsGetData, AdminItemsApiAdminListsListIdItemsGetErrors, AdminItemsApiAdminListsListIdItemsGetResponses, AdminListsApiAdminListsGetData, AdminListsApiAdminListsGetErrors, AdminListsApiAdminListsGetResponses, AuditHistoryApiAdminAuditGetData, AuditHistoryApiAdminAuditGetErrors, AuditHistoryApiAdminAuditGetResponses, AvatarApiMediaAvatarPostData, AvatarApiMediaAvatarPostErrors, AvatarApiMediaAvatarPostResponses, ChangeRoleApiAdminUsersUserIdRolePutData, ChangeRoleApiAdminUsersUserIdRolePutErrors, ChangeRoleApiAdminUsersUserIdRolePutResponses, CreateCheckinApiItemsItemIdCheckinsPostData, CreateCheckinApiItemsItemIdCheckinsPostErrors, CreateCheckinApiItemsItemIdCheckinsPostResponses, CreateItemApiAdminListsListIdItemsPostData, CreateItemApiAdminListsListIdItemsPostErrors, CreateItemApiAdminListsListIdItemsPostResponses, CreateListApiAdminListsPostData, CreateListApiAdminListsPostErrors, CreateListApiAdminListsPostResponses, DeleteCheckinApiCheckinsCheckinIdDeleteData, DeleteCheckinApiCheckinsCheckinIdDeleteErrors, DeleteCheckinApiCheckinsCheckinIdDeleteResponses, EditCheckinApiCheckinsCheckinIdPatchData, EditCheckinApiCheckinsCheckinIdPatchErrors, EditCheckinApiCheckinsCheckinIdPatchResponses, EditItemApiAdminItemsItemIdPutData, EditItemApiAdminItemsItemIdPutErrors, EditItemApiAdminItemsItemIdPutResponses, EditListApiAdminListsListIdPutData, EditListApiAdminListsListIdPutErrors, EditListApiAdminListsListIdPutResponses, EditProfileApiAuthMePatchData, EditProfileApiAuthMePatchErrors, EditProfileApiAuthMePatchResponses, GetAvatarApiMediaAvatarUserIdGetData, GetAvatarApiMediaAvatarUserIdGetErrors, GetAvatarApiMediaAvatarUserIdGetResponses, GetItemCoverApiMediaItemsItemIdCoverGetData, GetItemCoverApiMediaItemsItemIdCoverGetErrors, GetItemCoverApiMediaItemsItemIdCoverGetResponses, GetListCoverApiMediaListsListIdCoverGetData, GetListCoverApiMediaListsListIdCoverGetErrors, GetListCoverApiMediaListsListIdCoverGetResponses, HealthApiHealthGetData, HealthApiHealthGetResponses, HideExperienceApiAdminCheckinsCheckinIdHidePostData, HideExperienceApiAdminCheckinsCheckinIdHidePostErrors, HideExperienceApiAdminCheckinsCheckinIdHidePostResponses, HistoryApiMeCheckinsGetData, HistoryApiMeCheckinsGetErrors, HistoryApiMeCheckinsGetResponses, ImportReviewedItemsApiAdminListsListIdImportsPostData, ImportReviewedItemsApiAdminListsListIdImportsPostErrors, ImportReviewedItemsApiAdminListsListIdImportsPostResponses, ItemCoverApiMediaItemsItemIdCoverPostData, ItemCoverApiMediaItemsItemIdCoverPostErrors, ItemCoverApiMediaItemsItemIdCoverPostResponses, ItemDetailsApiItemsItemIdGetData, ItemDetailsApiItemsItemIdGetErrors, ItemDetailsApiItemsItemIdGetResponses, ListCoverApiMediaListsListIdCoverPostData, ListCoverApiMediaListsListIdCoverPostErrors, ListCoverApiMediaListsListIdCoverPostResponses, ListDetailApiListsListIdGetData, ListDetailApiListsListIdGetErrors, ListDetailApiListsListIdGetResponses, ListItemsApiListsListIdItemsGetData, ListItemsApiListsListIdItemsGetErrors, ListItemsApiListsListIdItemsGetResponses, ListsApiListsGetData, ListsApiListsGetErrors, ListsApiListsGetResponses, ListUsersApiAdminUsersGetData, ListUsersApiAdminUsersGetErrors, ListUsersApiAdminUsersGetResponses, LoginApiAuthLoginPostData, LoginApiAuthLoginPostErrors, LoginApiAuthLoginPostResponses, LogoutApiAuthLogoutPostData, LogoutApiAuthLogoutPostErrors, LogoutApiAuthLogoutPostResponses, MeApiAuthMeGetData, MeApiAuthMeGetResponses, OriginalApiMediaMediaIdOriginalGetData, OriginalApiMediaMediaIdOriginalGetErrors, OriginalApiMediaMediaIdOriginalGetResponses, OwnDetailApiCheckinsCheckinIdGetData, OwnDetailApiCheckinsCheckinIdGetErrors, OwnDetailApiCheckinsCheckinIdGetResponses, PublicExperiencesApiItemsItemIdCheckinsPublicGetData, PublicExperiencesApiItemsItemIdCheckinsPublicGetErrors, PublicExperiencesApiItemsItemIdCheckinsPublicGetResponses, PublishItemApiAdminItemsItemIdPublishPostData, PublishItemApiAdminItemsItemIdPublishPostErrors, PublishItemApiAdminItemsItemIdPublishPostResponses, PublishListApiAdminListsListIdPublishPostData, PublishListApiAdminListsListIdPublishPostErrors, PublishListApiAdminListsListIdPublishPostResponses, RegisterApiAuthRegisterPostData, RegisterApiAuthRegisterPostErrors, RegisterApiAuthRegisterPostResponses, RemovePhotoApiMediaMediaIdDeleteData, RemovePhotoApiMediaMediaIdDeleteErrors, RemovePhotoApiMediaMediaIdDeleteResponses, SharedExperienceApiSharesShareIdGetData, SharedExperienceApiSharesShareIdGetErrors, SharedExperienceApiSharesShareIdGetResponses, ThumbnailApiMediaMediaIdThumbnailGetData, ThumbnailApiMediaMediaIdThumbnailGetErrors, ThumbnailApiMediaMediaIdThumbnailGetResponses, UnpublishItemApiAdminItemsItemIdUnpublishPostData, UnpublishItemApiAdminItemsItemIdUnpublishPostErrors, UnpublishItemApiAdminItemsItemIdUnpublishPostResponses, UnpublishListApiAdminListsListIdUnpublishPostData, UnpublishListApiAdminListsListIdUnpublishPostErrors, UnpublishListApiAdminListsListIdUnpublishPostResponses, UploadPhotoApiMediaUploadsPostData, UploadPhotoApiMediaUploadsPostErrors, UploadPhotoApiMediaUploadsPostResponses } from './types.gen';
+import type { AddPhotoApiMediaCheckinsCheckinIdPostData, AddPhotoApiMediaCheckinsCheckinIdPostErrors, AddPhotoApiMediaCheckinsCheckinIdPostResponses, AddRelationApiAdminItemsItemIdRelationsPostData, AddRelationApiAdminItemsItemIdRelationsPostErrors, AddRelationApiAdminItemsItemIdRelationsPostResponses, AdminItemsApiAdminListsListIdItemsGetData, AdminItemsApiAdminListsListIdItemsGetErrors, AdminItemsApiAdminListsListIdItemsGetResponses, AdminListDetailApiAdminListsListIdGetData, AdminListDetailApiAdminListsListIdGetErrors, AdminListDetailApiAdminListsListIdGetResponses, AdminListsApiAdminListsGetData, AdminListsApiAdminListsGetErrors, AdminListsApiAdminListsGetResponses, AuditHistoryApiAdminAuditGetData, AuditHistoryApiAdminAuditGetErrors, AuditHistoryApiAdminAuditGetResponses, AvatarApiMediaAvatarPostData, AvatarApiMediaAvatarPostErrors, AvatarApiMediaAvatarPostResponses, ChangeRoleApiAdminUsersUserIdRolePutData, ChangeRoleApiAdminUsersUserIdRolePutErrors, ChangeRoleApiAdminUsersUserIdRolePutResponses, CompleteItemApiItemsItemIdCompletePostData, CompleteItemApiItemsItemIdCompletePostErrors, CompleteItemApiItemsItemIdCompletePostResponses, CreateCheckinApiItemsItemIdCheckinsPostData, CreateCheckinApiItemsItemIdCheckinsPostErrors, CreateCheckinApiItemsItemIdCheckinsPostResponses, CreateChecklistImportApiAdminChecklistImportsPostData, CreateChecklistImportApiAdminChecklistImportsPostErrors, CreateChecklistImportApiAdminChecklistImportsPostResponses, CreateItemApiAdminListsListIdItemsPostData, CreateItemApiAdminListsListIdItemsPostErrors, CreateItemApiAdminListsListIdItemsPostResponses, CreateListApiAdminListsPostData, CreateListApiAdminListsPostErrors, CreateListApiAdminListsPostResponses, DeleteCheckinApiCheckinsCheckinIdDeleteData, DeleteCheckinApiCheckinsCheckinIdDeleteErrors, DeleteCheckinApiCheckinsCheckinIdDeleteResponses, EditCheckinApiCheckinsCheckinIdPatchData, EditCheckinApiCheckinsCheckinIdPatchErrors, EditCheckinApiCheckinsCheckinIdPatchResponses, EditItemApiAdminItemsItemIdPutData, EditItemApiAdminItemsItemIdPutErrors, EditItemApiAdminItemsItemIdPutResponses, EditListApiAdminListsListIdPutData, EditListApiAdminListsListIdPutErrors, EditListApiAdminListsListIdPutResponses, EditProfileApiAuthMePatchData, EditProfileApiAuthMePatchErrors, EditProfileApiAuthMePatchResponses, GetAvatarApiMediaAvatarUserIdGetData, GetAvatarApiMediaAvatarUserIdGetErrors, GetAvatarApiMediaAvatarUserIdGetResponses, GetItemCoverApiMediaItemsItemIdCoverGetData, GetItemCoverApiMediaItemsItemIdCoverGetErrors, GetItemCoverApiMediaItemsItemIdCoverGetResponses, GetListCoverApiMediaListsListIdCoverGetData, GetListCoverApiMediaListsListIdCoverGetErrors, GetListCoverApiMediaListsListIdCoverGetResponses, HealthApiHealthGetData, HealthApiHealthGetResponses, HideExperienceApiAdminCheckinsCheckinIdHidePostData, HideExperienceApiAdminCheckinsCheckinIdHidePostErrors, HideExperienceApiAdminCheckinsCheckinIdHidePostResponses, HistoryApiMeCheckinsGetData, HistoryApiMeCheckinsGetErrors, HistoryApiMeCheckinsGetResponses, ImportReviewedItemsApiAdminListsListIdImportsPostData, ImportReviewedItemsApiAdminListsListIdImportsPostErrors, ImportReviewedItemsApiAdminListsListIdImportsPostResponses, ItemCoverApiMediaItemsItemIdCoverPostData, ItemCoverApiMediaItemsItemIdCoverPostErrors, ItemCoverApiMediaItemsItemIdCoverPostResponses, ItemDetailsApiItemsItemIdGetData, ItemDetailsApiItemsItemIdGetErrors, ItemDetailsApiItemsItemIdGetResponses, ListCoverApiMediaListsListIdCoverPostData, ListCoverApiMediaListsListIdCoverPostErrors, ListCoverApiMediaListsListIdCoverPostResponses, ListDetailApiListsListIdGetData, ListDetailApiListsListIdGetErrors, ListDetailApiListsListIdGetResponses, ListItemsApiListsListIdItemsGetData, ListItemsApiListsListIdItemsGetErrors, ListItemsApiListsListIdItemsGetResponses, ListsApiListsGetData, ListsApiListsGetErrors, ListsApiListsGetResponses, ListUsersApiAdminUsersGetData, ListUsersApiAdminUsersGetErrors, ListUsersApiAdminUsersGetResponses, LoginApiAuthLoginPostData, LoginApiAuthLoginPostErrors, LoginApiAuthLoginPostResponses, LogoutApiAuthLogoutPostData, LogoutApiAuthLogoutPostErrors, LogoutApiAuthLogoutPostResponses, MeApiAuthMeGetData, MeApiAuthMeGetResponses, OriginalApiMediaMediaIdOriginalGetData, OriginalApiMediaMediaIdOriginalGetErrors, OriginalApiMediaMediaIdOriginalGetResponses, OwnDetailApiCheckinsCheckinIdGetData, OwnDetailApiCheckinsCheckinIdGetErrors, OwnDetailApiCheckinsCheckinIdGetResponses, PreviewChecklistApiAdminChecklistImportsPreviewPostData, PreviewChecklistApiAdminChecklistImportsPreviewPostErrors, PreviewChecklistApiAdminChecklistImportsPreviewPostResponses, PublicExperiencesApiItemsItemIdCheckinsPublicGetData, PublicExperiencesApiItemsItemIdCheckinsPublicGetErrors, PublicExperiencesApiItemsItemIdCheckinsPublicGetResponses, PublishAllApiAdminListsListIdPublishAllPostData, PublishAllApiAdminListsListIdPublishAllPostErrors, PublishAllApiAdminListsListIdPublishAllPostResponses, PublishItemApiAdminItemsItemIdPublishPostData, PublishItemApiAdminItemsItemIdPublishPostErrors, PublishItemApiAdminItemsItemIdPublishPostResponses, PublishListApiAdminListsListIdPublishPostData, PublishListApiAdminListsListIdPublishPostErrors, PublishListApiAdminListsListIdPublishPostResponses, RegisterApiAuthRegisterPostData, RegisterApiAuthRegisterPostErrors, RegisterApiAuthRegisterPostResponses, RemovePhotoApiMediaMediaIdDeleteData, RemovePhotoApiMediaMediaIdDeleteErrors, RemovePhotoApiMediaMediaIdDeleteResponses, SharedExperienceApiSharesShareIdGetData, SharedExperienceApiSharesShareIdGetErrors, SharedExperienceApiSharesShareIdGetResponses, ThumbnailApiMediaMediaIdThumbnailGetData, ThumbnailApiMediaMediaIdThumbnailGetErrors, ThumbnailApiMediaMediaIdThumbnailGetResponses, UnpublishItemApiAdminItemsItemIdUnpublishPostData, UnpublishItemApiAdminItemsItemIdUnpublishPostErrors, UnpublishItemApiAdminItemsItemIdUnpublishPostResponses, UnpublishListApiAdminListsListIdUnpublishPostData, UnpublishListApiAdminListsListIdUnpublishPostErrors, UnpublishListApiAdminListsListIdUnpublishPostResponses, UploadPhotoApiMediaUploadsPostData, UploadPhotoApiMediaUploadsPostErrors, UploadPhotoApiMediaUploadsPostResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -17,6 +17,34 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
      */
     meta?: Record<string, unknown>;
 };
+
+/**
+ * Preview Checklist
+ *
+ * Validate and preview without writing content or audit rows.
+ */
+export const previewChecklistApiAdminChecklistImportsPreviewPost = <ThrowOnError extends boolean = false>(options: Options<PreviewChecklistApiAdminChecklistImportsPreviewPostData, ThrowOnError>) => (options.client ?? client).post<PreviewChecklistApiAdminChecklistImportsPreviewPostResponses, PreviewChecklistApiAdminChecklistImportsPreviewPostErrors, ThrowOnError>({
+    url: '/api/admin/checklist-imports/preview',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+/**
+ * Create Checklist Import
+ *
+ * Revalidate and atomically import, or return the immutable original result.
+ */
+export const createChecklistImportApiAdminChecklistImportsPost = <ThrowOnError extends boolean = false>(options: Options<CreateChecklistImportApiAdminChecklistImportsPostData, ThrowOnError>) => (options.client ?? client).post<CreateChecklistImportApiAdminChecklistImportsPostResponses, CreateChecklistImportApiAdminChecklistImportsPostErrors, ThrowOnError>({
+    url: '/api/admin/checklist-imports',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
 
 /**
  * Register
@@ -117,6 +145,13 @@ export const createCheckinApiItemsItemIdCheckinsPost = <ThrowOnError extends boo
 });
 
 /**
+ * Complete Item
+ *
+ * Complete once; serialize concurrent clicks and reuse an active record.
+ */
+export const completeItemApiItemsItemIdCompletePost = <ThrowOnError extends boolean = false>(options: Options<CompleteItemApiItemsItemIdCompletePostData, ThrowOnError>) => (options.client ?? client).post<CompleteItemApiItemsItemIdCompletePostResponses, CompleteItemApiItemsItemIdCompletePostErrors, ThrowOnError>({ url: '/api/items/{item_id}/complete', ...options });
+
+/**
  * History
  *
  * Read own active records, including archived checklist entries.
@@ -208,6 +243,13 @@ export const createListApiAdminListsPost = <ThrowOnError extends boolean = false
 });
 
 /**
+ * Admin List Detail
+ *
+ * Read one list and all publication status counts as an administrator.
+ */
+export const adminListDetailApiAdminListsListIdGet = <ThrowOnError extends boolean = false>(options: Options<AdminListDetailApiAdminListsListIdGetData, ThrowOnError>) => (options.client ?? client).get<AdminListDetailApiAdminListsListIdGetResponses, AdminListDetailApiAdminListsListIdGetErrors, ThrowOnError>({ url: '/api/admin/lists/{list_id}', ...options });
+
+/**
  * Edit List
  *
  * Replace editable checklist content.
@@ -234,6 +276,13 @@ export const publishListApiAdminListsListIdPublishPost = <ThrowOnError extends b
  * Unpublish without deleting personal history.
  */
 export const unpublishListApiAdminListsListIdUnpublishPost = <ThrowOnError extends boolean = false>(options: Options<UnpublishListApiAdminListsListIdUnpublishPostData, ThrowOnError>) => (options.client ?? client).post<UnpublishListApiAdminListsListIdUnpublishPostResponses, UnpublishListApiAdminListsListIdUnpublishPostErrors, ThrowOnError>({ url: '/api/admin/lists/{list_id}/unpublish', ...options });
+
+/**
+ * Publish All
+ *
+ * Publish the list and draft items, preserving intentionally unpublished items.
+ */
+export const publishAllApiAdminListsListIdPublishAllPost = <ThrowOnError extends boolean = false>(options: Options<PublishAllApiAdminListsListIdPublishAllPostData, ThrowOnError>) => (options.client ?? client).post<PublishAllApiAdminListsListIdPublishAllPostResponses, PublishAllApiAdminListsListIdPublishAllPostErrors, ThrowOnError>({ url: '/api/admin/lists/{list_id}/publish-all', ...options });
 
 /**
  * Admin Items
@@ -345,7 +394,7 @@ export const addPhotoApiMediaCheckinsCheckinIdPost = <ThrowOnError extends boole
 /**
  * Remove Photo
  *
- * Remove one owned photo while preserving nonempty experiences.
+ * Remove one owned photo, retaining a valid completion record.
  */
 export const removePhotoApiMediaMediaIdDelete = <ThrowOnError extends boolean = false>(options: Options<RemovePhotoApiMediaMediaIdDeleteData, ThrowOnError>) => (options.client ?? client).delete<RemovePhotoApiMediaMediaIdDeleteResponses, RemovePhotoApiMediaMediaIdDeleteErrors, ThrowOnError>({ url: '/api/media/{media_id}', ...options });
 

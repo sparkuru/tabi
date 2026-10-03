@@ -6,7 +6,7 @@ Use this contract when changing authentication, list/item publication, check-ins
 
 ## 2. Signatures
 
-- Migrations: `cd backend && .venv/bin/alembic upgrade head`; Compose API entrypoint runs the same command before Uvicorn. Current head: `cf8b4151f81e`.
+- Migrations: Compose API entrypoint runs `alembic upgrade head` before Uvicorn; Docker development uses `./hako python alembic upgrade head` with an explicit isolated DB/network. Current head: `a748bd701acf`.
 - Seed: `python -m app.seed_ocr --check-only --log`, `python -m app.seed_ocr --owner-email ADMIN_EMAIL`, or `python -m app.seed_ocr --owner-email ADMIN_EMAIL --publish-reference` after the system admin exists. It reads `backend/data/ocr_seed.json` by default.
 - Session: `POST /api/auth/register`, `POST /api/auth/login`, `POST /api/auth/logout`, `GET/PATCH /api/auth/me`.
 - Catalog: `GET /api/lists`, `GET /api/lists/{list_id}`, `GET /api/lists/{list_id}/items`, `GET /api/items/{item_id}`; admin writes under `/api/admin`.
@@ -20,7 +20,7 @@ Use this contract when changing authentication, list/item publication, check-ins
 - Passwords need at least 12 characters; public display names are trimmed and cannot be blank. `UserOut` includes email only for the account owner or system admin user list; public check-in projections expose nickname/avatar, not email.
 - A checklist and each item have independent `draft`, `published`, or `unpublished` status. Public catalog requires both levels published. Existing check-ins remain readable by their author after unpublish.
 - `ItemWrite` requires paired latitude/longitude and a `coordinate_system` in `WGS84`, `GCJ02`, or `BD09`; dated `reference_note` and `reference_as_of` must also be paired. `ChecklistOut.sort_order` and `ItemSummaryOut.sort_order` let admin edits preserve ordering.
-- `POST .../checkins` requires a unique per-user idempotency key. Repeating the same key and payload returns the original record; changing the payload with that key conflicts. At least note or one photo is needed. Repeated visits with different keys are separate rows; progress counts distinct active item IDs.
+- `POST .../checkins` requires a unique per-user idempotency key. Repeating the same key and payload returns the original record; changing the payload with that key conflicts. Empty note/photos are valid completion records. Deliberate repeated records with different keys remain separate rows; progress counts distinct active item IDs. Direct completion and universal import/publication follow [Universal Checklist Contracts](./universal-checklist-contracts.md).
 
 ```http
 POST /api/items/{item_id}/checkins
@@ -46,7 +46,7 @@ Content-Type: application/json
 | Other user's record or private media | `404` without disclosure |
 | Same-list normalized item name/address collision | `409` |
 | Same idempotency key with changed request | `409` |
-| Empty check-in, mismatched coordinates, unreviewed OCR import row | `422` |
+| Mismatched coordinates, unreviewed OCR import row | `422` |
 | Admin attempts to clear or replace an OCR item's source marker | `422` |
 | Registration/login/upload exceeds its sliding window | `429` with `Retry-After` |
 | Unpublished catalog item or revoked share | `404` |
@@ -55,7 +55,7 @@ Content-Type: application/json
 ## 5. Good / Base / Bad Cases
 
 - Good: two check-ins on one item with different keys yield two history rows and one completed item.
-- Base: a photo-only private check-in without coordinates succeeds and remains owner-only.
+- Base: an empty or photo-only private check-in without coordinates succeeds and remains owner-only.
 - Bad: reusing one key for a different note returns `409`; importing an OCR row with `transcription_reviewed=false` returns `422`.
 
 ## 6. Tests Required

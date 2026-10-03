@@ -1,0 +1,36 @@
+{
+  "format": "tabi.checklist",
+  "version": 1,
+  "key": "example-ocr-reference",
+  "list": {
+    "title": "OCR reference example",
+    "summary": "本清单整理自 archive/ocr.md 的 OCR 原始资料，仅供参考；店铺、地址及推荐内容可能已变化，出行前请核实。",
+    "category": "美食"
+  },
+  "items": [
+    {
+      "key": "reference-1",
+      "name": "雅佳神话·麻辣烤鱼",
+      "place_kind": "physical",
+      "address": "海淀区志新路11号（三里庄店）",
+      "recommendation": "OCR 原始备注（未核实）：烤鱼活鱼现杀，经营超20年老店",
+      "source": "archive/ocr.md:9 [OCR Markdown transcription only]",
+      "missing_fields": [
+        "verified_at",
+        "coordinates"
+      ]
+    },
+    {
+      "key": "reference-2",
+      "name": "四季民福烤鸭店",
+      "place_kind": "physical",
+      "address": "东城区前门大街30号",
+      "recommendation": "OCR 原始备注（未核实）：本地人常去的烤鸭店，外皮酥脆",
+      "source": "archive/ocr.md:10 [OCR Markdown transcription only]",
+      "missing_fields": [
+        "verified_at",
+        "coordinates"
+      ]
+    }
+  ]
+}

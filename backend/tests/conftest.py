@@ -7,7 +7,9 @@ from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
+from app.api.routes import auth, media
 from app.core.config import get_settings
+from app.core.rate_limit import SlidingWindowLimiter
 from app.db.base import Base
 from app.db.session import get_db
 from app.main import app
@@ -19,6 +21,9 @@ def client(
     tmp_path: pytest.TempPathFactory, monkeypatch: pytest.MonkeyPatch
 ) -> Iterator[TestClient]:
     """Yield an API client with clean tables and private media storage."""
+    isolated_limiter = SlidingWindowLimiter()
+    monkeypatch.setattr(auth, "limiter", isolated_limiter)
+    monkeypatch.setattr(media, "limiter", isolated_limiter)
     database_path = tmp_path / "test.db"
     monkeypatch.setenv("TABI_MEDIA_ROOT", str(tmp_path / "media"))
     get_settings.cache_clear()

@@ -1,0 +1,413 @@
+{
+  "$defs": {
+    "ChecklistContent": {
+      "additionalProperties": false,
+      "description": "Importable list content without IDs or publication state.",
+      "properties": {
+        "title": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "summary": {
+          "default": "",
+          "maxLength": 5000,
+          "title": "Summary",
+          "type": "string"
+        },
+        "category": {
+          "anyOf": [
+            {
+              "maxLength": 80,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Category"
+        },
+        "sort_order": {
+          "default": 0,
+          "maximum": 2147483647,
+          "minimum": -2147483648,
+          "title": "Sort Order",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "title"
+      ],
+      "title": "ChecklistContent",
+      "type": "object"
+    },
+    "ChecklistItem": {
+      "additionalProperties": false,
+      "description": "Item data and references local to one import document.",
+      "properties": {
+        "name": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "summary": {
+          "default": "",
+          "maxLength": 5000,
+          "title": "Summary",
+          "type": "string"
+        },
+        "description": {
+          "default": "",
+          "maxLength": 30000,
+          "title": "Description",
+          "type": "string"
+        },
+        "category": {
+          "anyOf": [
+            {
+              "maxLength": 80,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Category"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 20,
+          "title": "Tags",
+          "type": "array"
+        },
+        "suggested_action": {
+          "anyOf": [
+            {
+              "maxLength": 5000,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Suggested Action"
+        },
+        "recommendation": {
+          "anyOf": [
+            {
+              "maxLength": 5000,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Recommendation"
+        },
+        "reference_note": {
+          "anyOf": [
+            {
+              "maxLength": 5000,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reference Note"
+        },
+        "reference_as_of": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reference As Of"
+        },
+        "missing_fields": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 20,
+          "title": "Missing Fields",
+          "type": "array"
+        },
+        "sort_order": {
+          "default": 0,
+          "maximum": 2147483647,
+          "minimum": -2147483648,
+          "title": "Sort Order",
+          "type": "integer"
+        },
+        "place_kind": {
+          "default": "none",
+          "enum": [
+            "none",
+            "physical",
+            "area",
+            "online"
+          ],
+          "title": "Place Kind",
+          "type": "string"
+        },
+        "place_name": {
+          "anyOf": [
+            {
+              "maxLength": 160,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Place Name"
+        },
+        "address": {
+          "anyOf": [
+            {
+              "maxLength": 255,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Address"
+        },
+        "area": {
+          "anyOf": [
+            {
+              "maxLength": 160,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Area"
+        },
+        "online_url": {
+          "anyOf": [
+            {
+              "format": "uri",
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Online Url"
+        },
+        "latitude": {
+          "anyOf": [
+            {
+              "maximum": 90,
+              "minimum": -90,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Latitude"
+        },
+        "longitude": {
+          "anyOf": [
+            {
+              "maximum": 180,
+              "minimum": -180,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Longitude"
+        },
+        "coordinate_system": {
+          "anyOf": [
+            {
+              "enum": [
+                "WGS84",
+                "GCJ02",
+                "BD09"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Coordinate System"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "maxLength": 2000,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source"
+        },
+        "verified_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Verified At"
+        },
+        "links": {
+          "items": {
+            "$ref": "#/$defs/ChecklistLink"
+          },
+          "maxItems": 20,
+          "title": "Links",
+          "type": "array"
+        },
+        "key": {
+          "maxLength": 80,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Key",
+          "type": "string"
+        },
+        "related_keys": {
+          "items": {
+            "maxLength": 80,
+            "minLength": 1,
+            "pattern": "^[a-z0-9][a-z0-9._-]*$",
+            "type": "string"
+          },
+          "maxItems": 199,
+          "title": "Related Keys",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "key"
+      ],
+      "title": "ChecklistItem",
+      "type": "object"
+    },
+    "ChecklistLink": {
+      "additionalProperties": false,
+      "description": "Strict nested link contract using existing URL validation.",
+      "properties": {
+        "title": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "url": {
+          "format": "uri",
+          "maxLength": 2048,
+          "minLength": 1,
+          "title": "Url",
+          "type": "string"
+        },
+        "kind": {
+          "default": "reference",
+          "maxLength": 24,
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "url"
+      ],
+      "title": "ChecklistLink",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "One UTF-8 JSON file, limited to 200 items and 2 MiB in transport.",
+  "properties": {
+    "format": {
+      "const": "tabi.checklist",
+      "title": "Format",
+      "type": "string"
+    },
+    "version": {
+      "const": 1,
+      "title": "Version",
+      "type": "integer"
+    },
+    "key": {
+      "maxLength": 80,
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "title": "Key",
+      "type": "string"
+    },
+    "list": {
+      "$ref": "#/$defs/ChecklistContent"
+    },
+    "items": {
+      "items": {
+        "$ref": "#/$defs/ChecklistItem"
+      },
+      "maxItems": 200,
+      "minItems": 1,
+      "title": "Items",
+      "type": "array"
+    },
+    "source": {
+      "anyOf": [
+        {
+          "maxLength": 2000,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source"
+    }
+  },
+  "required": [
+    "format",
+    "version",
+    "key",
+    "list",
+    "items"
+  ],
+  "title": "ChecklistDocument",
+  "type": "object"
+}

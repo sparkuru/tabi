@@ -2,7 +2,8 @@
 
 from fastapi import FastAPI
 
-from app.api.routes import admin, auth, catalog, checkins, media, users
+from app.api.import_body_limit import ImportBodyLimit
+from app.api.routes import admin, auth, catalog, checkins, checklist_imports, media, users
 
 app = FastAPI(
     title="Tabi API",
@@ -10,6 +11,9 @@ app = FastAPI(
     openapi_url="/api/openapi.json",
     docs_url="/api/docs",
 )
+
+app.add_middleware(ImportBodyLimit)
+app.include_router(checklist_imports.router, prefix="/api")
 
 app.include_router(auth.router, prefix="/api")
 app.include_router(catalog.router, prefix="/api")

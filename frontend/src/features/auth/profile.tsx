@@ -60,9 +60,7 @@ export function ProfilePage() {
     );
   return (
     <div className="mx-auto max-w-xl">
-      <PageIntro eyebrow="My profile" title="个人资料">
-        公开打卡只展示昵称和头像；邮箱仅在你的账号页面可见。
-      </PageIntro>
+      <PageIntro title="个人资料">公开记录只展示昵称和头像。</PageIntro>
       <Card className="p-6 sm:p-8">
         <form onSubmit={save} className="space-y-5">
           <div className="flex items-center gap-4">

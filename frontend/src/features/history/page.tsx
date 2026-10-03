@@ -37,7 +37,7 @@ export function HistoryPage() {
   if (session.isPending) return <Loading />;
   if (!session.data)
     return (
-      <EmptyState title="登录后回看你的足迹">
+      <EmptyState title="登录后查看记录">
         <Link
           to="/auth"
           search={{ redirect: "/history" }}
@@ -49,9 +49,7 @@ export function HistoryPage() {
     );
   return (
     <>
-      <PageIntro eyebrow="My moments" title="我的打卡">
-        同一个条目可以记录许多次。每一次都独立保存在这里。
-      </PageIntro>
+      <PageIntro title="我的记录" />
       <div className="mb-6 max-w-xs">
         <label className="field-label" htmlFor="history-category">
           按分类回看
@@ -98,6 +96,9 @@ export function HistoryPage() {
                   {record.note}
                 </p>
               )}
+              {!record.note && !record.media.length && (
+                <p className="text-sm font-semibold text-teal-800">已完成</p>
+              )}
               <PhotoGallery media={record.media} />
               <Link
                 to="/checkins/$checkinId"
@@ -110,15 +111,15 @@ export function HistoryPage() {
           ))}
         </div>
       ) : (
-        <EmptyState title="还没有打卡记录">
-          打开一张清单，找到想体验的条目，从第一次开始。
+        <EmptyState title="还没有记录">
+          完成清单中的条目后，记录会出现在这里。
         </EmptyState>
       )}
       {history.data && history.data.total > 20 && (
         <div className="mt-6 flex items-center justify-between gap-3 text-sm text-stone-600">
           <button
             type="button"
-            className="rounded-full border border-teal-700 px-4 py-2 font-semibold text-teal-800 disabled:opacity-40"
+            className="min-h-11 rounded-full border border-teal-700 px-4 py-2 font-semibold text-teal-800 disabled:opacity-40"
             disabled={offset === 0 || history.isFetching}
             onClick={() => setOffset((value) => Math.max(0, value - 20))}
           >
@@ -130,7 +131,7 @@ export function HistoryPage() {
           </span>
           <button
             type="button"
-            className="rounded-full border border-teal-700 px-4 py-2 font-semibold text-teal-800 disabled:opacity-40"
+            className="min-h-11 rounded-full border border-teal-700 px-4 py-2 font-semibold text-teal-800 disabled:opacity-40"
             disabled={offset + 20 >= history.data.total || history.isFetching}
             onClick={() => setOffset((value) => value + 20)}
           >

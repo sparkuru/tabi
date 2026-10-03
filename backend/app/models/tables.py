@@ -251,3 +251,19 @@ class ImportBatch(Base):
     reviewed_by: Mapped[str] = mapped_column(ForeignKey("users.id"), nullable=False)
     reviewed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now_utc)
+
+
+class ChecklistImport(Base):
+    """Stable package identity and original content digest for universal imports."""
+
+    __tablename__ = "checklist_imports"
+    __table_args__ = (UniqueConstraint("package_key", name="uq_checklist_import_package"),)
+
+    id: Mapped[str] = mapped_column(Uuid(as_uuid=False), primary_key=True, default=new_id)
+    package_key: Mapped[str] = mapped_column(String(80), nullable=False)
+    format_version: Mapped[int] = mapped_column(Integer, nullable=False)
+    payload_hash: Mapped[str] = mapped_column(String(64), nullable=False)
+    list_id: Mapped[str] = mapped_column(ForeignKey("lists.id"), nullable=False)
+    item_ids_by_key: Mapped[dict[str, str]] = mapped_column(JSON, nullable=False)
+    imported_by: Mapped[str] = mapped_column(ForeignKey("users.id"), nullable=False)
+    imported_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now_utc)

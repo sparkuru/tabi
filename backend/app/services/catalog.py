@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 
 from app.models.tables import Checkin, Checklist, Item, ItemLink, ItemRelation
 from app.schemas.catalog import (
+    AdminChecklistOut,
     ChecklistOut,
     ItemDetailOut,
     ItemLinkOut,
@@ -45,6 +46,23 @@ def checklist_out(db: Session, checklist: Checklist, user_id: str | None) -> Che
         item_count=len(ids),
         completed_count=len(counts),
         record_count=sum(counts.values()),
+    )
+
+
+def admin_checklist_out(db: Session, checklist: Checklist, user_id: str) -> AdminChecklistOut:
+    """Add independent management counts to the unchanged public projection."""
+    rows = db.execute(
+        select(Item.status, func.count(Item.id))
+        .where(Item.list_id == checklist.id)
+        .group_by(Item.status)
+    )
+    counts = dict(rows.all())
+    return AdminChecklistOut(
+        **checklist_out(db, checklist, user_id).model_dump(),
+        total_item_count=sum(counts.values()),
+        draft_item_count=counts.get("draft", 0),
+        published_item_count=counts.get("published", 0),
+        unpublished_item_count=counts.get("unpublished", 0),
     )
 
 

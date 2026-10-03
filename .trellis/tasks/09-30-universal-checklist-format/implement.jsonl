@@ -1,0 +1,15 @@
+{"file":".trellis/spec/product/requirements.md","reason":"Baseline permissions, progress, visibility and history; task design supersedes OCR-only import and nonempty-record limits."}
+{"file":".trellis/spec/product/architecture.md","reason":"Existing data, media and API boundaries to preserve."}
+{"file":".trellis/spec/backend/mvp-contracts.md","reason":"Executable auth, publication, OCR compatibility and PostgreSQL validation; apply task-approved completion changes."}
+{"file":".trellis/spec/frontend/index.md","reason":"Frontend guideline discovery; preserve generated-client conventions."}
+{"file":".trellis/spec/guides/cross-layer-thinking-guide.md","reason":"Trace versioned package, preview, persistence, publishing, completion and UI responses."}
+{"file":".trellis/spec/trellis-plus/index.md","reason":"Project development, responsive validation and finish-work policies."}
+{"file":".trellis/tasks/09-30-universal-checklist-format/research/format-and-import.md","reason":"Code evidence and task-specific import, content-first UI and completion research."}
+{"file": ".trellis/mainline.md", "reason": "Current initiative, approved requirements and planning boundary"}
+{"file": ".trellis/spec/trellis-plus/development-principles.md", "reason": "Project development defaults, scope, data protection and evidence"}
+{"file": ".trellis/spec/trellis-plus/development.md", "reason": "Existing Compose lifecycle, environment and before-dev checkpoint"}
+{"file": ".trellis/spec/trellis-plus/validation.md", "reason": "Automated validation profile, mobile coverage and submit-ready review"}
+{"file": ".trellis/spec/trellis-plus/frontend.md", "reason": "Project-local UUPM design and responsive accessibility workflow"}
+{"file": ".trellis/spec/trellis-plus/commit-policy.md", "reason": "Successful archive attribution, explicit staging and retry boundaries"}
+{"file": ".trellis/spec/trellis-plus/continuity.md", "reason": "Planning, guided continuation and conductor-worker boundaries"}
+{"file": ".trellis/spec/backend/universal-checklist-contracts.md", "reason": "Implemented v1 import, publication, empty-completion and browser contracts; normalized storage validation"}

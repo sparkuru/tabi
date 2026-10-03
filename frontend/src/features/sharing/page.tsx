@@ -41,7 +41,8 @@ export function SharePage({ shareId }: { shareId: string }) {
       </PageIntro>
       <Card className="space-y-6 p-6 sm:p-8">
         <p className="prose-note leading-8 text-stone-700">
-          {record.data.note || "这次体验留下了照片。"}
+          {record.data.note ||
+            (record.data.media.length ? "照片记录" : "已完成")}
         </p>
         <PhotoGallery media={record.data.media} />
       </Card>
@@ -50,7 +51,7 @@ export function SharePage({ shareId }: { shareId: string }) {
         params={{ itemId: record.data.item_id }}
         className="mt-6 inline-block text-sm font-semibold text-teal-800 hover:underline"
       >
-        看看这个条目 →
+        查看条目 →
       </Link>
     </div>
   );

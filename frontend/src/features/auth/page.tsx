@@ -40,11 +40,8 @@ export function AuthPage({ redirect }: { redirect: string }) {
 
   return (
     <div className="mx-auto max-w-lg">
-      <PageIntro
-        eyebrow="Your journey"
-        title={mode === "login" ? "欢迎回来" : "从这里开始记录"}
-      >
-        登录后可以保存每一次体验；你的打卡默认只有自己能看到。
+      <PageIntro title={mode === "login" ? "登录" : "注册"}>
+        记录默认仅自己可见。
       </PageIntro>
       <Card className="p-6 sm:p-8">
         <div
@@ -56,7 +53,7 @@ export function AuthPage({ redirect }: { redirect: string }) {
             role="tab"
             aria-selected={mode === "login"}
             type="button"
-            className={`rounded-full py-2 text-sm font-semibold ${mode === "login" ? "bg-white text-teal-900 shadow-sm" : "text-stone-600"}`}
+            className={`min-h-11 rounded-full py-2 text-sm font-semibold ${mode === "login" ? "bg-white text-teal-900 shadow-sm" : "text-stone-600"}`}
             onClick={() => setMode("login")}
           >
             登录
@@ -65,7 +62,7 @@ export function AuthPage({ redirect }: { redirect: string }) {
             role="tab"
             aria-selected={mode === "register"}
             type="button"
-            className={`rounded-full py-2 text-sm font-semibold ${mode === "register" ? "bg-white text-teal-900 shadow-sm" : "text-stone-600"}`}
+            className={`min-h-11 rounded-full py-2 text-sm font-semibold ${mode === "register" ? "bg-white text-teal-900 shadow-sm" : "text-stone-600"}`}
             onClick={() => setMode("register")}
           >
             注册

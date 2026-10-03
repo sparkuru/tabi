@@ -24,6 +24,7 @@ import { Button } from "../../components/ui/button";
 import { Card } from "../../components/ui/card";
 import { useSession } from "../../hooks/use-session";
 import { queryClient } from "../../lib/query-client";
+import { createRequestKey } from "../../lib/request-key";
 import { formatDate } from "../../lib/utils";
 
 function localDateTime(): string {
@@ -47,7 +48,7 @@ export function NewCheckinPage({ itemId }: { itemId: string }) {
   const [photos, setPhotos] = useState<File[]>([]);
   const [position, setPosition] = useState<PositionIn | null>(null);
   const [locationMessage, setLocationMessage] = useState("");
-  const requestKey = useRef(crypto.randomUUID());
+  const requestKey = useRef(createRequestKey());
   const staged = useRef(new Map<File, string>());
   const [previews, setPreviews] = useState<{ file: File; url: string }[]>([]);
 
@@ -86,6 +87,8 @@ export function NewCheckinPage({ itemId }: { itemId: string }) {
       );
     },
     onSuccess: (record) => {
+      queryClient.invalidateQueries({ queryKey: ["lists"] });
+      queryClient.invalidateQueries({ queryKey: ["items"] });
       queryClient.invalidateQueries({ queryKey: ["list"] });
       queryClient.invalidateQueries({ queryKey: ["item"] });
       queryClient.invalidateQueries({ queryKey: ["history"] });
@@ -120,7 +123,7 @@ export function NewCheckinPage({ itemId }: { itemId: string }) {
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!note.trim() && photos.length === 0) return;
+    if (mutation.isPending) return;
     mutation.mutate();
   }
 
@@ -128,7 +131,7 @@ export function NewCheckinPage({ itemId }: { itemId: string }) {
   if (item.error) return <ErrorNotice error={item.error} />;
   if (!session.data)
     return (
-      <EmptyState title="登录后记录这次体验">
+      <EmptyState title="登录后添加记录">
         <Button asChild className="mt-4">
           <Link to="/auth" search={{ redirect: `/items/${itemId}/checkin` }}>
             去登录
@@ -145,13 +148,13 @@ export function NewCheckinPage({ itemId }: { itemId: string }) {
       >
         ← 返回条目
       </Link>
-      <PageIntro eyebrow="A new memory" title={`记录：${item.data.name}`}>
-        每次体验都是独立的一页。文字和照片任选其一；定位完全由你决定。
+      <PageIntro title={`记录：${item.data.name}`}>
+        心得、照片和定位均可留空。记录默认仅自己可见。
       </PageIntro>
       <Card className="p-6 sm:p-8">
         <form onSubmit={submit} className="space-y-6">
           <label className="block">
-            <span className="field-label">体验时间</span>
+            <span className="field-label">记录时间</span>
             <input
               className="field"
               type="datetime-local"
@@ -160,16 +163,19 @@ export function NewCheckinPage({ itemId }: { itemId: string }) {
               onChange={(event) => setExperiencedAt(event.target.value)}
             />
           </label>
-          <label className="block">
-            <span className="field-label">这次的心得</span>
+          <div>
+            <label htmlFor="new-record-note" className="field-label">
+              心得（可选）
+            </label>
             <textarea
+              id="new-record-note"
               className="field min-h-36 resize-y"
               maxLength={30000}
               value={note}
               onChange={(event) => setNote(event.target.value)}
-              placeholder="写下你想记住的细节，也可以只上传照片。"
+              placeholder="添加心得，也可以留空。"
             />
-          </label>
+          </div>
           <div>
             <label className="field-label" htmlFor="photos">
               照片（最多 8 张）
@@ -210,7 +216,7 @@ export function NewCheckinPage({ itemId }: { itemId: string }) {
                           current.filter((entry) => entry !== file),
                         )
                       }
-                      className="absolute top-1 right-1 grid size-7 place-items-center rounded-full bg-stone-900/75 text-white"
+                      className="absolute top-1 right-1 grid size-11 place-items-center rounded-full bg-stone-900/75 text-white"
                       aria-label={`移除 ${file.name}`}
                     >
                       <X className="size-4" />
@@ -270,12 +276,10 @@ export function NewCheckinPage({ itemId }: { itemId: string }) {
           {mutation.error && <ErrorNotice error={mutation.error} />}
           <Button
             type="submit"
-            disabled={
-              mutation.isPending || (!note.trim() && photos.length === 0)
-            }
+            disabled={mutation.isPending}
             className="w-full"
           >
-            {mutation.isPending ? "正在保存…" : "保存这次打卡"}
+            {mutation.isPending ? "正在保存…" : "保存记录"}
           </Button>
         </form>
       </Card>
@@ -359,7 +363,7 @@ export function OwnCheckinPage({ checkinId }: { checkinId: string }) {
         to="/history"
         className="mb-6 inline-block text-sm font-semibold text-teal-800 hover:underline"
       >
-        ← 返回我的打卡
+        ← 返回我的记录
       </Link>
       <PageIntro eyebrow={current.list_title} title={current.item_name}>
         {formatDate(current.experienced_at)} ·{" "}
@@ -378,7 +382,7 @@ export function OwnCheckinPage({ checkinId }: { checkinId: string }) {
           </p>
         ) : null}
         <p className="prose-note leading-8 text-stone-700">
-          {current.note || "这次留下了照片。"}
+          {current.note || (current.media.length ? "照片记录" : "已完成")}
         </p>
         <PhotoGallery media={current.media} />
         {current.media.length > 0 && (
@@ -389,21 +393,13 @@ export function OwnCheckinPage({ checkinId }: { checkinId: string }) {
                 variant="ghost"
                 size="small"
                 type="button"
-                disabled={
-                  removeMedia.isPending ||
-                  (current.media.length === 1 && !current.note)
-                }
+                disabled={removeMedia.isPending}
                 onClick={() => removeMedia.mutate(photo.id)}
               >
                 移除照片 {index + 1}
               </Button>
             ))}
           </div>
-        )}
-        {current.media.length === 1 && !current.note && (
-          <p className="text-sm text-stone-500">
-            这条记录只有一张照片。先补充心得，才能移除它。
-          </p>
         )}
         {removeMedia.error && <ErrorNotice error={removeMedia.error} />}
         {current.media.length < 8 && (
@@ -443,14 +439,18 @@ export function OwnCheckinPage({ checkinId }: { checkinId: string }) {
       </Card>
       <Card className="mt-6 p-6 sm:p-8">
         <h2 className="mb-4 text-xl font-bold">编辑这次记录</h2>
-        <label className="block">
-          <span className="field-label">心得</span>
+        <div>
+          <label htmlFor="record-note" className="field-label">
+            心得
+          </label>
           <textarea
+            id="record-note"
             className="field min-h-32"
+            maxLength={30000}
             value={note ?? current.note ?? ""}
             onChange={(event) => setNote(event.target.value)}
           />
-        </label>
+        </div>
         <label className="mt-4 block">
           <span className="field-label">可见性</span>
           <select
@@ -469,20 +469,29 @@ export function OwnCheckinPage({ checkinId }: { checkinId: string }) {
             <ErrorNotice error={edit.error} />
           </div>
         )}
+        {edit.isSuccess && (
+          <p role="status" className="mt-4 text-sm font-semibold text-teal-800">
+            修改已保存
+          </p>
+        )}
         <div className="mt-5 flex flex-wrap gap-3">
           <Button
             type="button"
             disabled={edit.isPending}
             onClick={() => edit.mutate()}
           >
-            保存修改
+            {edit.isPending ? "正在保存…" : "保存修改"}
           </Button>
           <Button
             type="button"
             variant="danger"
             disabled={remove.isPending}
             onClick={() => {
-              if (window.confirm("删除这次打卡？删除后进度可能改变。"))
+              if (
+                window.confirm(
+                  "删除这条记录？删除最后一条记录后，条目将恢复未完成。",
+                )
+              )
                 remove.mutate();
             }}
           >

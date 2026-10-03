@@ -1,0 +1,31 @@
+{
+  "format": "tabi.checklist",
+  "version": 1,
+  "key": "example-python-learning",
+  "list": {
+    "title": "Python basics",
+    "category": "Learning",
+    "summary": "Complete each exercise and optionally add notes or photos."
+  },
+  "items": [
+    {
+      "key": "functions",
+      "name": "Functions",
+      "description": "Write a function with arguments and a return value.",
+      "links": [
+        {
+          "title": "Python tutorial",
+          "url": "https://docs.python.org/3/tutorial/controlflow.html#defining-functions"
+        }
+      ]
+    },
+    {
+      "key": "classes",
+      "name": "Classes",
+      "description": "Create a class with an instance method.",
+      "related_keys": [
+        "functions"
+      ]
+    }
+  ]
+}

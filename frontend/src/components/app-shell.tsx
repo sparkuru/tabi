@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Compass, LogOut, MapPinned, UserRound } from "lucide-react";
+import { Compass, LogOut, UserRound } from "lucide-react";
 
 import { apiDone } from "../api/client";
 import { logoutApiAuthLogoutPost } from "../api/generated";
@@ -24,6 +24,12 @@ export function AppShell({ children }: { children: ReactNode }) {
     session.data?.role === "system_admin";
   return (
     <div className="min-h-screen bg-paper">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:block focus:p-3 focus:text-teal-900"
+      >
+        跳到内容
+      </a>
       <header className="sticky top-0 z-20 border-b border-stone-200/80 bg-paper/95 backdrop-blur">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-3 sm:flex-nowrap sm:gap-4 sm:px-8">
           <Link
@@ -42,10 +48,10 @@ export function AppShell({ children }: { children: ReactNode }) {
           >
             <Link
               to="/"
-              className="rounded-full px-3 py-2 text-sm font-medium text-stone-700 hover:bg-white"
+              className="inline-flex min-h-11 items-center rounded-full px-3 py-2 text-sm font-medium text-stone-700 hover:bg-white"
               activeProps={{
                 className:
-                  "rounded-full bg-teal-50 px-3 py-2 text-sm font-semibold text-teal-900",
+                  "inline-flex min-h-11 items-center rounded-full bg-teal-50 px-3 py-2 text-sm font-semibold text-teal-900",
               }}
             >
               清单
@@ -53,19 +59,19 @@ export function AppShell({ children }: { children: ReactNode }) {
             {session.data && (
               <Link
                 to="/history"
-                className="rounded-full px-3 py-2 text-sm font-medium text-stone-700 hover:bg-white"
+                className="inline-flex min-h-11 items-center rounded-full px-3 py-2 text-sm font-medium text-stone-700 hover:bg-white"
                 activeProps={{
                   className:
-                    "rounded-full bg-teal-50 px-3 py-2 text-sm font-semibold text-teal-900",
+                    "inline-flex min-h-11 items-center rounded-full bg-teal-50 px-3 py-2 text-sm font-semibold text-teal-900",
                 }}
               >
-                我的打卡
+                我的记录
               </Link>
             )}
             {admin && (
               <Link
                 to="/admin"
-                className="rounded-full px-3 py-2 text-sm font-medium text-stone-700 hover:bg-white"
+                className="inline-flex min-h-11 items-center rounded-full px-3 py-2 text-sm font-medium text-stone-700 hover:bg-white"
               >
                 管理
               </Link>
@@ -103,16 +109,12 @@ export function AppShell({ children }: { children: ReactNode }) {
           </div>
         </div>
       </header>
-      <main className="mx-auto max-w-6xl px-4 py-8 sm:px-8 sm:py-12">
+      <main
+        id="main-content"
+        className="mx-auto max-w-6xl px-4 py-8 sm:px-8 sm:py-12"
+      >
         {children}
       </main>
-      <footer className="mt-16 border-t border-stone-200 px-4 py-8 text-center text-sm text-stone-500">
-        <MapPinned
-          className="mx-auto mb-2 size-5 text-teal-700"
-          aria-hidden="true"
-        />
-        一次一记，把想做的事慢慢过成故事。
-      </footer>
     </div>
   );
 }

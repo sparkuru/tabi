@@ -1,46 +1,59 @@
 services:
   db:
-    image: postgres:17-alpine
+    image: ${TABI_POSTGRES_IMAGE:-postgres:17-alpine}
+    command: ["postgres", "-c", "listen_addresses=${TABI_DB_HOST:-0.0.0.0}", "-p", "${TABI_DB_PORT:-5432}"]
     environment:
-      POSTGRES_DB: tabi
-      POSTGRES_USER: tabi
+      POSTGRES_DB: ${POSTGRES_DB:-tabi}
+      POSTGRES_USER: ${POSTGRES_USER:-tabi}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      TABI_DB_PORT: ${TABI_DB_PORT:-5432}
     volumes:
       - db_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U tabi -d tabi"]
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -p \"$$TABI_DB_PORT\" -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
       interval: 5s
       timeout: 3s
       retries: 10
 
   api:
+    image: ${TABI_API_IMAGE:-${COMPOSE_PROJECT_NAME}-api:latest}
     build:
       context: ..
       dockerfile: infra/docker/backend.Dockerfile
     environment:
-      TABI_DATABASE_URL: postgresql+psycopg://tabi:${POSTGRES_PASSWORD}@db:5432/tabi
-      TABI_MEDIA_ROOT: /data/media
+      POSTGRES_DB: ${POSTGRES_DB:-tabi}
+      POSTGRES_USER: ${POSTGRES_USER:-tabi}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      TABI_DB_PORT: ${TABI_DB_PORT:-5432}
+      TABI_API_HOST: ${TABI_API_HOST:-0.0.0.0}
+      TABI_API_PORT: ${TABI_API_PORT:-8000}
+      TABI_MEDIA_ROOT: ${TABI_MEDIA_ROOT:-/data/media}
       TABI_COOKIE_SECURE: ${TABI_COOKIE_SECURE:-false}
     volumes:
-      - media_data:/data/media
+      - media_data:${TABI_MEDIA_ROOT:-/data/media}
     depends_on:
       db:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health', timeout=2)"]
+      test: ["CMD", "python", "-c", "import os, urllib.request; urllib.request.urlopen('http://127.0.0.1:' + os.environ['TABI_API_PORT'] + '/api/health', timeout=2)"]
       interval: 10s
       timeout: 3s
       retries: 10
 
   web:
+    image: ${TABI_WEB_IMAGE:-${COMPOSE_PROJECT_NAME}-web:latest}
     build:
       context: ..
       dockerfile: infra/docker/frontend.Dockerfile
     environment:
       TABI_SITE_ADDRESS: ${TABI_SITE_ADDRESS:-:80}
+      TABI_WEB_HOST: ${TABI_WEB_HOST:-0.0.0.0}
+      TABI_WEB_HTTP_PORT: ${TABI_WEB_HTTP_PORT:-80}
+      TABI_WEB_HTTPS_PORT: ${TABI_WEB_HTTPS_PORT:-443}
+      TABI_API_PORT: ${TABI_API_PORT:-8000}
     ports:
-      - "${TABI_HTTP_BIND:?Set TABI_HTTP_BIND in infra/.env}:80"
-      - "${TABI_HTTPS_BIND:?Set TABI_HTTPS_BIND in infra/.env}:443"
+      - "${TABI_HTTP_BIND:?Set TABI_HTTP_BIND in .env}:${TABI_WEB_HTTP_PORT:-80}"
+      - "${TABI_HTTPS_BIND:?Set TABI_HTTPS_BIND in .env}:${TABI_WEB_HTTPS_PORT:-443}"
     depends_on:
       api:
         condition: service_healthy

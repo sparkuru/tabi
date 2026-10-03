@@ -84,15 +84,13 @@ def remove_photo(
     auth: Annotated[AuthContext, Depends(require_csrf)],
     db: Annotated[Session, Depends(get_db)],
 ) -> None:
-    """Remove one owned photo while preserving nonempty experiences."""
+    """Remove one owned photo, retaining a valid completion record."""
     media = db.get(Media, media_id)
     if media is None or media.checkin.user_id != auth.user.id:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Image not found")
     checkin = media.checkin
     if checkin.deleted_at is not None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Image not found")
-    if not checkin.note and len(checkin.media) == 1:
-        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Note or photo required")
     keys = (media.storage_key, media.thumbnail_key)
     db.delete(media)
     db.commit()

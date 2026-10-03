@@ -13,7 +13,7 @@ from sqlalchemy.orm import Session
 
 from app.api.deps import AuthContext, require_admin, require_auth, require_csrf
 from app.db.session import get_db
-from app.models.tables import AuditLog, Checkin, Item, Media, PendingUpload
+from app.models.tables import AuditLog, Checkin, Checklist, Item, Media, PendingUpload
 from app.schemas.catalog import Page
 from app.schemas.checkins import (
     CheckinCreate,
@@ -78,8 +78,6 @@ def create_checkin(
     if item is None or item.status != "published" or item.checklist.status != "published":
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Item not found")
     note = payload.note.strip() if payload.note else None
-    if not note and not payload.upload_ids:
-        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Note or photo required")
     if len(set(payload.upload_ids)) != len(payload.upload_ids):
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Duplicate upload IDs")
 
@@ -133,8 +131,72 @@ def create_checkin(
                 Checkin.idempotency_key == idempotency_key,
             )
         )
-        if prior is None or prior.request_hash != fingerprint:
+        if prior is None or prior.request_hash != fingerprint or prior.deleted_at is not None:
             raise HTTPException(status.HTTP_409_CONFLICT, "Idempotency key already used") from exc
+        return own_checkin(prior)
+    db.refresh(checkin)
+    return own_checkin(checkin)
+
+
+@router.post("/items/{item_id}/complete", response_model=OwnCheckinOut)
+def complete_item(
+    item_id: str,
+    idempotency_key: Annotated[str, Header(min_length=16, max_length=80)],
+    auth: Annotated[AuthContext, Depends(require_csrf)],
+    db: Annotated[Session, Depends(get_db)],
+) -> OwnCheckinOut:
+    """Complete once; serialize concurrent clicks and reuse an active record."""
+    fingerprint = sha256(
+        dumps({"operation": "complete", "item_id": item_id}, sort_keys=True).encode()
+    ).hexdigest()
+    item = db.scalar(select(Item).where(Item.id == item_id).with_for_update())
+    if item is None:
+        raise HTTPException(404, "Item not found")
+    checklist = db.scalar(select(Checklist).where(Checklist.id == item.list_id))
+    if item.status != "published" or checklist.status != "published":
+        raise HTTPException(404, "Item not found")
+    prior = db.scalar(
+        select(Checkin).where(
+            Checkin.user_id == auth.user.id, Checkin.idempotency_key == idempotency_key
+        )
+    )
+    if prior is not None:
+        if prior.request_hash != fingerprint or prior.deleted_at is not None:
+            raise HTTPException(409, "Idempotency key already used")
+        return own_checkin(prior)
+    existing = db.scalar(
+        select(Checkin)
+        .where(
+            Checkin.user_id == auth.user.id,
+            Checkin.item_id == item_id,
+            Checkin.deleted_at.is_(None),
+        )
+        .order_by(Checkin.created_at, Checkin.id)
+        .limit(1)
+    )
+    if existing is not None:
+        return own_checkin(existing)
+    checkin = Checkin(
+        user_id=auth.user.id,
+        item_id=item_id,
+        idempotency_key=idempotency_key,
+        request_hash=fingerprint,
+        share_id=token_urlsafe(24),
+        experienced_at=datetime.now(UTC),
+        visibility="private",
+    )
+    db.add(checkin)
+    try:
+        db.commit()
+    except IntegrityError as exc:
+        db.rollback()
+        prior = db.scalar(
+            select(Checkin).where(
+                Checkin.user_id == auth.user.id, Checkin.idempotency_key == idempotency_key
+            )
+        )
+        if prior is None or prior.request_hash != fingerprint or prior.deleted_at is not None:
+            raise HTTPException(409, "Idempotency key already used") from exc
         return own_checkin(prior)
     db.refresh(checkin)
     return own_checkin(checkin)
@@ -191,8 +253,6 @@ def edit_checkin(
     checkin = _own_record(db, checkin_id, auth.user.id)
     if "note" in payload.model_fields_set:
         note = payload.note.strip() if payload.note else None
-        if not note and not checkin.media:
-            raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Note or photo required")
         checkin.note = note
     if "experienced_at" in payload.model_fields_set:
         checkin.experienced_at = payload.experienced_at or datetime.now(UTC)

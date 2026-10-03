@@ -1,0 +1,23 @@
+{
+  "format": "tabi.checklist",
+  "version": 1,
+  "key": "example-weekly-todo",
+  "list": {
+    "title": "Weekly tasks",
+    "category": "Tasks"
+  },
+  "items": [
+    {
+      "key": "backup",
+      "name": "Back up important files",
+      "description": "Verify that a restore works."
+    },
+    {
+      "key": "plan",
+      "name": "Plan next week",
+      "related_keys": [
+        "backup"
+      ]
+    }
+  ]
+}

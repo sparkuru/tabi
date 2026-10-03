@@ -6,6 +6,7 @@ import { apiData, apiDone } from "../../api/client";
 import {
   addRelationApiAdminItemsItemIdRelationsPost,
   adminItemsApiAdminListsListIdItemsGet,
+  adminListDetailApiAdminListsListIdGet,
   adminListsApiAdminListsGet,
   auditHistoryApiAdminAuditGet,
   changeRoleApiAdminUsersUserIdRolePut,
@@ -19,13 +20,13 @@ import {
   listCoverApiMediaListsListIdCoverPost,
   listUsersApiAdminUsersGet,
   publishItemApiAdminItemsItemIdPublishPost,
-  publishListApiAdminListsListIdPublishPost,
+  publishAllApiAdminListsListIdPublishAllPost,
   unpublishItemApiAdminItemsItemIdUnpublishPost,
   unpublishListApiAdminListsListIdUnpublishPost,
 } from "../../api/generated";
 import type {
   ChangeRoleIn,
-  ChecklistOut,
+  AdminChecklistOut,
   ChecklistWrite,
   ItemDetailOut,
   ItemWrite,
@@ -41,6 +42,7 @@ import { Button } from "../../components/ui/button";
 import { Card } from "../../components/ui/card";
 import { useSession } from "../../hooks/use-session";
 import { queryClient } from "../../lib/query-client";
+import { ChecklistImport } from "./checklist-import";
 
 const blankList: ChecklistWrite = {
   title: "",
@@ -113,7 +115,7 @@ export function AdminPage() {
   const [selectedListId, setSelectedListId] = useState("");
   const [selectedItemId, setSelectedItemId] = useState("");
   const [selectedListSnapshot, setSelectedListSnapshot] =
-    useState<ChecklistOut | null>(null);
+    useState<AdminChecklistOut | null>(null);
   const [selectedItemSnapshot, setSelectedItemSnapshot] =
     useState<ItemDetailOut | null>(null);
   const [listForm, setListForm] = useState<ChecklistWrite>(blankList);
@@ -147,6 +149,14 @@ export function AdminPage() {
     enabled: isAdmin,
   });
   const listId = selectedListId;
+  const listDetail = useQuery({
+    queryKey: ["admin-list", listId],
+    queryFn: () =>
+      apiData(
+        adminListDetailApiAdminListsListIdGet({ path: { list_id: listId } }),
+      ),
+    enabled: isAdmin && Boolean(listId),
+  });
   const items = useInfiniteQuery({
     queryKey: ["admin-items", listId],
     queryFn: ({ pageParam }) =>
@@ -166,6 +176,7 @@ export function AdminPage() {
   const visibleLists = lists.data?.pages.flatMap((page) => page.items) ?? [];
   const visibleItems = items.data?.pages.flatMap((page) => page.items) ?? [];
   const selectedList =
+    listDetail.data ??
     visibleLists.find((entry) => entry.id === listId) ??
     (selectedListSnapshot?.id === listId ? selectedListSnapshot : undefined);
   const selectedItem =
@@ -198,10 +209,13 @@ export function AdminPage() {
     setError(null);
     setMessage("");
     try {
-      await action();
-      setMessage(success);
+      const result = await action();
+      setMessage(typeof result === "string" ? result : success);
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: ["admin-lists"] }),
+        queryClient.invalidateQueries({ queryKey: ["admin-list"] }),
+        queryClient.invalidateQueries({ queryKey: ["list"] }),
+        queryClient.invalidateQueries({ queryKey: ["item"] }),
         queryClient.invalidateQueries({ queryKey: ["admin-items"] }),
         queryClient.invalidateQueries({ queryKey: ["lists"] }),
         queryClient.invalidateQueries({ queryKey: ["items"] }),
@@ -283,9 +297,40 @@ export function AdminPage() {
     );
   return (
     <>
-      <PageIntro eyebrow="Content studio" title="内容管理">
-        创建清单和条目，复核资料，再决定何时发布。
-      </PageIntro>
+      <PageIntro title="内容管理" />
+      <ChecklistImport
+        onSelect={async (id) => {
+          await Promise.all([
+            queryClient.invalidateQueries({ queryKey: ["admin-lists"] }),
+            queryClient.invalidateQueries({ queryKey: ["admin-items", id] }),
+            queryClient.invalidateQueries({ queryKey: ["admin-list", id] }),
+            queryClient.invalidateQueries({ queryKey: ["admin-audit"] }),
+          ]);
+          const imported = await queryClient.fetchQuery({
+            queryKey: ["admin-list", id],
+            queryFn: () =>
+              apiData(
+                adminListDetailApiAdminListsListIdGet({
+                  path: { list_id: id },
+                }),
+              ),
+          });
+          setSelectedListId(id);
+          setSelectedListSnapshot(imported);
+          setListForm({
+            title: imported.title,
+            summary: imported.summary,
+            category: imported.category,
+            sort_order: imported.sort_order,
+          });
+          setSelectedItemId("");
+          setSelectedItemSnapshot(null);
+          setItemForm(blankItem);
+          setListCover(null);
+          setItemCover(null);
+          setRelatedItemId("");
+        }}
+      />
       {error && (
         <div className="mb-6">
           <ErrorNotice error={error} />
@@ -328,7 +373,7 @@ export function AdminPage() {
                     setItemCover(null);
                     setRelatedItemId("");
                   }}
-                  className={`rounded-full px-3 py-2 text-sm ${listId === entry.id ? "bg-teal-800 text-white" : "bg-stone-100 text-stone-700"}`}
+                  className={`min-h-11 max-w-full break-words rounded-full px-3 py-2 text-sm ${listId === entry.id ? "bg-teal-800 text-white" : "bg-stone-100 text-stone-700"}`}
                 >
                   {entry.title}
                 </button>
@@ -346,7 +391,7 @@ export function AdminPage() {
                   setItemCover(null);
                   setRelatedItemId("");
                 }}
-                className="rounded-full border border-teal-700 px-3 py-2 text-sm font-semibold text-teal-800"
+                className="min-h-11 rounded-full border border-teal-700 px-3 py-2 text-sm font-semibold text-teal-800"
               >
                 + 新建
               </button>
@@ -420,8 +465,15 @@ export function AdminPage() {
               保存清单
             </Button>
           </form>
+          {listDetail.error && <ErrorNotice error={listDetail.error} />}
           {selectedList && (
             <div className="mt-5 space-y-4">
+              <p className="text-sm text-stone-600">
+                共 {selectedList.total_item_count} 个条目 · 草稿{" "}
+                {selectedList.draft_item_count} · 已发布{" "}
+                {selectedList.published_item_count} · 已下架{" "}
+                {selectedList.unpublished_item_count}
+              </p>
               <div>
                 <label className="block">
                   <span className="field-label">清单封面</span>
@@ -480,25 +532,47 @@ export function AdminPage() {
               <div className="flex flex-wrap gap-2">
                 <Button
                   type="button"
-                  variant="outline"
-                  disabled={busy}
+                  disabled={
+                    busy ||
+                    listDetail.isFetching ||
+                    (selectedList.draft_item_count === 0 &&
+                      selectedList.published_item_count === 0)
+                  }
                   onClick={() =>
                     run(async () => {
-                      const updated = await apiData(
-                        (selectedList.status === "published"
-                          ? unpublishListApiAdminListsListIdUnpublishPost
-                          : publishListApiAdminListsListIdPublishPost)({
+                      const result = await apiData(
+                        publishAllApiAdminListsListIdPublishAllPost({
                           path: { list_id: listId },
                         }),
                       );
-                      setSelectedListSnapshot(updated);
-                    }, "清单状态已更新")
+                      setSelectedListSnapshot(result.list);
+                      return `清单已发布：新发布 ${result.published_count} 个条目，已有 ${result.already_published_count} 个已发布条目，跳过 ${result.skipped_unpublished_count} 个已下架条目。`;
+                    })
                   }
                 >
-                  {selectedList.status === "published"
-                    ? "下架清单"
-                    : "发布清单"}
+                  {busy
+                    ? "正在处理…"
+                    : `发布清单及 ${selectedList.draft_item_count} 个草稿条目`}
                 </Button>
+                {selectedList.status === "published" && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    disabled={busy}
+                    onClick={() =>
+                      run(async () => {
+                        const updated = await apiData(
+                          unpublishListApiAdminListsListIdUnpublishPost({
+                            path: { list_id: listId },
+                          }),
+                        );
+                        setSelectedListSnapshot(updated);
+                      }, "清单已下架")
+                    }
+                  >
+                    下架清单
+                  </Button>
+                )}
                 <Button asChild variant="ghost">
                   <Link to="/lists/$listId" params={{ listId }}>
                     查看公开页
@@ -530,10 +604,14 @@ export function AdminPage() {
                       setItemCover(null);
                       setRelatedItemId("");
                     }}
-                    className={`rounded-full px-3 py-2 text-sm ${selectedItemId === entry.id ? "bg-teal-800 text-white" : "bg-stone-100 text-stone-700"}`}
+                    className={`min-h-11 max-w-full break-words rounded-full px-3 py-2 text-sm ${selectedItemId === entry.id ? "bg-teal-800 text-white" : "bg-stone-100 text-stone-700"}`}
                   >
                     {entry.name}
-                    {entry.status !== "published" ? " · 草稿" : ""}
+                    {entry.status === "draft"
+                      ? " · 草稿"
+                      : entry.status === "unpublished"
+                        ? " · 已下架"
+                        : " · 已发布"}
                   </button>
                 ))}
                 <button
@@ -545,7 +623,7 @@ export function AdminPage() {
                     setItemCover(null);
                     setRelatedItemId("");
                   }}
-                  className="rounded-full border border-teal-700 px-3 py-2 text-sm font-semibold text-teal-800"
+                  className="min-h-11 rounded-full border border-teal-700 px-3 py-2 text-sm font-semibold text-teal-800"
                 >
                   + 新建
                 </button>
@@ -1153,13 +1231,16 @@ export function AdminPage() {
             coordinates_checked。导入后作为草稿复查。
           </p>
           <form onSubmit={importRows} className="space-y-3">
-            <textarea
-              className="field min-h-40 font-mono text-xs"
-              value={importJson}
-              onChange={(event) => setImportJson(event.target.value)}
-              placeholder='{"source":"OCR file...","reviewed_at":"2026-09-29T00:00:00Z","rows":[...]}'
-              required
-            />
+            <label className="block">
+              <span className="field-label">已复核条目 JSON</span>
+              <textarea
+                className="field min-h-40 font-mono text-xs"
+                value={importJson}
+                onChange={(event) => setImportJson(event.target.value)}
+                placeholder='{"source":"OCR file...","reviewed_at":"2026-09-29T00:00:00Z","rows":[...]}'
+                required
+              />
+            </label>
             <Button type="submit" disabled={busy || !listId}>
               导入当前清单
             </Button>

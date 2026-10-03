@@ -23,6 +23,7 @@
 | `media` | `id`, `checkin_id`, `storage_key`, `thumbnail_key`, `sort_order`, `created_at`。 |
 | `item_links` | `id`, `item_id`, `title`, `url`, `kind`。 |
 | `item_relations` | `item_id`, `related_item_id`, `relation_kind`；两端必须同属一个清单，禁止自关联及重复。 |
+| `checklist_imports` | 唯一 `package_key`、版本、初次有效载荷摘要、清单 ID、条目 key→ID 映射、管理员与时间；同一事务创建内容及审计，用于复用/冲突，不同步覆盖编辑。 |
 
 `list` 一对多 `item`，`item` 一对多 `checkin`，`user` 一对多 `checkin`，`checkin` 一对多 `media`。统计进度时按用户、清单、不同有效 `item_id` 去重，不按记录数计算。删除/下架策略须保留历史关系；原资料更新不改写记录正文。
 
@@ -31,6 +32,8 @@
 建议 API 边界为 `/auth`、`/lists`、`/items`、`/checkins`、`/me/checkins`、`/media`、`/admin`；公开清单和心得接口须分页。对外采用不透明 ID 或不易枚举的分享标识，但分享标识不替代服务端每次检查可见性、隐藏状态和记录所有权。公开响应不得返回精确打卡位置、邮箱或原图元数据；原图和私人图片通过授权接口或限时 URL 访问。
 
 上传先进入私有临时区，经类型、大小和图片处理校验后绑定记录；生成缩略图并移除公开图片的敏感元数据，失败时清理临时文件。打卡写入使用幂等请求标识以处理连点和网络重试。浏览器定位记录坐标、精度、时间及坐标系，地图服务边界负责坐标转换，不混用坐标系。
+
+通用 JSON 预览/整张草稿导入与清单/草稿批量发布为管理员入口；不改变旧 OCR 复核路径。直接完成复用有效 Checkin 或创建私人无内容记录，采用条目行锁和用户级幂等约束，不增加独立完成表。具体接口、错误和回归契约见 `../backend/universal-checklist-contracts.md`。
 
 ## 质量与运行约束
 

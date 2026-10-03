@@ -42,7 +42,24 @@ const listRoute = createRoute({
 const itemRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/items/$itemId",
-  component: () => <ItemPage itemId={itemRoute.useParams().itemId} />,
+  validateSearch: (
+    search: Record<string, unknown>,
+  ): { complete?: boolean } => ({
+    complete:
+      search.complete === "1" ||
+      search.complete === 1 ||
+      search.complete === true ||
+      search.complete === "true"
+        ? true
+        : undefined,
+  }),
+  component: () => (
+    <ItemPage
+      key={itemRoute.useParams().itemId}
+      itemId={itemRoute.useParams().itemId}
+      completeOnArrival={itemRoute.useSearch().complete}
+    />
+  ),
 });
 const newCheckinRoute = createRoute({
   getParentRoute: () => rootRoute,

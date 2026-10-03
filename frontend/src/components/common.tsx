@@ -9,15 +9,15 @@ export function PageIntro({
   title,
   children,
 }: {
-  eyebrow: string;
+  eyebrow?: string | null;
   title: string;
   children?: ReactNode;
 }) {
   return (
     <div className="mb-8 space-y-3">
-      <p className="text-xs font-bold tracking-[0.22em] text-teal-700 uppercase">
-        {eyebrow}
-      </p>
+      {eyebrow && (
+        <p className="text-sm font-semibold text-teal-700">{eyebrow}</p>
+      )}
       <h1 className="max-w-3xl text-3xl leading-tight font-bold tracking-tight text-stone-900 sm:text-5xl">
         {title}
       </h1>
@@ -36,7 +36,10 @@ export function Loading({ label = "正在载入…" }: { label?: string }) {
 
 export function ErrorNotice({ error }: { error: unknown }) {
   return (
-    <Card role="alert" className="border-rose-200 bg-rose-50 p-5 text-rose-900">
+    <Card
+      role="alert"
+      className="prose-note border-rose-200 bg-rose-50 p-5 text-rose-900"
+    >
       {error instanceof Error ? error.message : "暂时无法加载，请稍后重试。"}
     </Card>
   );
@@ -73,11 +76,11 @@ export function PhotoGallery({ media }: { media: MediaOut[] }) {
           href={photo.original_url ?? photo.thumbnail_url}
           target="_blank"
           rel="noreferrer"
-          aria-label="查看打卡照片"
+          aria-label="查看记录照片"
         >
           <img
             src={photo.thumbnail_url}
-            alt="打卡照片"
+            alt="记录照片"
             loading="lazy"
             className="aspect-square w-full rounded-2xl object-cover"
           />

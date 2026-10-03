@@ -20,6 +20,7 @@ This directory contains guidelines for backend development. Fill in each file wi
 | [Quality Guidelines](./quality-guidelines.md) | Code standards, forbidden patterns | To fill |
 | [Logging Guidelines](./logging-guidelines.md) | Structured logging, log levels | To fill |
 | [MVP Contracts](./mvp-contracts.md) | Executable API, database, OCR seed and runtime boundaries | Implemented |
+| [Universal Checklist Contracts](./universal-checklist-contracts.md) | Versioned imports, atomic reuse, batch publication, empty completion and Web contracts | Implemented |
 
 ---
 

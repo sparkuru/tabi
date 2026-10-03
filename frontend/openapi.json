@@ -5,6 +5,136 @@
     "version": "0.1.0"
   },
   "paths": {
+    "/api/admin/checklist-imports/preview": {
+      "post": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Preview Checklist",
+        "description": "Validate and preview without writing content or audit rows.",
+        "operationId": "preview_checklist_api_admin_checklist_imports_preview_post",
+        "parameters": [
+          {
+            "name": "x-csrf-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Csrf-Token"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChecklistDocument"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChecklistPreviewOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/checklist-imports": {
+      "post": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Create Checklist Import",
+        "description": "Revalidate and atomically import, or return the immutable original result.",
+        "operationId": "create_checklist_import_api_admin_checklist_imports_post",
+        "parameters": [
+          {
+            "name": "x-csrf-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Csrf-Token"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChecklistDocument"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChecklistImportOut"
+                }
+              }
+            }
+          },
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChecklistImportOut"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/auth/register": {
       "post": {
         "tags": [
@@ -550,6 +680,76 @@
         }
       }
     },
+    "/api/items/{item_id}/complete": {
+      "post": {
+        "tags": [
+          "checkins"
+        ],
+        "summary": "Complete Item",
+        "description": "Complete once; serialize concurrent clicks and reuse an active record.",
+        "operationId": "complete_item_api_items__item_id__complete_post",
+        "parameters": [
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Item Id"
+            }
+          },
+          {
+            "name": "idempotency-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 80,
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "x-csrf-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Csrf-Token"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OwnCheckinOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/me/checkins": {
       "get": {
         "tags": [
@@ -1066,7 +1266,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Page_ChecklistOut_"
+                  "$ref": "#/components/schemas/Page_AdminChecklistOut_"
                 }
               }
             }
@@ -1124,7 +1324,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ChecklistOut"
+                  "$ref": "#/components/schemas/AdminChecklistOut"
                 }
               }
             }
@@ -1193,7 +1393,48 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ChecklistOut"
+                  "$ref": "#/components/schemas/AdminChecklistOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Admin List Detail",
+        "description": "Read one list and all publication status counts as an administrator.",
+        "operationId": "admin_list_detail_api_admin_lists__list_id__get",
+        "parameters": [
+          {
+            "name": "list_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "List Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminChecklistOut"
                 }
               }
             }
@@ -1252,7 +1493,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ChecklistOut"
+                  "$ref": "#/components/schemas/AdminChecklistOut"
                 }
               }
             }
@@ -1311,7 +1552,66 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ChecklistOut"
+                  "$ref": "#/components/schemas/AdminChecklistOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/lists/{list_id}/publish-all": {
+      "post": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Publish All",
+        "description": "Publish the list and draft items, preserving intentionally unpublished items.",
+        "operationId": "publish_all_api_admin_lists__list_id__publish_all_post",
+        "parameters": [
+          {
+            "name": "list_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "List Id"
+            }
+          },
+          {
+            "name": "x-csrf-token",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Csrf-Token"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublishAllOut"
                 }
               }
             }
@@ -1934,7 +2234,7 @@
           "media"
         ],
         "summary": "Remove Photo",
-        "description": "Remove one owned photo while preserving nonempty experiences.",
+        "description": "Remove one owned photo, retaining a valid completion record.",
         "operationId": "remove_photo_api_media__media_id__delete",
         "parameters": [
           {
@@ -2513,6 +2813,99 @@
   },
   "components": {
     "schemas": {
+      "AdminChecklistOut": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "summary": {
+            "type": "string",
+            "title": "Summary"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category"
+          },
+          "sort_order": {
+            "type": "integer",
+            "title": "Sort Order"
+          },
+          "cover_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cover Url"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "item_count": {
+            "type": "integer",
+            "title": "Item Count"
+          },
+          "completed_count": {
+            "type": "integer",
+            "title": "Completed Count"
+          },
+          "record_count": {
+            "type": "integer",
+            "title": "Record Count"
+          },
+          "total_item_count": {
+            "type": "integer",
+            "title": "Total Item Count"
+          },
+          "draft_item_count": {
+            "type": "integer",
+            "title": "Draft Item Count"
+          },
+          "published_item_count": {
+            "type": "integer",
+            "title": "Published Item Count"
+          },
+          "unpublished_item_count": {
+            "type": "integer",
+            "title": "Unpublished Item Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "summary",
+          "category",
+          "sort_order",
+          "cover_url",
+          "status",
+          "item_count",
+          "completed_count",
+          "record_count",
+          "total_item_count",
+          "draft_item_count",
+          "published_item_count",
+          "unpublished_item_count"
+        ],
+        "title": "AdminChecklistOut",
+        "description": "Management counts without changing public catalog totals."
+      },
       "AdminUserOut": {
         "properties": {
           "id": {
@@ -2752,6 +3145,428 @@
         "title": "CheckinEdit",
         "description": "Fields editable on one existing experience."
       },
+      "ChecklistContent": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "Title"
+          },
+          "summary": {
+            "type": "string",
+            "maxLength": 5000,
+            "title": "Summary",
+            "default": ""
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 80
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category"
+          },
+          "sort_order": {
+            "type": "integer",
+            "maximum": 2147483647.0,
+            "minimum": -2147483648.0,
+            "title": "Sort Order",
+            "default": 0
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "title"
+        ],
+        "title": "ChecklistContent",
+        "description": "Importable list content without IDs or publication state."
+      },
+      "ChecklistDocument": {
+        "properties": {
+          "format": {
+            "type": "string",
+            "const": "tabi.checklist",
+            "title": "Format"
+          },
+          "version": {
+            "type": "integer",
+            "const": 1,
+            "title": "Version"
+          },
+          "key": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 1,
+            "pattern": "^[a-z0-9][a-z0-9._-]*$",
+            "title": "Key"
+          },
+          "list": {
+            "$ref": "#/components/schemas/ChecklistContent"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ChecklistItem"
+            },
+            "type": "array",
+            "maxItems": 200,
+            "minItems": 1,
+            "title": "Items"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "format",
+          "version",
+          "key",
+          "list",
+          "items"
+        ],
+        "title": "ChecklistDocument",
+        "description": "One UTF-8 JSON file, limited to 200 items and 2 MiB in transport."
+      },
+      "ChecklistImportOut": {
+        "properties": {
+          "list_id": {
+            "type": "string",
+            "title": "List Id"
+          },
+          "item_ids_by_key": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Item Ids By Key"
+          },
+          "reused": {
+            "type": "boolean",
+            "title": "Reused"
+          }
+        },
+        "type": "object",
+        "required": [
+          "list_id",
+          "item_ids_by_key",
+          "reused"
+        ],
+        "title": "ChecklistImportOut",
+        "description": "Stable IDs from the original import, including a reuse indicator."
+      },
+      "ChecklistItem": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "Name"
+          },
+          "summary": {
+            "type": "string",
+            "maxLength": 5000,
+            "title": "Summary",
+            "default": ""
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 30000,
+            "title": "Description",
+            "default": ""
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 80
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category"
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 20,
+            "title": "Tags"
+          },
+          "suggested_action": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 5000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Suggested Action"
+          },
+          "recommendation": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 5000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Recommendation"
+          },
+          "reference_note": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 5000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference Note"
+          },
+          "reference_as_of": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference As Of"
+          },
+          "missing_fields": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 20,
+            "title": "Missing Fields"
+          },
+          "sort_order": {
+            "type": "integer",
+            "maximum": 2147483647.0,
+            "minimum": -2147483648.0,
+            "title": "Sort Order",
+            "default": 0
+          },
+          "place_kind": {
+            "type": "string",
+            "enum": [
+              "none",
+              "physical",
+              "area",
+              "online"
+            ],
+            "title": "Place Kind",
+            "default": "none"
+          },
+          "place_name": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 160
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Place Name"
+          },
+          "address": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 255
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Address"
+          },
+          "area": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 160
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Area"
+          },
+          "online_url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2048,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Online Url"
+          },
+          "latitude": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 90.0,
+                "minimum": -90.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latitude"
+          },
+          "longitude": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 180.0,
+                "minimum": -180.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Longitude"
+          },
+          "coordinate_system": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "WGS84",
+                  "GCJ02",
+                  "BD09"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Coordinate System"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source"
+          },
+          "verified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Verified At"
+          },
+          "links": {
+            "items": {
+              "$ref": "#/components/schemas/ChecklistLink"
+            },
+            "type": "array",
+            "maxItems": 20,
+            "title": "Links"
+          },
+          "key": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 1,
+            "pattern": "^[a-z0-9][a-z0-9._-]*$",
+            "title": "Key"
+          },
+          "related_keys": {
+            "items": {
+              "type": "string",
+              "maxLength": 80,
+              "minLength": 1,
+              "pattern": "^[a-z0-9][a-z0-9._-]*$"
+            },
+            "type": "array",
+            "maxItems": 199,
+            "title": "Related Keys"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "key"
+        ],
+        "title": "ChecklistItem",
+        "description": "Item data and references local to one import document."
+      },
+      "ChecklistLink": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 160,
+            "minLength": 1,
+            "title": "Title"
+          },
+          "url": {
+            "type": "string",
+            "maxLength": 2048,
+            "minLength": 1,
+            "format": "uri",
+            "title": "Url"
+          },
+          "kind": {
+            "type": "string",
+            "maxLength": 24,
+            "title": "Kind",
+            "default": "reference"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "title",
+          "url"
+        ],
+        "title": "ChecklistLink",
+        "description": "Strict nested link contract using existing URL validation."
+      },
       "ChecklistOut": {
         "properties": {
           "id": {
@@ -2824,6 +3639,60 @@
         ],
         "title": "ChecklistOut",
         "description": "Checklist card with viewer-specific progress."
+      },
+      "ChecklistPreviewOut": {
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "Key"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "item_count": {
+            "type": "integer",
+            "title": "Item Count"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ChecklistItem"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "ready",
+              "existing",
+              "conflict"
+            ],
+            "title": "State"
+          },
+          "existing_list_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Existing List Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "key",
+          "title",
+          "item_count",
+          "items",
+          "state",
+          "existing_list_id"
+        ],
+        "title": "ChecklistPreviewOut",
+        "description": "Validated import preview; it is not a write authorization token."
       },
       "ChecklistWrite": {
         "properties": {
@@ -3749,6 +4618,37 @@
         "title": "OwnCheckinOut",
         "description": "Owner view including private state and optional position."
       },
+      "Page_AdminChecklistOut_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/AdminChecklistOut"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit"
+          },
+          "offset": {
+            "type": "integer",
+            "title": "Offset"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total",
+          "limit",
+          "offset"
+        ],
+        "title": "Page[AdminChecklistOut]"
+      },
       "Page_AdminUserOut_": {
         "properties": {
           "items": {
@@ -4120,6 +5020,34 @@
         ],
         "title": "PublicCheckinOut",
         "description": "Public experience projection with no private position or email."
+      },
+      "PublishAllOut": {
+        "properties": {
+          "list": {
+            "$ref": "#/components/schemas/AdminChecklistOut"
+          },
+          "published_count": {
+            "type": "integer",
+            "title": "Published Count"
+          },
+          "already_published_count": {
+            "type": "integer",
+            "title": "Already Published Count"
+          },
+          "skipped_unpublished_count": {
+            "type": "integer",
+            "title": "Skipped Unpublished Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "list",
+          "published_count",
+          "already_published_count",
+          "skipped_unpublished_count"
+        ],
+        "title": "PublishAllOut",
+        "description": "Actual batch publication outcomes."
       },
       "RegisterIn": {
         "properties": {

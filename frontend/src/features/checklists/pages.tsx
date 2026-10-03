@@ -1,9 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import {
   ArrowRight,
   Check,
+  ListChecks,
   MapPin,
   Search,
   SlidersHorizontal,
@@ -31,6 +32,7 @@ import { Card } from "../../components/ui/card";
 import { useSession } from "../../hooks/use-session";
 import { queryClient } from "../../lib/query-client";
 import { formatDate } from "../../lib/utils";
+import { useCompletion } from "../entries/use-completion";
 
 function ListCard({ list, index }: { list: ChecklistOut; index: number }) {
   const progress = list.item_count
@@ -55,7 +57,7 @@ function ListCard({ list, index }: { list: ChecklistOut; index: number }) {
               <span className="text-6xl font-black opacity-50">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <MapPin className="size-16 opacity-60" aria-hidden="true" />
+              <ListChecks className="size-16 opacity-60" aria-hidden="true" />
             </div>
           )}
           {list.category && (
@@ -113,33 +115,8 @@ export function HomePage() {
   const visibleLists = lists.data?.pages.flatMap((page) => page.items) ?? [];
   return (
     <>
-      <div className="relative mb-12 overflow-hidden rounded-[2rem] bg-teal-900 px-6 py-12 text-white sm:px-12 sm:py-16">
-        <div
-          className="absolute -right-12 -bottom-24 size-72 rounded-full border-[32px] border-white/10"
-          aria-hidden="true"
-        />
-        <p className="mb-4 text-xs font-bold tracking-[0.25em] text-emerald-200 uppercase">
-          Tabi · 旅々
-        </p>
-        <h1 className="max-w-2xl text-4xl leading-tight font-black tracking-tight sm:text-6xl">
-          把想做的事，
-          <br />
-          <span className="text-amber-200">一件件过成故事。</span>
-        </h1>
-        <p className="mt-6 max-w-xl leading-7 text-teal-100">
-          挑一张清单，从“这是什么、在哪里、做什么”开始探索。每次体验都能留下自己的照片与心得。
-        </p>
-        <a
-          href="#lists"
-          className="mt-8 inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-6 text-sm font-bold text-teal-900 hover:bg-amber-100"
-        >
-          探索清单 <ArrowRight className="size-4" aria-hidden="true" />
-        </a>
-      </div>
       <section id="lists" aria-label="公开清单">
-        <PageIntro eyebrow="Find your next stop" title="想从哪里开始？">
-          从一张清单出发，按自己的节奏慢慢打卡。
-        </PageIntro>
+        <PageIntro title="清单" />
         {lists.isPending ? (
           <Loading />
         ) : lists.error && visibleLists.length === 0 ? (
@@ -176,13 +153,15 @@ export function HomePage() {
 }
 
 function ItemCard({ item }: { item: ItemSummaryOut }) {
+  const session = useSession();
+  const completion = useCompletion(item.id);
   return (
-    <Link
-      to="/items/$itemId"
-      params={{ itemId: item.id }}
-      className="group block focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
-    >
-      <Card className="flex items-center gap-4 p-4 transition-shadow group-hover:shadow-md sm:p-5">
+    <Card className="p-4 sm:p-5">
+      <Link
+        to="/items/$itemId"
+        params={{ itemId: item.id }}
+        className="group flex items-center gap-4 rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
+      >
         <div className="grid size-16 shrink-0 place-items-center overflow-hidden rounded-2xl bg-emerald-50 text-teal-800 sm:size-20">
           {item.cover_url ? (
             <img
@@ -191,36 +170,62 @@ function ItemCard({ item }: { item: ItemSummaryOut }) {
               className="size-full object-cover"
             />
           ) : (
-            <MapPin className="size-7" aria-hidden="true" />
+            <ListChecks className="size-7" aria-hidden="true" />
           )}
         </div>
         <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2">
-            <h2 className="truncate font-bold text-stone-900 sm:text-lg">
-              {item.name}
-            </h2>
-            {item.completed && (
-              <span
-                className="grid size-5 shrink-0 place-items-center rounded-full bg-teal-700 text-white"
-                aria-label="已打卡"
-              >
-                <Check className="size-3" />
-              </span>
-            )}
-          </div>
-          <p className="mt-1 line-clamp-2 text-sm text-stone-600">
-            {item.summary || "点开看看详情与推荐动作"}
-          </p>
+          <h2 className="break-words font-bold text-stone-900 sm:text-lg">
+            {item.name}
+          </h2>
+          {item.summary && (
+            <p className="mt-1 line-clamp-2 text-sm text-stone-600">
+              {item.summary}
+            </p>
+          )}
           <p className="mt-2 text-xs text-stone-500">
-            {item.category ?? "未分类"} · {item.checkin_count} 次打卡
+            {item.category && `${item.category} · `}
+            {item.checkin_count} 条记录
           </p>
         </div>
         <ArrowRight
           className="size-4 shrink-0 text-teal-800"
           aria-hidden="true"
         />
-      </Card>
-    </Link>
+      </Link>
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        {item.completed ? (
+          <span className="inline-flex min-h-11 items-center gap-1 px-3 text-sm font-semibold text-teal-800">
+            <Check className="size-4" aria-hidden="true" />
+            已完成
+          </span>
+        ) : (
+          <Button
+            type="button"
+            variant="outline"
+            disabled={completion.isPending || session.isPending}
+            onClick={() => completion.complete()}
+            aria-label={`标记完成：${item.name}`}
+          >
+            {completion.isPending ? "正在完成…" : "标记完成"}
+          </Button>
+        )}
+        <Button asChild variant="ghost">
+          <Link
+            to={session.data ? "/items/$itemId/checkin" : "/auth"}
+            {...(session.data
+              ? { params: { itemId: item.id } }
+              : { search: { redirect: `/items/${item.id}/checkin` } })}
+          >
+            添加记录
+          </Link>
+        </Button>
+      </div>
+      {completion.error && (
+        <div className="mt-3">
+          <ErrorNotice error={completion.error} />
+        </div>
+      )}
+    </Card>
   );
 }
 
@@ -278,15 +283,12 @@ export function ListPage({ listId }: { listId: string }) {
       >
         ← 返回清单
       </Link>
-      <PageIntro
-        eyebrow={list.data.category ?? "Checklist"}
-        title={list.data.title}
-      >
+      <PageIntro eyebrow={list.data.category} title={list.data.title}>
         {list.data.summary}
       </PageIntro>
       <Card className="mb-8 flex flex-col gap-4 bg-teal-50 p-6 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-sm font-semibold text-teal-800">你的探索进度</p>
+          <p className="text-sm font-semibold text-teal-800">进度</p>
           <p className="mt-1 text-2xl font-black text-teal-900">
             {list.data.completed_count}{" "}
             <span className="text-base font-medium">
@@ -317,7 +319,7 @@ export function ListPage({ listId }: { listId: string }) {
             className="field pl-10"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="搜索想去的地方或条目"
+            placeholder="搜索条目"
           />
         </label>
         <label className="flex items-center gap-2 text-sm">
@@ -383,8 +385,29 @@ export function ListPage({ listId }: { listId: string }) {
   );
 }
 
-export function ItemPage({ itemId }: { itemId: string }) {
+export function ItemPage({
+  itemId,
+  completeOnArrival = false,
+}: {
+  itemId: string;
+  completeOnArrival?: boolean;
+}) {
   const session = useSession();
+  const completion = useCompletion(itemId);
+  const navigate = useNavigate();
+  const autoCompleted = useRef(false);
+  useEffect(() => {
+    if (completeOnArrival && session.data && !autoCompleted.current) {
+      autoCompleted.current = true;
+      void navigate({
+        to: "/items/$itemId",
+        params: { itemId },
+        search: {},
+        replace: true,
+      });
+      void completion.complete();
+    }
+  }, [completeOnArrival, session.data, completion.complete, navigate, itemId]);
   const [experienceOffset, setExperienceOffset] = useState(0);
   const [moderatingId, setModeratingId] = useState<string | null>(null);
   const [moderationError, setModerationError] = useState<unknown>(null);
@@ -455,10 +478,7 @@ export function ItemPage({ itemId }: { itemId: string }) {
       </Link>
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
         <div>
-          <PageIntro
-            eyebrow={current.category ?? "Checklist item"}
-            title={current.name}
-          >
+          <PageIntro eyebrow={current.category} title={current.name}>
             {current.summary}
           </PageIntro>
           {current.source && (
@@ -468,8 +488,8 @@ export function ItemPage({ itemId }: { itemId: string }) {
               {current.verified_at
                 ? `资料核对于 ${formatDate(current.verified_at)}。`
                 : current.source.includes("OCR Markdown transcription only")
-                  ? "本条来自 OCR 整理记录。店铺或景点现状未核实，地点与推荐仅供参考，请出行前自行确认。"
-                  : "资料尚未核对，地点与推荐仅供参考，请出行前自行确认。"}
+                  ? "OCR 整理资料，现状未核实，仅供参考。"
+                  : "资料尚未核实，仅供参考。"}
               <span className="mt-1 block break-words">
                 来源：
                 {current.source.replace(
@@ -499,58 +519,77 @@ export function ItemPage({ itemId }: { itemId: string }) {
                 ))}
               </div>
             )}
-            <section>
-              <h2 className="mb-3 text-xl font-bold">这是什么</h2>
-              <p className="prose-note leading-8 text-stone-700">
-                {current.description ||
-                  current.summary ||
-                  "管理员还没有补充详情。"}
-              </p>
-            </section>
-            <section>
-              <h2 className="mb-3 text-xl font-bold">在哪里</h2>
-              <p className="flex items-start gap-2 text-stone-700">
-                <MapPin
-                  className="mt-1 size-5 shrink-0 text-teal-700"
-                  aria-hidden="true"
-                />
-                {current.place_kind === "none"
-                  ? "没有固定地点"
-                  : [current.place_name, current.address, current.area]
-                      .filter(Boolean)
-                      .join(" · ") || "地点待补充"}
-              </p>
-              {current.online_url && (
-                <a
-                  className="mt-2 inline-block text-teal-800 underline"
-                  href={current.online_url}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  打开线上地点
-                </a>
-              )}
-            </section>
-            <section>
-              <h2 className="mb-3 text-xl font-bold">做什么</h2>
-              <p className="prose-note leading-8 text-stone-700">
-                {current.suggested_action || "按自己的方式体验，回来记下一次。"}
-              </p>
-              {current.recommendation && (
-                <p className="prose-note mt-3 rounded-2xl bg-amber-50 p-4 text-sm leading-7 text-stone-700">
-                  {current.recommendation}
+            {(current.description || current.summary) && (
+              <section>
+                <h2 className="mb-3 text-xl font-bold">详情</h2>
+                <p className="prose-note leading-8 text-stone-700">
+                  {current.description || current.summary}
                 </p>
+              </section>
+            )}
+            {current.place_kind !== "none" &&
+              (current.place_name ||
+                current.address ||
+                current.area ||
+                current.online_url ||
+                (current.latitude !== null && current.longitude !== null)) && (
+                <section>
+                  <h2 className="mb-3 text-xl font-bold">地点</h2>
+                  {(current.place_name || current.address || current.area) && (
+                    <p className="flex items-start gap-2 text-stone-700">
+                      <MapPin
+                        className="mt-1 size-5 shrink-0 text-teal-700"
+                        aria-hidden="true"
+                      />
+                      {[current.place_name, current.address, current.area]
+                        .filter(Boolean)
+                        .join(" · ")}
+                    </p>
+                  )}
+                  {current.latitude !== null && current.longitude !== null && (
+                    <p className="mt-2 text-sm text-stone-600">
+                      坐标：{current.latitude}, {current.longitude}（
+                      {current.coordinate_system}）
+                    </p>
+                  )}
+                  {current.online_url && (
+                    <a
+                      className="mt-2 inline-flex min-h-11 items-center break-all text-teal-800 underline"
+                      href={current.online_url}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      打开线上地点
+                    </a>
+                  )}
+                </section>
               )}
-              {current.reference_note && (
-                <p className="mt-3 text-sm text-stone-500">
-                  参考资料（截至{" "}
-                  {current.reference_as_of
-                    ? formatDate(current.reference_as_of)
-                    : "未标日期"}
-                  ）：{current.reference_note}
-                </p>
-              )}
-            </section>
+            {(current.suggested_action ||
+              current.recommendation ||
+              current.reference_note) && (
+              <section>
+                <h2 className="mb-3 text-xl font-bold">建议</h2>
+                {current.suggested_action && (
+                  <p className="prose-note leading-8 text-stone-700">
+                    {current.suggested_action}
+                  </p>
+                )}
+                {current.recommendation && (
+                  <p className="prose-note mt-3 rounded-2xl bg-amber-50 p-4 text-sm leading-7 text-stone-700">
+                    {current.recommendation}
+                  </p>
+                )}
+                {current.reference_note && (
+                  <p className="mt-3 text-sm text-stone-500">
+                    参考资料（截至{" "}
+                    {current.reference_as_of
+                      ? formatDate(current.reference_as_of)
+                      : "未标日期"}
+                    ）：{current.reference_note}
+                  </p>
+                )}
+              </section>
+            )}
           </div>
           {current.links.length > 0 && (
             <section className="mt-8">
@@ -574,30 +613,59 @@ export function ItemPage({ itemId }: { itemId: string }) {
         </div>
         <aside className="space-y-5">
           <Card className="sticky top-24 p-6">
-            <p className="text-sm font-semibold text-teal-800">我的足迹</p>
+            <p className="text-sm font-semibold text-teal-800">我的记录</p>
             <p className="mt-2 text-3xl font-black">
               {current.checkin_count}{" "}
-              <span className="text-base font-medium">次打卡</span>
+              <span className="text-base font-medium">条记录</span>
             </p>
-            <p className="mt-2 text-sm text-stone-600">
-              每一次去，都是一条新的记录。
-            </p>
-            <Button asChild className="mt-5 w-full">
+            {current.completed ? (
+              <p
+                role="status"
+                className="mt-4 flex items-center gap-2 font-semibold text-teal-800"
+              >
+                <Check className="size-5" aria-hidden="true" />
+                已完成
+              </p>
+            ) : (
+              <Button
+                type="button"
+                className="mt-5 w-full"
+                disabled={completion.isPending || session.isPending}
+                onClick={() => completion.complete()}
+              >
+                {completion.isPending ? "正在完成…" : "标记完成"}
+              </Button>
+            )}
+            <Button asChild variant="outline" className="mt-3 w-full">
               <Link
                 to={session.data ? "/items/$itemId/checkin" : "/auth"}
                 {...(session.data
                   ? { params: { itemId } }
                   : { search: { redirect: `/items/${itemId}/checkin` } })}
               >
-                写一次打卡 <ArrowRight className="size-4" />
+                添加记录
               </Link>
             </Button>
+            {current.completed && completion.data && (
+              <Link
+                to="/checkins/$checkinId"
+                params={{ checkinId: completion.data.id }}
+                className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-teal-800 underline"
+              >
+                补充心得和照片
+              </Link>
+            )}
+            {completion.error && (
+              <div className="mt-3">
+                <ErrorNotice error={completion.error} />
+              </div>
+            )}
           </Card>
         </aside>
       </div>
       {current.related.length > 0 && (
         <section className="mt-12">
-          <h2 className="mb-4 text-xl font-bold">同清单里还可以看看</h2>
+          <h2 className="mb-4 text-xl font-bold">相关条目</h2>
           <div className="grid gap-3 md:grid-cols-2">
             {current.related.map((related) => (
               <ItemCard key={related.id} item={related} />
@@ -606,7 +674,7 @@ export function ItemPage({ itemId }: { itemId: string }) {
         </section>
       )}
       <section className="mt-12">
-        <h2 className="mb-4 text-xl font-bold">大家的公开心得</h2>
+        <h2 className="mb-4 text-xl font-bold">公开记录</h2>
         {moderationError !== null && <ErrorNotice error={moderationError} />}
         {experiences.isPending ? (
           <Loading />
@@ -627,13 +695,16 @@ export function ItemPage({ itemId }: { itemId: string }) {
                     {record.note}
                   </p>
                 )}
+                {!record.note && !record.media.length && (
+                  <p className="font-semibold text-teal-800">已完成</p>
+                )}
                 <PhotoGallery media={record.media} />
                 <Link
                   to="/shares/$shareId"
                   params={{ shareId: record.share_id }}
                   className="inline-block text-sm font-semibold text-teal-800 hover:underline"
                 >
-                  查看这次体验 →
+                  查看记录 →
                 </Link>
                 {canModerate && (
                   <Button
@@ -650,9 +721,7 @@ export function ItemPage({ itemId }: { itemId: string }) {
             ))}
           </div>
         ) : (
-          <EmptyState icon="camera" title="还没有公开心得">
-            第一条分享，也许就从你开始。
-          </EmptyState>
+          <EmptyState title="还没有公开记录" />
         )}
         {experiences.data && experiences.data.total > 20 && (
           <div className="mt-6 flex items-center justify-between gap-3 text-sm text-stone-600">

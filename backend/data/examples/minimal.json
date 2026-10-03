@@ -1,0 +1,14 @@
+{
+  "format": "tabi.checklist",
+  "version": 1,
+  "key": "example-minimal",
+  "list": {
+    "title": "My checklist"
+  },
+  "items": [
+    {
+      "key": "first",
+      "name": "First item"
+    }
+  ]
+}
