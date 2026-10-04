@@ -54,6 +54,26 @@ it does not clear all cached data. Do not describe it as a cache purge.
 
 ## Async operation state
 
+### Administrative workspace state
+
+`AdminPage` owns the local workspace (`content`, `imports`, `moderation`,
+`users`, `audit`) as well as checklist/item drafts, selected files and role
+drafts. Changing the workspace changes visibility, not selection or draft
+ownership. Keep inactive workspace sections mounted with native `hidden` and
+matching scoped CSS; hidden controls must leave focus order and accessibility
+discovery. Conditionally remounting `ChecklistImport` loses its source, preview,
+revision and active-operation guards.
+
+Checklist/item selection, new-item actions and explicit import selection retain
+their intentional reset semantics. Optional-field disclosures may be keyed by
+selected item to initialize from populated values, but not by workspace or query
+refresh. `ChecklistImport` reports busy/error/success through `onFeedback`; pass
+a stable callback such as the parent's state setter. Its explicit `onEdit`
+transition opens and focuses content editing while retaining the import result.
+The ordinary workspace switcher remains a native button navigation pattern,
+not an incomplete ARIA tab implementation. System-only workspaces fall back to
+content editing when the loaded session no longer has system-admin privileges.
+
 Use pending/busy state for visible feedback and refs where a synchronous guard
 must survive renders. `useCompletion` keeps an `active` ref to block duplicate
 calls and a request-key ref for safe retries. It rotates the key only after

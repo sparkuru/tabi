@@ -1,0 +1,18 @@
+{"file":".trellis/spec/trellis-plus/index.md","reason":"Project policy loading and write boundaries"}
+{"file":".trellis/mainline.md","reason":"Existing approvals and product continuity"}
+{"file":".trellis/spec/trellis-plus/continuity.md","reason":"Planning and implementation authorization boundaries"}
+{"file":".trellis/spec/trellis-plus/development-principles.md","reason":"Scope and existing work protection"}
+{"file":".trellis/spec/trellis-plus/development.md","reason":"Docker environments and preview lifecycle"}
+{"file":".trellis/spec/trellis-plus/preview-console.md","reason":"Preview readiness and access reporting"}
+{"file":".trellis/spec/trellis-plus/frontend.md","reason":"Local design workflow"}
+{"file":".trellis/spec/trellis-plus/validation.md","reason":"Desktop/mobile and actual preview acceptance"}
+{"file":".trellis/spec/frontend/index.md","reason":"Frontend conventions"}
+{"file":".trellis/spec/frontend/experience-design.md","reason":"Journal identity and eight-dimension review"}
+{"file":".trellis/spec/frontend/component-guidelines.md","reason":"Forms, controls, accessible feedback"}
+{"file":".trellis/spec/frontend/state-management.md","reason":"Draft, selection and query state boundaries"}
+{"file":".trellis/spec/frontend/quality-guidelines.md","reason":"Frontend validation commands"}
+{"file":".trellis/spec/frontend/type-safety.md","reason":"Existing generated client contracts"}
+{"file":".trellis/spec/product/requirements.md","reason":"Administrative capabilities and product invariants"}
+{"file":".trellis/tasks/10-05-administrator-experience/research/admin-layout.md","reason":"Source-backed layout investigation and candidate recommendations"}
+{"file": ".trellis/spec/frontend/directory-structure.md", "reason": "Feature-local component placement and source boundaries"}
+{"file": ".trellis/spec/frontend/hook-guidelines.md", "reason": "Existing hooks, enabled queries and pending operations"}

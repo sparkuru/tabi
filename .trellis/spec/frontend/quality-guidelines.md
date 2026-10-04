@@ -85,7 +85,10 @@ button-target checks. Keep those fixtures and the real API/database paths.
 Source-backed test examples:
 
 - `frontend/e2e/import.spec.ts`: keyboard activation, file upload, preview,
-  disabled import, publication, reuse/conflict and validation errors.
+  disabled import, publication, reuse/conflict and validation errors; workspace
+  draft/busy continuity without unintended writes, optional-field validation,
+  persisted metadata/covers/relations, moderation/share invalidation, role
+  changes and content-admin workspace boundaries.
 - `frontend/e2e/completion.spec.ts`: busy guard, real request count, completion
   progress, editing/photos, repeat records, visitor privacy, share revocation,
   deletion and guest resume.

@@ -17,12 +17,22 @@ interface AdminItem {
 }
 
 async function ocrSnapshot(request: Parameters<typeof apiLogin>[0]) {
-  const response = await request.get("/api/admin/lists?limit=100");
-  expect(response.status()).toBe(200);
-  const lists = (await response.json()).items as {
+  const lists: {
     id: string;
     title: string;
-  }[];
+  }[] = [];
+  let offset = 0;
+  let total = 0;
+  do {
+    const response = await request.get(
+      `/api/admin/lists?limit=100&offset=${offset}`,
+    );
+    expect(response.status()).toBe(200);
+    const page = await response.json();
+    lists.push(...page.items);
+    total = page.total;
+    offset += page.limit;
+  } while (offset < total);
   const result: Record<string, AdminItem[]> = {};
   for (const title of ["北京美食", "周末游玩"]) {
     const list = lists.find((entry) => entry.title === title);
@@ -71,10 +81,15 @@ test("batch publish skips deliberately removed items and preserves all original 
   ).toBe(200);
   await login(page, "admin", "/admin");
   await page
+    .getByRole("navigation", { name: "管理工作区" })
+    .getByRole("button", { name: "导入", exact: true })
+    .click();
+  await page
     .getByLabel("清单 JSON", { exact: true })
     .fill(JSON.stringify(document));
   await page.getByRole("button", { name: "预览清单", exact: true }).click();
   await page.getByRole("button", { name: "选择原有清单", exact: true }).click();
+  await page.getByRole("button", { name: "编辑当前清单", exact: true }).click();
   await page
     .getByRole("button", { name: "发布清单及 0 个草稿条目", exact: true })
     .click();

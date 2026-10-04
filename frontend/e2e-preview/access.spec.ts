@@ -82,6 +82,11 @@ test("preview administrator login and non-writing checklist preview", async ({
     checkStatus(identity.status(), 200);
     const role: unknown = (await identity.json()).role;
     expect(["content_admin", "system_admin"].includes(String(role))).toBe(true);
+    const navigation = page.getByRole("navigation", { name: "管理工作区" });
+    await expect(
+      navigation.getByRole("button", { name: /内容编辑/ }),
+    ).toHaveAttribute("aria-pressed", "true");
+    await navigation.getByRole("button", { name: /^导入/ }).click();
     await expect(
       page.getByRole("heading", { name: "导入整张清单", exact: true }),
     ).toBeVisible();
@@ -116,6 +121,12 @@ test("preview administrator login and non-writing checklist preview", async ({
     const response = await previewResponse;
     checkStatus(response.status(), 200);
     const result = await response.json();
+    await navigation.getByRole("button", { name: /^内容治理/ }).click();
+    await expect(page.getByLabel("清单 JSON", { exact: true })).toBeHidden();
+    await navigation.getByRole("button", { name: /^导入/ }).click();
+    await expect(page.getByLabel("清单 JSON", { exact: true })).toHaveValue(
+      JSON.stringify(payload),
+    );
     expect(result.state).toBe("ready");
     expect(result.title).toBe(title);
     expect(result.key).toBe(key);

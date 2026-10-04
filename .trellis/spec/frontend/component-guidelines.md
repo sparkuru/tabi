@@ -89,6 +89,24 @@ selection, and a labelled tabpanel. The skip link moves focus to the main
 landmark (`tabIndex={-1}`). These are tested code patterns, not proof of a
 complete accessibility audit.
 
+### Optional administrative fields and labels
+
+The administrative item editor uses labelled `details`/`summary` groups for
+recommendation, location, reference and external-link fields. Initialize groups
+containing existing data as open when the selected item changes; collapsing a
+group must not clear, disable or omit its values from the save request.
+`AdminPage` handles `onInvalidCapture` on the item form by opening every ancestor
+`details` of the invalid control, allowing native validation to focus it. Test
+this with a required external-link input inside a closed group, rather than
+removing its `required` constraint to make submission succeed.
+
+Keep helper text and selected-file names outside the wrapping label and connect
+help with `aria-describedby`, as with `admin-reference-time-help`. Including
+help or changing file names inside a label changes the control's accessible
+name. Prefer semantic role/name locators for select/textarea controls, and
+verify the accessible description separately. Admin textareas need scoped
+minimum-height rules because unlayered `.field` rules override utility classes.
+
 ## Common Mistakes and Validation
 
 Avoid replacing semantic controls with clickable containers, dropping forwarded
