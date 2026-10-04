@@ -26,13 +26,13 @@ docker compose --env-file .env -f infra/docker-compose.yml exec api \
 
 ## OCR 首批资料与来源边界
 
-用户已确认 `archive/ocr.md` 是首批北京美食和周末游玩的完整记录。已跟踪的 `backend/data/ocr_seed.json` 保留来源行号、原始字段、缺项标记和来源 SHA-256。
+用户已确认 `archive/ocr.md` 是首批北京美食和周末游玩的完整记录。`backend/data/ocr_seed.json` 的格式契约要求保留来源行号、原始字段、缺项标记，以及必填的 `source_file` 和 `source_sha256`；每张清单的 `source_note_prefix` 也必须非空。实际加载由 `backend/app/seed_ocr.py` 的 Pydantic 模型校验，缺失来源字段或空备注前缀会失败，不能将合法 JSON 语法等同于可导入。
 
 | 资料 | 种子范围与约束 |
 | --- | --- |
 | 北京美食 | 96 条；前 70 条保留地址和备注，末尾 26 条仅列店名的推荐按区域单列，不推测街道地址或合并疑似分店。 |
 | 周末游玩 | 76 条；原表记录编号 25–54 缺失，不补造记录。 |
-| 合计 | 172 条；新检出仓库可直接使用种子 JSON，不依赖原始 Markdown。 |
+| 合计 | 172 条；种子格式校验通过后，新检出仓库可使用种子 JSON，不依赖原始 Markdown。 |
 | 原始 Markdown | 本地 `archive/ocr.md` 受根 `.gitignore` 的 `/archive` 规则保护，不随代码提交；存在时，测试额外核对原文行和 SHA-256。 |
 
 公开内容必须明确标注 OCR 来源和现状未核实。未注明采集日期的票价、车程或营业状态不作为当前事实展示；`verified_at` 留空，不能填入导入时间冒充核查时间。具体字段、发布和回归契约见 [MVP 契约](../backend/mvp-contracts.md)。

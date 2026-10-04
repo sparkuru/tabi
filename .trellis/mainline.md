@@ -32,7 +32,7 @@
 | 3 | `.trellis/tasks/archive/2026-10/09-30-universal-checklist-format/` | complete | 实现与全范围检查通过：45 单元、4 PostgreSQL、14 桌面/手机浏览器，迁移/构建/格式及生命周期通过；实际 preview 与用户验收通过；Work `7f6eb74`、archive `9171c39`；任务 completed，收尾 journal 独立记录。 |
 | 4 | `.trellis/tasks/archive/2026-10/00-bootstrap-guidelines/` | complete | 2026-10-04 用户明确要求补齐现有 `00` 后提交归档，不新建任务。11 份后端/前端指南已按真实源码填充，索引与 context 同步；例子、链接、占位清理与 diff 检查通过，详见任务 verification。Work `86b4318`；archive `62aa9ee` 含恰好一次 Codex trailer，task completed。 |
 | 5 | 预览输出与运行规范整理 | complete | Work `86b4318` 覆盖开始时的 18 个脏路径；脚本/夹具、Compose 配置、Node 22 类型/格式/构建、独立 Docker 生命周期及实际入口匿名桌面/手机检查通过；README 原有删除与运行内容迁入 spec 一并提交。 |
-| 6 | 检查期间新增的种子/备份忽略文件变动 | explicitly approved for separate commit | 用户在得知种子三项校验错误与备份忽略保护移除后，明确回复“一并检查并提交”。按现状纳入独立提交，不恢复用户删除的字段或忽略文件；JSON 语法与 diff 检查通过，seed schema 校验未通过。此决定在 `00` 归档后到达，不属于指南任务验收。 |
+| 6 | 检查期间新增的种子/备份忽略文件变动 | committed with known validation failure | Work `8e9f20c`：用户在得知种子三项校验错误与备份忽略保护移除后，明确回复“一并检查并提交”。按现状纳入独立提交，不恢复用户删除的字段或忽略文件；JSON 语法与 diff 检查通过，seed schema 校验未通过。此决定在 `00` 归档后到达，不属于指南任务验收。运行规格同步为条件式校验契约，不声称当前文件必然可导入。 |
 
 ## Evidence and Decisions
 
