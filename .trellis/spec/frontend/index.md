@@ -1,12 +1,14 @@
 # Frontend Development Guidelines
 
-> Best practices for frontend development in this project.
+> Source-backed conventions for the responsive React Web application.
 
 ---
 
 ## Overview
 
-This directory contains guidelines for frontend development. Fill in each file with your project's specific conventions.
+The frontend uses React 19, TypeScript, Vite, TanStack Router/Query, Tailwind,
+and existing Radix/Lucide components. Phone interactions and desktop management
+share one Web application. These guidelines describe current source patterns.
 
 ---
 
@@ -14,25 +16,29 @@ This directory contains guidelines for frontend development. Fill in each file w
 
 | Guide | Description | Status |
 |-------|-------------|--------|
-| [Directory Structure](./directory-structure.md) | Module organization and file layout | To fill |
-| [Component Guidelines](./component-guidelines.md) | Component patterns, props, composition | To fill |
-| [Hook Guidelines](./hook-guidelines.md) | Custom hooks, data fetching patterns | To fill |
-| [State Management](./state-management.md) | Local state, global state, server state | To fill |
-| [Quality Guidelines](./quality-guidelines.md) | Code standards, forbidden patterns | To fill |
-| [Type Safety](./type-safety.md) | Type patterns, validation | To fill |
+| [Directory Structure](./directory-structure.md) | Routes, feature pages, shared components and generated API code | Documented |
+| [Component Guidelines](./component-guidelines.md) | Typed props, composition, forms and accessible feedback | Documented |
+| [Hook Guidelines](./hook-guidelines.md) | Session/query hooks and completion mutation boundaries | Documented |
+| [State Management](./state-management.md) | Query cache, URL search, form state and guest intent | Documented |
+| [Quality Guidelines](./quality-guidelines.md) | Type/build/format checks and browser verification | Documented |
+| [Type Safety](./type-safety.md) | Generated contracts, strict TypeScript and unknown inputs | Documented |
+| [Runtime and Development Checks](../product/runtime-and-data.md) | Preview setup, development commands and OpenAPI client generation | Documented |
 
 ---
 
-## How to Fill These Guidelines
+## Pre-Development Checklist
 
-For each guideline file:
+Read directory structure and quality guidance before frontend changes. Select
+the component, hook, state and type documents for the affected code; read the
+backend contract for API behavior. UI work also reads Trellis Plus frontend and
+validation profiles; preview operations read runtime/data and preview policies.
 
-1. Document your project's **actual conventions** (not ideals)
-2. Include **code examples** from your codebase
-3. List **forbidden patterns** and why
-4. Add **common mistakes** your team has made
+## Quality Check
 
-The goal is to help AI assistants and new team members understand how YOUR project works.
+Use quality-guidelines.md for existing package scripts and browser coverage.
+Verify generated API types, query invalidation and desktop/phone interaction
+behavior for the affected flow. Documentation changes must retain real source
+references, working links, and no template scaffolding.
 
 ---
 

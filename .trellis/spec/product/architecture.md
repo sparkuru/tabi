@@ -10,7 +10,7 @@
 | 持久化 | PostgreSQL 存领域数据；私有对象存储或受保护文件存储放照片和缩略图。 |
 | 交付 | HTTPS 反向代理统一提供 Web、API 和分享页；浏览器定位仅在安全上下文且用户主动授权时请求。 |
 
-这是 PRD 确定的选型。首版实现、迁移和运行命令以 `README.md`、`infra/RUNBOOK.md` 及当前 Trellis task 的验证记录为准。
+这是 PRD 确定的选型。首版实现、迁移和运行命令见 [运行与首批资料规格](runtime-and-data.md)、[运行手册](../../../infra/RUNBOOK.md) 及当前 Trellis task 的验证记录。
 
 ## 数据模型与约束
 

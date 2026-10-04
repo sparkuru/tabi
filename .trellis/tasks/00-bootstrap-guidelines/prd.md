@@ -21,9 +21,19 @@ the rest conversationally.
 
 ## Status (update the checkboxes as you complete each item)
 
-- [ ] Fill backend guidelines
-- [ ] Fill frontend guidelines
-- [ ] Add code examples
+- [x] Fill backend guidelines
+- [x] Fill frontend guidelines
+- [x] Add code examples
+
+Completion verified on 2026-10-04 after the user explicitly requested filling
+this existing task before committing and archiving. All five backend and six
+frontend guides describe current source and include real examples. Both indexes
+are synchronized. The final independent review checked thirteen documents,
+thirty-six local links/anchors, seventy-five explicit source paths, and seventeen
+source-language code blocks; no scaffold text or substantive mismatch remained.
+See `verification.md` for the documentation acceptance and separate checks on
+the pre-existing dirty preview work. No new task or product implementation was
+introduced by this guideline completion.
 
 ---
 

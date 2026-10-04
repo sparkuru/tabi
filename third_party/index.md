@@ -17,3 +17,12 @@ Trellis platform files in `.agents/` and `.codex/` remain ignored/local. UI/UX P
 When retaining a new third-party source/template/asset/font or changing its version, identify source/version and affected paths, obtain verbatim LICENSE plus applicable NOTICE/COPYRIGHT from that exact distribution, and add one inventory entry. Reuse this directory; preserve original inline notices and notices needed by other retained versions. Unknown provenance stays explicit and blocks sharing only the affected material. Ordinary package dependencies retain package notices; this is not a transitive-dependency vendoring project.
 
 The Trellis Plus specs and mainline are independently authored project data. They contain no copied tool implementation; copied notices remain third-party text. Before staging inspect every exact candidate, exclude protected runtime and local/secret files, and run `git diff --check`.
+
+## Local asset comparison during policy reconciliation
+
+The retained search.py, core.py, design_system.py and ux-guidelines.csv are
+byte-identical to the corresponding installed ui-ux-pro-max-cli 2.10.2 assets.
+This narrows their package source but does not establish the entire platform
+template version or supply an exact applicable LICENSE/NOTICE. Keep the
+license-notice-needed status before sharing affected material; no local
+integration files or new raw UUPM output are added by this reconciliation.

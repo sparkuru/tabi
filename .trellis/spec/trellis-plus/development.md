@@ -50,7 +50,7 @@ docker compose --env-file .env -f infra/docker-compose.yml pull db  # first setu
 
 重复 `start` 复用同一 Compose 项目，不先 down、不重复创建数据栈；重复 `stop` 成功。`stop/down` 只对同一预览项目执行 Compose down，保留数据库、媒体和 Caddy 卷，禁止 `down -v`、按端口杀进程或清理其他项目。默认项目保持原 `infra` 身份和卷；不能通过改名让用户误以为原数据丢失。隔离验证显式使用唯一 `COMPOSE_PROJECT_NAME`、临时环境文件/工作副本及空闲 loopback 宿主端口，所有命令保持同一配置；不操作现有预览或 `tabi-checklist-dev`。
 
-成功输出要求：按 db、api、web 列出实际容器监听 host:port，区分内部端点、宿主发布映射和非浏览器协议。Web HTTP/HTTPS 从实际 Caddy 配置与 Docker 端口映射获取，不能把映射等同于服务监听；HTTP-only 配置需将 HTTPS 映射标成未启用。Caddy 管理端点固定为容器 loopback `localhost:2019`，属于内部控制接口，不发布宿主、不当作产品管理页。网站、`/admin`、`/api/docs` 的 URL 必须含 scheme、可访问 host、实际端口；wildcard 只出现在监听行。监听允许时输出 localhost；有实际 LAN 地址则补充 LAN URL，否则提示使用宿主地址，不能编造 IP。不输出密码、token 或展开后的含密配置。
+成功输出严格遵循 [preview console contract](preview-console.md)：固定分区，按服务分组，每行一个完整 URL；在发布宿主执行 `ip -br a` 枚举全部有效地址，保留多网卡、同网卡多地址、bridge/tunnel 候选，不能只取默认路由地址。使用实际映射端口，localhost 只在本机分区；所有地址候选的跨设备可达性未验证时必须明确说明。`start` 与健康 `status` 使用同一 renderer；默认隐藏 Compose 启动进度，`--verbose` 显示诊断。未通过就绪检查的服务不得有成功提示或可用 URL。
 
 默认可信局域网预览采用 `0.0.0.0` 的服务监听/host publishing；已知 loopback 或 Docker-only 限制优先。db/api 不发布宿主端口，不增加防火墙规则。HTTP 预览不证明 HTTPS、浏览器定位或功能验收；对外 HTTPS、secure Cookie、数据备份与恢复见 `infra/RUNBOOK.md`。Docker 执行仍受当前会话 socket/sandbox/网络权限约束；不添加宽泛 Docker/shell allowlist、不调整审批策略。
 
@@ -80,6 +80,7 @@ docker compose --env-file .env -f infra/docker-compose.yml config --quiet
 | `TABI_SITE_ADDRESS` | Caddy 站点选择；HTTP 预览 :80；改内部 HTTP port 时同改此站点端口；HTTPS 域名配置按运行手册 |
 | `TABI_COOKIE_SECURE` | Compose → API；本地 HTTP 为 false，对外 HTTPS 为 true |
 | `TABI_HTTP_BIND` / `TABI_HTTPS_BIND` | Compose 必填 host:port，局域网样例 0.0.0.0:8080 / 0.0.0.0:8443；改变宿主端口不用改变容器端口 |
+| `TABI_PREVIEW_READY_TIMEOUT` | Compose → web environment → preview wrapper; default 60 seconds, integer 1..9999; bounds `up --wait`, no implicit build/pull |
 | `TABI_MEDIA_ROOT` | API media 目录及 media_data 挂载目标，默认 /data/media；仍用同一命名卷，不将本机路径或 secret 打入镜像 |
 
 Compose 进程环境覆盖 `--env-file` 插值值，预览主输入仍为根 `.env`；避免带入旧的 exported 配置。插值后由 Compose 显式注入容器/命令；API `backend/app/core/config.py` 的进程环境优先于应用 cwd 的 `.env`。预览不将宿主 dotenv 复制或挂载到应用中，不在 shell 重新实现 dotenv loader。
@@ -89,3 +90,15 @@ Compose 进程环境覆盖 `--env-file` 插值值，预览主输入仍为根 `.e
 更改样例和消费者同步。已有本地文件按 key presence 只追加缺失 key 的安全默认/占位；空值算已有并报告，不替换。保留自定义值、注释、引号、行结束符，保证分隔换行；重复运行不追加重复 key，有重复/模糊配置时报告，不猜测用户意图。缺失本地文件沿用首次设置，不生成只含新增 key 的半份文件。用 `/tmp` fixture 验证缺文件、自定义值、空值、缺 key、第二次相同更新；不为一次追加建立永久同步工具。
 
 报告新增 key、仍需填写的用途/来源与应用动作，不打印 secret/local diff。改名/删除须说明人工调整。镜像构建输入改后执行 `build` 再 `start`；容器环境改后 `start`（`restart` 不重新注入）。`POSTGRES_PASSWORD` 改变不自动更新已有数据库密码，真实库需协调 SQL 密码修改，不能删除卷绕过。
+
+## Current console dependency and loading contract
+
+Read `preview-console.md` before preview changes or checks. Wildcard publication
+requires host `ip` (iproute2) and a discoverable local Docker endpoint; dependency
+or enumeration failures are actionable failures, never a localhost-only success.
+Specific/loopback bindings retain their narrower access boundary. `--verbose`
+controls safe startup diagnostics. Tabi also requires host `curl` and `jq` for
+publication probes and effective Compose configuration; no host application
+toolchain is required. Root `AGENTS.md` directs policy loading from
+a project-owned section outside the unchanged Trellis-managed block. This
+reconciliation requires no new task and changes no product acceptance state.
