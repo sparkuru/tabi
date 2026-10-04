@@ -69,3 +69,43 @@ Implemented checklist/check-in MVP, seeded all 172 OCR records as labeled refere
 ### Status
 
 [OK] **Completed**
+
+
+## Session 3: Bootstrap guidelines and complete dirty-file submission
+
+**Date**: 2026-10-04
+**Task**: Bootstrap guidelines and complete dirty-file submission
+**Branch**: `ikimashō`
+
+### Summary
+
+Filled and verified all eleven development guides, committed initial dirty preview/documentation changes, archived 00, and separately committed later user-approved seed/backup-ignore edits with known validation failures recorded.
+
+### Main Changes
+
+- Work 86b4318: 34 original/approved files including preview console/lifecycle, specs, title and existing README deletion.
+- Archive 62aa9ee: 00-bootstrap-guidelines completed with three PRD items verified and exactly one Codex attribution trailer.
+- Later user authorization: 8e9f20c preserves newly changed OCR seed and deleted backup ignore file; 9cccdf9 synchronizes manifest validation guidance and mainline.
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `86b4318` | (see git log) |
+| `8e9f20c` | (see git log) |
+| `9cccdf9` | (see git log) |
+
+### Testing
+
+- [OK] Source-backed guide review: 13 documents, 36 links/anchors, 75 source paths, 17 code examples; primary checked 21 spec documents/62 links and unchanged Trellis-managed AGENTS block.
+- [OK] Shell syntax, ShellCheck, shfmt, two fixture suites, Compose config, Node 22 type/format/build, isolated Docker lifecycle/data retention and actual-preview anonymous desktop/mobile checks passed.
+- [FAIL, recorded] Seed check-only rejects missing source_file/source_sha256 and empty first source_note_prefix. The user explicitly requested preserving and committing these edits after disclosure.
+- [NOT RUN] Authenticated preview: historical credentials file is absent. Full backend/PG/writable E2E suites were not rerun for documentation scope.
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- No new task or serial product authorization. If requested, address seed/schema incompatibility and backup ignore policy; current edits are saved without claiming those issues fixed.
