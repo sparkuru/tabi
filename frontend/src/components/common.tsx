@@ -14,21 +14,19 @@ export function PageIntro({
   children?: ReactNode;
 }) {
   return (
-    <div className="mb-8 space-y-3">
-      {eyebrow && (
-        <p className="text-sm font-semibold text-teal-700">{eyebrow}</p>
+    <div className="page-intro space-y-3">
+      {eyebrow && <p className="eyebrow">{eyebrow}</p>}
+      <h1 className="page-title max-w-3xl">{title}</h1>
+      {children && (
+        <p className="max-w-2xl text-sm leading-7 text-stone-600">{children}</p>
       )}
-      <h1 className="max-w-3xl text-3xl leading-tight font-bold tracking-tight text-stone-900 sm:text-5xl">
-        {title}
-      </h1>
-      {children && <p className="max-w-2xl text-stone-600">{children}</p>}
     </div>
   );
 }
 
 export function Loading({ label = "正在载入…" }: { label?: string }) {
   return (
-    <p role="status" className="py-10 text-center text-stone-500">
+    <p role="status" className="loading-notice">
       {label}
     </p>
   );

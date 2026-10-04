@@ -3,6 +3,7 @@ import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
 import {
   ArrowRight,
+  ArrowDown,
   Check,
   ListChecks,
   MapPin,
@@ -33,6 +34,7 @@ import { useSession } from "../../hooks/use-session";
 import { queryClient } from "../../lib/query-client";
 import { formatDate } from "../../lib/utils";
 import { useCompletion } from "../entries/use-completion";
+import { CollectionArt, JourneyArt } from "../../components/journey-art";
 
 function ListCard({ list, index }: { list: ChecklistOut; index: number }) {
   const progress = list.item_count
@@ -42,48 +44,44 @@ function ListCard({ list, index }: { list: ChecklistOut; index: number }) {
     <Link
       to="/lists/$listId"
       params={{ listId: list.id }}
-      className="group block h-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
+      className="collection-link group focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700"
     >
-      <Card className="h-full overflow-hidden transition-shadow group-hover:shadow-lg">
-        <div className="relative h-48 overflow-hidden bg-gradient-to-br from-teal-800 via-teal-700 to-emerald-400">
+      <Card className="collection-card">
+        <div className={`collection-cover tone-${index % 3}`}>
           {list.cover_url ? (
             <img
               src={list.cover_url}
               alt=""
+              loading="lazy"
               className="size-full object-cover"
             />
           ) : (
-            <div className="absolute inset-0 flex items-center justify-between px-7 text-white/80">
-              <span className="text-6xl font-black opacity-50">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <ListChecks className="size-16 opacity-60" aria-hidden="true" />
-            </div>
+            <CollectionArt variant={index % 3} />
           )}
+          <span className="collection-index" aria-hidden="true">
+            VOL. {String(index + 1).padStart(2, "0")}
+          </span>
           {list.category && (
-            <span className="absolute right-4 bottom-4 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-teal-900">
-              {list.category}
-            </span>
+            <span className="collection-category">{list.category}</span>
           )}
         </div>
-        <div className="space-y-4 p-6">
+        <div className="collection-content">
           <div>
-            <h2 className="text-xl font-bold text-stone-900">{list.title}</h2>
-            <p className="mt-2 line-clamp-2 text-sm leading-6 text-stone-600">
-              {list.summary}
-            </p>
+            <h3 className="collection-title">{list.title}</h3>
+            {list.summary && (
+              <p className="collection-summary line-clamp-2">{list.summary}</p>
+            )}
           </div>
-          <div className="flex items-center justify-between text-sm">
+          <div className="collection-meta">
             <span className="text-stone-600">
               {list.item_count} 个条目 · 已完成 {list.completed_count}
             </span>
-            <ArrowRight
-              className="size-4 text-teal-800 transition-transform group-hover:translate-x-1"
-              aria-hidden="true"
-            />
+            <span className="collection-arrow">
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </span>
           </div>
           <div
-            className="h-2 overflow-hidden rounded-full bg-stone-100"
+            className="collection-progress"
             role="progressbar"
             aria-valuenow={progress}
             aria-valuemin={0}
@@ -91,8 +89,8 @@ function ListCard({ list, index }: { list: ChecklistOut; index: number }) {
             aria-label={`${list.title}完成进度`}
           >
             <div
-              className="h-full rounded-full bg-teal-700"
-              style={{ width: `${progress}%` }}
+              className="collection-progress-fill"
+              style={{ transform: `scaleX(${progress / 100})` }}
             />
           </div>
         </div>
@@ -115,15 +113,74 @@ export function HomePage() {
   const visibleLists = lists.data?.pages.flatMap((page) => page.items) ?? [];
   return (
     <>
-      <section id="lists" aria-label="公开清单">
-        <PageIntro title="清单" />
+      <section className="hero" aria-label="探索日常">
+        <div className="hero-copy enter">
+          <p className="hero-kicker eyebrow">
+            日常探索手账{" "}
+            <span className="folio text-stone-500">THE EVERYDAY JOURNAL</span>
+          </p>
+          <h1 className="hero-title">
+            世界很大，
+            <br />
+            先从<em>身边</em>出发。
+          </h1>
+          <p className="hero-description">
+            一张清单，一次出发。
+            <br />
+            发现值得体验的小事，收藏属于你的日常。
+          </p>
+          <a href="#lists" className="hero-cta">
+            发现清单 <ArrowDown className="size-4" aria-hidden="true" />
+          </a>
+        </div>
+        <div className="hero-visual enter enter-later">
+          <JourneyArt />
+          <p className="hero-annotation folio">
+            <span>WANDER / DISCOVER / REMEMBER</span>
+          </p>
+        </div>
+      </section>
+      <div className="journey-steps" aria-label="探索方式">
+        {[
+          ["01", "挑选一张清单", "找到一点灵感，安排下一次出发"],
+          ["02", "完成一次体验", "轻轻打个卡，积攒自己的进度"],
+          ["03", "留下一个瞬间", "写下心得，照片和记录默认私密"],
+        ].map(([number, title, description]) => (
+          <div className="journey-step" key={number}>
+            <span className="step-number" aria-hidden="true">
+              {number}
+            </span>
+            <div>
+              <p className="step-title">{title}</p>
+              <p className="step-description">{description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <section id="lists" aria-label="公开清单" tabIndex={-1}>
+        <div className="collection-heading">
+          <div>
+            <p className="eyebrow mb-2">THE COLLECTION</p>
+            <h2>
+              <span className="block sm:inline">下一站，</span>
+              <span>由你挑选。</span>
+            </h2>
+          </div>
+          <p className="text-xs leading-6 text-stone-500">
+            {lists.data
+              ? `${lists.data.pages[0].total} 张公开清单`
+              : "等一个新的出发"}
+            <br />
+            慢慢走，一点点收集。
+          </p>
+        </div>
         {lists.isPending ? (
           <Loading />
         ) : lists.error && visibleLists.length === 0 ? (
           <ErrorNotice error={lists.error} />
         ) : visibleLists.length ? (
           <>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="collection-grid">
               {visibleLists.map((list, index) => (
                 <ListCard key={list.id} list={list} index={index} />
               ))}
@@ -156,7 +213,7 @@ function ItemCard({ item }: { item: ItemSummaryOut }) {
   const session = useSession();
   const completion = useCompletion(item.id);
   return (
-    <Card className="p-4 sm:p-5">
+    <Card className="item-card p-4 sm:p-5">
       <Link
         to="/items/$itemId"
         params={{ itemId: item.id }}
@@ -279,14 +336,14 @@ export function ListPage({ listId }: { listId: string }) {
     <>
       <Link
         to="/"
-        className="mb-6 inline-block text-sm font-semibold text-teal-800 hover:underline"
+        className="mb-6 inline-flex min-h-11 items-center text-sm font-semibold text-teal-800 hover:underline"
       >
         ← 返回清单
       </Link>
       <PageIntro eyebrow={list.data.category} title={list.data.title}>
         {list.data.summary}
       </PageIntro>
-      <Card className="mb-8 flex flex-col gap-4 bg-teal-50 p-6 sm:flex-row sm:items-center sm:justify-between">
+      <Card className="progress-panel mb-8 flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-sm font-semibold text-teal-800">进度</p>
           <p className="mt-1 text-2xl font-black text-teal-900">
@@ -300,10 +357,17 @@ export function ListPage({ listId }: { listId: string }) {
           <div className="mb-2 text-right text-sm font-bold text-teal-800">
             {progress}%
           </div>
-          <div className="h-3 overflow-hidden rounded-full bg-white">
+          <div
+            className="h-3 overflow-hidden rounded-full bg-white"
+            role="progressbar"
+            aria-valuenow={progress}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-label={`${list.data.title}完成进度`}
+          >
             <div
-              className="h-full rounded-full bg-teal-700"
-              style={{ width: `${progress}%` }}
+              className="collection-progress-fill rounded-full"
+              style={{ transform: `scaleX(${progress / 100})` }}
             />
           </div>
         </div>
@@ -316,7 +380,7 @@ export function ListPage({ listId }: { listId: string }) {
           />
           <span className="sr-only">搜索条目</span>
           <input
-            className="field pl-10"
+            className="field field-search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="搜索条目"
@@ -472,7 +536,7 @@ export function ItemPage({
       <Link
         to="/lists/$listId"
         params={{ listId: current.list_id }}
-        className="mb-6 inline-block text-sm font-semibold text-teal-800 hover:underline"
+        className="mb-6 inline-flex min-h-11 items-center text-sm font-semibold text-teal-800 hover:underline"
       >
         ← 返回清单
       </Link>
@@ -601,7 +665,7 @@ export function ItemPage({
                       href={link.url}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-teal-800 underline"
+                      className="inline-flex min-h-11 items-center text-teal-800 underline"
                     >
                       {link.title} ↗
                     </a>
@@ -702,7 +766,7 @@ export function ItemPage({
                 <Link
                   to="/shares/$shareId"
                   params={{ shareId: record.share_id }}
-                  className="inline-block text-sm font-semibold text-teal-800 hover:underline"
+                  className="inline-flex min-h-11 items-center text-sm font-semibold text-teal-800 hover:underline"
                 >
                   查看记录 →
                 </Link>

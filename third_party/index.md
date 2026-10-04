@@ -12,7 +12,23 @@ Source: installed `@mindfoldhq/trellis` 0.6.14 package metadata and LICENSE, mat
 
 Trellis platform files in `.agents/` and `.codex/` remain ignored/local. UI/UX Pro Max in `.codex/skills/ui-ux-pro-max/` has its entry point, scripts and CSV data, but exact installed source revision/version and matching LICENSE/NOTICE are not established: `unknown`, `license-notice-needed` before sharing that material or raw generated artifacts. No generic substitute notice was fabricated and no local tool files were staged. Other local design skills are not promoted into shared material by this change.
 
-## Maintenance
+## Journal display font
+
+`frontend/src/assets/journal-display.woff2` is a 31-character WOFF2 subset of
+Noto Serif CJK SC Bold, from Debian `fonts-noto-cjk` version
+`1:20240730+repack1-1`, `/usr/share/fonts/opentype/noto/NotoSerifCJK-Bold.ttc`
+(collection index 2). Source: https://github.com/notofonts/noto-cjk.
+The exact installed distribution copyright/license is retained verbatim in
+[noto-serif-cjk/copyright](noto-serif-cjk/copyright); embedded font copyright,
+version and license records are retained in
+[noto-serif-cjk/font-notices.txt](noto-serif-cjk/font-notices.txt).
+Upstream font uses SIL OFL 1.1.
+Font is used only for static editorial copy; dynamic/user text uses the system
+font stack. No remote font requests. Regenerate with `python3 -m fontTools.subset`
+using collection index 2, WOFF2 flavor and the static headline glyphs before
+changing that copy.
+
+## Maintenance rules
 
 When retaining a new third-party source/template/asset/font or changing its version, identify source/version and affected paths, obtain verbatim LICENSE plus applicable NOTICE/COPYRIGHT from that exact distribution, and add one inventory entry. Reuse this directory; preserve original inline notices and notices needed by other retained versions. Unknown provenance stays explicit and blocks sharing only the affected material. Ordinary package dependencies retain package notices; this is not a transitive-dependency vendoring project.
 

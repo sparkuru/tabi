@@ -90,7 +90,9 @@ test("batch publish skips deliberately removed items and preserves all original 
   expect(await ocrSnapshot(request)).toEqual(original);
 
   await page.goto("/");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("清单");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "世界很大，先从身边出发。",
+  );
   await (await homeListLink(page, document.list.title)).click();
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     document.list.title,

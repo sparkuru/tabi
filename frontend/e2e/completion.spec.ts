@@ -139,6 +139,7 @@ test("complete, edit, photos, repeat, share and revoke preserve progress and pri
     publicPage.getByText("函数练习已完成。", { exact: true }),
   ).toBeVisible();
   await expect(publicPage.getByRole("img", { name: "记录照片" })).toBeVisible();
+  await reviewScreenshot(publicPage, "completion-public-share");
   const ownData = await page.request.get(`/api/checkins/${record.id}`);
   const photo = (await ownData.json()).media[0];
   expect(
@@ -162,6 +163,15 @@ test("complete, edit, photos, repeat, share and revoke preserve progress and pri
     page.getByRole("radio", { name: "仅自己（默认）" }),
   ).toBeChecked();
   await noOverflow(page);
+
+  await page.getByLabel("心得（可选）", { exact: true }).focus();
+  await page.keyboard.press("Tab");
+  const photos = page.getByLabel("照片（最多 8 张）", { exact: true });
+  await expect(photos).toBeFocused();
+  const uploadArea = photos.locator("..");
+  await expect(uploadArea).toHaveCSS("outline-style", "solid");
+  await expect(uploadArea).toHaveCSS("outline-width", "2px");
+  await reviewScreenshot(page, "completion-new-record-focus");
 
   await page.getByRole("button", { name: "保存记录", exact: true }).click();
   await expect(page).toHaveURL(/\/checkins\/[a-f0-9-]+$/);

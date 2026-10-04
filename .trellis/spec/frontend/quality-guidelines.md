@@ -26,6 +26,12 @@ builds do not validate documentation accuracy.
 
 ## Behavior and UI review
 
+Every UI change follows the standing constraint and project adaptation in
+[Experience Design](./experience-design.md). Inspect the actual candidate in
+all eight dimensions, refine concrete shortcomings, and repeat affected checks
+until no obvious improvement remains. Record dimension-specific evidence in the
+task; green tests alone do not establish visual completion.
+
 Preserve explicit loading, empty and failure states rather than interpreting a
 failed query as empty data. `frontend/src/components/common.tsx` provides
 `Loading` with `role="status"`, `ErrorNotice` with `role="alert"`, and
@@ -85,6 +91,10 @@ Source-backed test examples:
   deletion and guest resume.
 - `frontend/e2e/catalog.spec.ts`: loading, missing/empty states, removed-item
   visibility and preservation of the original OCR draft snapshot.
+- `frontend/e2e/editorial.spec.ts`: 320/375/768/1024/1440px layouts,
+  reduced-motion hover behavior, auth tab keys/password description, 200% text,
+  long titles, actual skip-link focus, logout pending/failure/retry and real
+  list search. `completion.spec.ts` also checks the file input's visible focus.
 
 Delay real requests when testing loading/busy behavior, as these tests do;
 do not mock away the API behavior being accepted. Use response/state assertions

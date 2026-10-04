@@ -41,7 +41,7 @@ export function HistoryPage() {
         <Link
           to="/auth"
           search={{ redirect: "/history" }}
-          className="mt-3 inline-block font-semibold text-teal-800 underline"
+          className="mt-3 inline-flex min-h-11 items-center font-semibold text-teal-800 underline"
         >
           去登录
         </Link>
@@ -81,7 +81,7 @@ export function HistoryPage() {
                   <Link
                     to="/checkins/$checkinId"
                     params={{ checkinId: record.id }}
-                    className="hover:text-teal-800 hover:underline"
+                    className="inline-flex min-h-11 items-center hover:text-teal-800 hover:underline"
                   >
                     {record.item_name}
                   </Link>
@@ -103,7 +103,7 @@ export function HistoryPage() {
               <Link
                 to="/checkins/$checkinId"
                 params={{ checkinId: record.id }}
-                className="text-sm font-semibold text-teal-800 hover:underline"
+                className="inline-flex min-h-11 items-center text-sm font-semibold text-teal-800 hover:underline"
               >
                 查看与编辑 →
               </Link>

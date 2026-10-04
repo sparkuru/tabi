@@ -27,7 +27,10 @@ export function SharePage({ shareId }: { shareId: string }) {
       <EmptyState title="这条分享暂时不可见">
         作者可能改回了私人、删除了记录，或内容已被隐藏。
         <div className="mt-4">
-          <Link to="/" className="font-semibold text-teal-800 underline">
+          <Link
+            to="/"
+            className="inline-flex min-h-11 items-center font-semibold text-teal-800 underline"
+          >
             返回公开清单
           </Link>
         </div>
@@ -49,7 +52,7 @@ export function SharePage({ shareId }: { shareId: string }) {
       <Link
         to="/items/$itemId"
         params={{ itemId: record.data.item_id }}
-        className="mt-6 inline-block text-sm font-semibold text-teal-800 hover:underline"
+        className="mt-6 inline-flex min-h-11 items-center text-sm font-semibold text-teal-800 hover:underline"
       >
         查看条目 →
       </Link>

@@ -11,12 +11,14 @@ frontend/
 ├── src/
 │   ├── main.tsx                 # API setup, QueryClientProvider, RouterProvider
 │   ├── router.tsx               # Route tree, params/search parsing, root shell
+│   ├── assets/                  # Local licensed display-font subset
 │   ├── api/
 │   │   ├── client.ts            # Transport configuration and response helpers
 │   │   └── generated/           # Generated SDK, types and client internals
 │   ├── components/
 │   │   ├── app-shell.tsx        # Navigation, session controls, main landmark
 │   │   ├── common.tsx           # Intro/loading/error/empty/photo components
+│   │   ├── journey-art.tsx      # Original decorative city/journal/compass SVG
 │   │   └── ui/                  # Button and Card primitives
 │   ├── features/
 │   │   ├── admin/              # page.tsx and checklist-import.tsx
@@ -65,8 +67,11 @@ Call the SDK through `frontend/src/api/generated` and use transport helpers in
 `frontend/src/api/client.ts`. Do not hand-edit `api/generated/`; API changes
 require the backend OpenAPI snapshot and `npm run api:generate`.
 
-The current application uses Lucide icons, CSS backgrounds and server-provided
-media URLs. There is no existing `src/assets/` or `public/` asset convention.
+The application uses Lucide icons, CSS backgrounds and server-provided media
+URLs. Original decorative SVG stays in `components/journey-art.tsx`; the local
+static-headline font is in `src/assets/`, referenced by shared CSS and bundled
+by Vite. Its exact notices live in `third_party/noto-serif-cjk/`. There is no
+`public/` asset convention.
 `frontend/vite.config.ts` serves and emits checklist documentation/schema/example
 downloads from `docs/` and `backend/data/examples/`; update those authoritative
 inputs instead of duplicating downloadable files in the frontend.

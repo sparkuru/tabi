@@ -1,0 +1,17 @@
+{"file": ".trellis/mainline.md", "reason": "Visual implementation and verification policy"}
+{"file": ".trellis/spec/trellis-plus/preview-console.md", "reason": "Visual implementation and verification policy"}
+{"file": ".trellis/spec/trellis-plus/development.md", "reason": "Visual implementation and verification policy"}
+{"file": ".trellis/spec/trellis-plus/commit-policy.md", "reason": "Visual implementation and verification policy"}
+{"file": ".trellis/spec/trellis-plus/index.md", "reason": "Visual implementation and verification policy"}
+{"file": ".trellis/spec/trellis-plus/validation.md", "reason": "Visual implementation and verification policy"}
+{"file": ".trellis/spec/trellis-plus/frontend.md", "reason": "Visual implementation and verification policy"}
+{"file": ".trellis/spec/trellis-plus/continuity.md", "reason": "Visual implementation and verification policy"}
+{"file": ".trellis/spec/trellis-plus/development-principles.md", "reason": "Visual implementation and verification policy"}
+{"file": ".trellis/spec/frontend/type-safety.md", "reason": "Visual implementation and verification policy"}
+{"file": ".trellis/spec/frontend/quality-guidelines.md", "reason": "Visual implementation and verification policy"}
+{"file": ".trellis/spec/frontend/index.md", "reason": "Visual implementation and verification policy"}
+{"file": ".trellis/spec/frontend/directory-structure.md", "reason": "Visual implementation and verification policy"}
+{"file": ".trellis/spec/frontend/hook-guidelines.md", "reason": "Visual implementation and verification policy"}
+{"file": ".trellis/spec/frontend/component-guidelines.md", "reason": "Visual implementation and verification policy"}
+{"file": ".trellis/spec/frontend/state-management.md", "reason": "Visual implementation and verification policy"}
+{"file": ".trellis/spec/frontend/experience-design.md", "reason": "Standing visual identity, mental model and eight-dimension review contract"}

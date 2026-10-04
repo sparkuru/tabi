@@ -47,7 +47,16 @@ inside their feature file until reuse requires another location.
   There is no CSS Module or styled-components convention.
 - Follow the existing responsive composition: `AppShell` wraps navigation on
   small screens; checklist grids expand at `md`/`lg`; record forms keep a
-  bounded width. Dynamic progress widths use inline styles in checklist cards.
+  bounded width. Dynamic progress uses a left-origin scale transform in
+  checklist cards and the list progress panel; the latter exposes a progressbar.
+- Keep body and user-supplied titles in the system sans stack. The local
+  `Tabi Journal` subset is limited to static editorial headlines and branding;
+  new glyphs require regenerating the subset and checking its retained notices.
+- Use the existing stone-500 theme token for secondary text; it is deliberately
+  darker than Tailwind's default to retain readable contrast on paper.
+- `.field` is unlayered CSS and takes precedence over Tailwind layer utilities.
+  Search inputs use `.field-search` for icon clearance; a `pl-*` utility alone
+  cannot override the shared padding rule.
 - Render user notes as text with `prose-note`; record/history/shared pages do
   not inject user HTML. Preserve conditional optional metadata rather than
   showing empty location or details sections.
@@ -66,14 +75,19 @@ Preserve these concrete semantics:
 - `AppShell` has a skip link, named navigation, a main landmark, and accessible
   names for icon-only controls. Decorative Lucide icons use `aria-hidden`.
 - Inputs have wrapping labels or `htmlFor`/`id` pairs; hidden label text names
-  checklist filters. Photos have alt text and links have accessible names.
+  checklist filters. Keep helper copy outside the label and associate it with
+  `aria-describedby`, as with the registration password. Photos have alt text
+  and links have accessible names.
+- An `sr-only` file input remains keyboard reachable. Its visible upload wrapper
+  uses `focus-within` to expose focus; do not remove the input from the tab order.
 - `Button` and navigation controls use `min-h-11` or `size-11` (44px under the
   default spacing scale), visible keyboard focus and disabled states. Shared
   CSS disables animation/transitions for reduced motion.
 
-These are current code patterns, not proof of a complete accessibility audit.
-The auth tabs currently expose roles/selection through native buttons; do not
-claim a complete arrow-key tab-widget implementation from those roles alone.
+The auth tabs use roving tab stops, ArrowLeft/ArrowRight/Home/End focus and
+selection, and a labelled tabpanel. The skip link moves focus to the main
+landmark (`tabIndex={-1}`). These are tested code patterns, not proof of a
+complete accessibility audit.
 
 ## Common Mistakes and Validation
 

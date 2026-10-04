@@ -144,7 +144,7 @@ export function NewCheckinPage({ itemId }: { itemId: string }) {
       <Link
         to="/items/$itemId"
         params={{ itemId }}
-        className="mb-6 inline-block text-sm font-semibold text-teal-800 hover:underline"
+        className="mb-6 inline-flex min-h-11 items-center text-sm font-semibold text-teal-800 hover:underline"
       >
         ← 返回条目
       </Link>
@@ -176,7 +176,7 @@ export function NewCheckinPage({ itemId }: { itemId: string }) {
               placeholder="添加心得，也可以留空。"
             />
           </div>
-          <div>
+          <div className="rounded-2xl focus-within:outline-2 focus-within:outline-offset-4 focus-within:outline-teal-700">
             <label className="field-label" htmlFor="photos">
               照片（最多 8 张）
             </label>
@@ -361,7 +361,7 @@ export function OwnCheckinPage({ checkinId }: { checkinId: string }) {
     <div className="mx-auto max-w-3xl">
       <Link
         to="/history"
-        className="mb-6 inline-block text-sm font-semibold text-teal-800 hover:underline"
+        className="mb-6 inline-flex min-h-11 items-center text-sm font-semibold text-teal-800 hover:underline"
       >
         ← 返回我的记录
       </Link>

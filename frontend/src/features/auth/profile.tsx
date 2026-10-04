@@ -52,7 +52,7 @@ export function ProfilePage() {
         <Link
           to="/auth"
           search={{ redirect: "/profile" }}
-          className="text-teal-800 underline"
+          className="inline-flex min-h-11 items-center text-teal-800 underline"
         >
           去登录
         </Link>
@@ -68,16 +68,20 @@ export function ProfilePage() {
               <img
                 src={session.data.avatar_url}
                 alt="当前头像"
-                className="size-16 rounded-full object-cover"
+                className="size-16 shrink-0 rounded-full object-cover"
               />
             ) : (
-              <span className="grid size-16 place-items-center rounded-full bg-teal-100 text-2xl font-bold text-teal-900">
+              <span className="grid size-16 shrink-0 place-items-center rounded-full bg-teal-100 text-2xl font-bold text-teal-900">
                 {session.data.display_name.slice(0, 1)}
               </span>
             )}
-            <div>
-              <p className="font-semibold">{session.data.display_name}</p>
-              <p className="text-sm text-stone-500">{session.data.email}</p>
+            <div className="min-w-0">
+              <p className="break-words font-semibold">
+                {session.data.display_name}
+              </p>
+              <p className="break-all text-sm text-stone-500">
+                {session.data.email}
+              </p>
             </div>
           </div>
           <label className="block">

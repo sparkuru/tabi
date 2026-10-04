@@ -10,6 +10,14 @@ Codex 本地 `.codex/skills/ui-ux-pro-max/SKILL.md`、`scripts/search.py` / `cor
 
 ## Plan → Implement → Check → Update Spec
 
+用户于 2026-10-05 明确要求把获奖级品质约束和本项目适配落实为长期规格。
+[体验设计契约](../frontend/experience-design.md) 是视觉与心智模型的共享来源：
+凡用户界面规划、实施、检查，实际读取正文，并在正常 task 的 implement/check
+JSONL 中分别显式注册该文件；仅有索引或 Markdown 链接不构成加载。
+后续页面继承城市探索手账视觉及“清单 → 条目 → 完成或追加记录 → 回看/可选分享”模型，
+按其八维标准循环检查与优化，直到没有明显可提升之处。该要求不替代本文件的
+工具流程、validation 的行为/实际入口验收或产品领域契约，也不授予新增功能权限。
+
 1. Plan：先读当前任务、前端规范、本文件和验证 profile，再读项目本地 UUPM skill。检查真实脚本 help；按清单/内容管理、批准视觉方向及 React Web 栈生成 design-system 搜索。通用可用入口如下；选项以本机 help 为准：
 
    ```sh
