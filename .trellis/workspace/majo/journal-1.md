@@ -109,3 +109,24 @@ Filled and verified all eleven development guides, committed initial dirty previ
 ### Next Steps
 
 - No new task or serial product authorization. If requested, address seed/schema incompatibility and backup ignore policy; current edits are saved without claiming those issues fixed.
+
+
+## Session 4: Editorial journal experience and standing design contract
+
+**Date**: 2026-10-05
+**Task**: Editorial journal experience and standing design contract
+**Branch**: `ikimashō`
+
+### Summary
+
+Completed the journal visual upgrade and persisted the award-quality eight-dimension refinement and shared checklist/item/record mental model. Work cf6b7f9, archive 391f0e0; user authorized commit. Type/format/build, 24 isolated desktop/mobile regressions, 2 actual-preview admin checks passed; final ordinary-user HTTP checks passed again before commit. Mobile uses Chromium emulation. Task completed; no next task authorized.
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `cf6b7f9` | (see git log) |
+
+### Status
+
+[OK] **Completed**
