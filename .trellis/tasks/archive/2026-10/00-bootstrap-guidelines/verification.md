@@ -53,6 +53,13 @@ and the first `source_note_prefix` is empty. Deleting the backup ignore file
 also removes that directory's local ignore protection. These observations are
 outside the accepted guide scope and are not counted as passing checks.
 
+After bootstrap work `86b4318` and archive `62aa9ee`, the user's pending answer
+arrived: include, check and commit both new paths. The validation errors and loss
+of backup ignore protection had been disclosed before that answer. They are
+preserved as current user edits in a separate commit; JSON syntax and diff checks
+passed, seed schema validation remains failed. This later scope approval does
+not change the documentation acceptance or count the seed failure as a pass.
+
 Executed checks:
 
 - `git diff --check`: passed.

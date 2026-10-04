@@ -1,19 +1,17 @@
 {
   "schema_version": 2,
-  "source_file": "archive/ocr.md",
-  "source_sha256": "0a8a5aec7e891358ecd309e76fa322d1a458f9bf02ff42b2018abd5aa3e3522b",
   "review_status": "transcribed_markdown_only",
   "lists": [
     {
       "key": "beijing_food",
       "title": "北京美食",
-      "summary": "本清单整理自 archive/ocr.md 的 OCR 原始资料，仅供参考；店铺、地址及推荐内容可能已变化，出行前请核实。",
+      "summary": "测试用美食清单",
       "legacy_generated_summaries": [
         "来自 OCR 汇总的北京餐饮候选条目，逐条核实后发布。"
       ],
       "category": "美食",
       "section": "北京《Delicious》刊",
-      "source_note_prefix": "OCR 原始备注（未核实）：",
+      "source_note_prefix": "",
       "suggested_action": "到店体验并记录感受",
       "rows": [
         {
@@ -2614,7 +2612,7 @@
           ]
         }
       ],
-      "publication_warning": "本清单整理自 archive/ocr.md 的 OCR 原始资料，仅供参考；目的地及景点信息可能已变化，出行前请核实。"
+      "publication_warning": "仅供参考；目的地及景点信息可能已变化，出行前请核实。"
     }
   ]
 }
