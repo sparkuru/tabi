@@ -2,7 +2,7 @@
 
 Standing contract: on 2026-10-05 the user explicitly requested preserving this
 adaptation for subsequent work. The shared authority is now
-[Experience Design](../../spec/frontend/experience-design.md); this task keeps
+[Experience Design](../../../../spec/frontend/experience-design.md); this task keeps
 the original implementation rationale and dated verification evidence.
 
 ## Art direction

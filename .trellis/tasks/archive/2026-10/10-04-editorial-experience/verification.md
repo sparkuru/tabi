@@ -171,3 +171,10 @@ logout/session invalidation and index/JS/CSS/font hashes all passed. The earlier
 24-case isolated and 2-case content-admin acceptance results cover the same
 unchanged application candidate; no role elevation was repeated for commit.
 Task context remains 17 unique entries per manifest and diff checks pass.
+
+Work committed as `cf6b7f9dde7f5e3228e99df725db62e57ce2d476`. The task was
+archived on 2026-10-05 through `task.py archive --no-commit`, then a separate
+archive commit preserves its completion metadata and the single required Codex
+trailer. The moved design link was rebased; context paths remain repository-root
+relative. Final work/archive references are maintained in mainline and the
+independent developer journal.
